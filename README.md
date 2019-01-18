@@ -10,6 +10,7 @@ We provide 3 scripts for convenience and two directories for organization:
   * (unused) `Codegen`: Runs until your compiler outputs the target code
 * `src`: Source code for your assignment
 * `build.sh`: Builds your compiler using `Make` or similar. You should replace the commands here if necessary to build your compiler
+* (unused) `execute.sh`: Runs the compiled code.
 * `run.sh`: Runs your compiler using two arguments (mode - $1 and input file - $2). You should replace the commands here if necessary to invoke your compiler
 * `test.sh`: Automatically runs your compiler against test programs in the programs directory and checks the output
 
