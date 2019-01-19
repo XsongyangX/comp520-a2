@@ -6,7 +6,7 @@ Language specification: https://www.cs.mcgill.ca/~cs520/2019/assignments/Assignm
 
 Grading rubric: https://www.cs.mcgill.ca/~cs520/2019/assignments/Assignment1_Rubric.pdf
 
-Model compiler: 
+Reference compiler: ssh teaching.cs.mcgill.ca, then run ~cs520/minic
 
 To organize your assignments and project for class, please follow the skeleton provided in this repository.
 
