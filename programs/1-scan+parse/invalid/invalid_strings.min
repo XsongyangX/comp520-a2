@@ -1,0 +1,12 @@
+// The program contains scanning errors on strings.
+
+var incompleteQuotes: string = "\";
+
+var invalidEscape1: string = "\3";
+var invalidEscape2: string = "\0";
+var invalidEscape3: string = "\c";
+var invalidEscape4: string = "\z";
+var invalidEscape5: string = "\/";
+var invalidEscape6: string = "\R";
+
+var empty: string = ""; // fine

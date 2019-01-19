@@ -1,0 +1,16 @@
+// The program generates scanning error due to missing semi-colons.
+
+var n: int = 3
+var e: float = 2.78;
+n = 0
+e = 3.0
+n = e + e
+
+if (true) print("hello")
+
+while (false){
+	// this is ok
+}
+
+read(n)
+print("Hi")
