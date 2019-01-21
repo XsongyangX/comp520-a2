@@ -1,5 +1,7 @@
 # Assignment 1
 
+Song Yang 260744153
+
 Assignment description: https://www.cs.mcgill.ca/~cs520/2019/assignments/Assignment1.pdf
 
 Language specification: https://www.cs.mcgill.ca/~cs520/2019/assignments/Assignment1_Specifications.pdf
