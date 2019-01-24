@@ -57,6 +57,9 @@ KEYWORDS var|float|int|string|boolean|if|else|while|read|print|true|false
 "&&"		printf("tAND\n");
 "\|\|"		printf("tOR\n");
 
+"\{" 		printf("tLCURL\n");
+"\}"		printf("tRCURL\n");
+
 . 		{ fprintf(stderr, "Error: (line %d) unexpected character '%s'\n", yylineno, yytext); exit(1); }
 %%
 
