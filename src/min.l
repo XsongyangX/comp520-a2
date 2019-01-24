@@ -7,7 +7,7 @@ Initial version: Only print out the tokens.
 /* Imports */
 %{
 	#include <stdio.h>
-}%
+%}
 
 /* Helper definitions */
 BOOLEAN true|false
