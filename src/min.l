@@ -14,8 +14,8 @@ BOOLEAN true|false
 DIGIT [0-9]
 INT 0|[1-9]{DIGIT}*
 FLOAT {INT}.{DIGIT}*
-SYMBOL [`~@#$%^&*][+-*/<>=_\|]|['.,;:!?\{\}\[\]\(\)]|[\\a\\b\\f\\n\\r\\t\\v\\"]
-STRING [a-zA-Z_]([a-zA-Z0-9]|{SYMBOL})*
+SYMBOL [`~@#$%^&*][+-*/<>=_\|]|['.,;:!?\{\}\[\]\(\)]|[\a\b\f\n\r\t\v\"]
+STRING \"[a-zA-Z_]([a-zA-Z0-9]|{SYMBOL})*\"
 
 /* Additional options */
 %option yylineno
@@ -24,6 +24,8 @@ STRING [a-zA-Z_]([a-zA-Z0-9]|{SYMBOL})*
 %%
 [\r\n]+		
 [ \t]+ 		printf("Whitespace, length %lu\n", yyleng);
+
+"//".*\n	printf("tComment");
 %%
 
 /* Main */
