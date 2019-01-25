@@ -16,7 +16,6 @@ INT 0|[1-9]{DIGIT}*
 FLOAT {INT}\.{DIGIT}*
 SYMBOL [`~@#$%^&\*][+\-/<>=_\|]|['\.,;:!?\{\}\[\]\(\)]|[\a\b\f\n\r\t\v\" ]
 IDENTIFIER ({LETTER}|_)({LETTER}|{DIGIT}|_)*
-KEYWORDS var|float|int|string|boolean|if|else|while|read|print|true|false
 
 /* Additional options */
 %option yylineno
@@ -32,7 +31,20 @@ KEYWORDS var|float|int|string|boolean|if|else|while|read|print|true|false
 [ \t]+ 		printf("Whitespace, length %lu\n", yyleng);
 
 "//".*\n	printf("tCOMMENT\n");
-{KEYWORDS} 	printf("tKEYWORD\n");
+
+var 	printf("tVAR\n");
+float 	printf("tKEYFLOAT\n");
+int 	printf("tKEYINT\n");
+string 	printf("tKEYSTRING\n");
+boolean printf("tBOOLEAN\n");
+if 		printf("tIF\n");
+else 	printf("tELSE\n");
+while 	printf("tWHILE\n");
+read 	printf("tREAD\n");
+print 	printf("tPRINT\n");
+true 	printf("tTRUE\n");
+false 	printf("tFALSE\n");
+
 {IDENTIFIER} 	printf("tINDENTIFIER\n");
 ":"		printf("tCOLON\n");
 "=" 		printf("tASSIGN\n");
