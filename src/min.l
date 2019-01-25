@@ -6,7 +6,9 @@ Initial version: Only print out the tokens.
 
 /* Imports */
 %{
-	#include <stdio.h>
+	#include "parser.tab.h" // from bison
+	#include <string.h>
+	#include <stdlib.h>
 %}
 
 /* Helper definitions */
@@ -25,59 +27,62 @@ IDENTIFIER ({LETTER}|_)({LETTER}|{DIGIT}|_)*
 	- yyleng: Length of the scanned token
 	- yytext: Matched text
 	- yylineno: Variable for the line number
+	- yylval: Storing extra data from scanning
 */
 %%
 [\r\n]+		
-[ \t]+ 		printf("Whitespace, length %lu\n", yyleng);
+[ \t]+ 		//printf("Whitespace, length %lu\n", yyleng);
 
-"//".*\n	printf("tCOMMENT\n");
+"//".*\n	{if (g_tokens) printf("tCOMMENT\n"); return(tCOMMENT);}
 
-var 	printf("tVAR\n");
-float 	printf("tKEYFLOAT\n");
-int 	printf("tKEYINT\n");
-string 	printf("tKEYSTRING\n");
-boolean printf("tBOOLEAN\n");
-if 		printf("tIF\n");
-else 	printf("tELSE\n");
-while 	printf("tWHILE\n");
-read 	printf("tREAD\n");
-print 	printf("tPRINT\n");
-true 	printf("tTRUE\n");
-false 	printf("tFALSE\n");
+var 	{if (g_tokens) printf("tVAR\n"); return(tVAR);}
+float 	{if (g_tokens) printf("tKEYFLOAT\n"); return(tKEYFLOAT);}
+int 	{if (g_tokens) printf("tKEYINT\n"); return(tKEYINT);}
+string 	{if (g_tokens) printf("tKEYSTRING\n"); return(tKEYSTRING);}
+boolean {if (g_tokens) printf("tBOOLEAN\n"); return(tBOOLEAN);}
+if 		{if (g_tokens) printf("tIF\n"); return(tIF);}
+else 	{if (g_tokens) printf("tELSE\n"); return(tELSE);}
+while 	{if (g_tokens) printf("tWHILE\n"); return(tWHILE);}
+read 	{if (g_tokens) printf("tREAD\n"); return(tREAD);}
+print 	{if (g_tokens) printf("tPRINT\n"); return(tPRINT);}
+true 	{if (g_tokens) printf("tTRUE\n"); return(tTRUE);}
+false 	{if (g_tokens) printf("tFALSE\n"); return(tFALSE);}
 
-{IDENTIFIER} 	printf("tINDENTIFIER\n");
-":"		printf("tCOLON\n");
-"=" 		printf("tASSIGN\n");
-{INT} 		printf("tINT\n");
-{FLOAT} 	printf("tFLOAT\n");
-\"({SYMBOL}|{LETTER}|{DIGIT})*\" 	printf("tSTRING\n");
-";" 		printf("tSEMICOLON\n");
+{IDENTIFIER} 	{if (g_tokens) printf("tINDENTIFIER\n"); return(tINDENTIFIER);}
+":"		{if (g_tokens) printf("tCOLON\n"); return(tCOLON);}
+"=" 		{if (g_tokens) printf("tASSIGN\n"); return(tASSIGN);}
+{INT} 		{if (g_tokens) printf("tINT\n"); return(tINT);}
+{FLOAT} 	{if (g_tokens) printf("tFLOAT\n"); return(tFLOAT);}
+\"({SYMBOL}|{LETTER}|{DIGIT})*\" 	{if (g_tokens) printf("tSTRING\n"); return(tSTRING);}
+";" 		{if (g_tokens) printf("tSEMICOLON\n"); return(tSEMICOLON);}
 
-"+" 		printf("tPLUS\n");
-"-"		printf("tMINUS\n");
-"/"		printf("tDIVIDE\n");
-"*"		printf("tTIMES\n");
-"("		printf("tLPAREN\n");
-")"		printf("tRPAREN\n");
+"+" 		{if (g_tokens) printf("tPLUS\n"); return(tPLUS);}
+"-"		{if (g_tokens) printf("tMINUS\n"); return(tMINUS);}
+"/"		{if (g_tokens) printf("tDIVIDE\n"); return(tDIVIDE);}
+"*"		{if (g_tokens) printf("tTIMES\n"); return(tTIMES);}
+"("		{if (g_tokens) printf("tLPAREN\n"); return(tLPAREN);}
+")"		{if (g_tokens) printf("tRPAREN\n"); return(tRPAREN);}
 
-"=="		printf("tEQUAL\n");
-"!="		printf("tNEQUAL\n");
-">="		printf("tGEQ\n");
-"<="		printf("tLEQ\n");
-">"		printf("tGREATER\n");
-"<"		printf("tLESSER\n");
-"&&"		printf("tAND\n");
-"\|\|"		printf("tOR\n");
+"=="		{if (g_tokens) printf("tEQUAL\n"); return(tEQUAL);}
+"!="		{if (g_tokens) printf("tNEQUAL\n"); return(tNEQUAL);}
+">="		{if (g_tokens) printf("tGEQ\n"); return(tGEQ);}
+"<="		{if (g_tokens) printf("tLEQ\n"); return(tLEQ);}
+">"		{if (g_tokens) printf("tGREATER\n"); return(tGREATER);}
+"<"		{if (g_tokens) printf("tLESSER\n"); return(tLESSER);}
+"&&"		{if (g_tokens) printf("tAND\n"); return(tAND);}
+"\|\|"		{if (g_tokens) printf("tOR\n"); return(tOR);}
 
-"\{" 		printf("tLCURL\n");
-"\}"		printf("tRCURL\n");
+"\{" 		{if (g_tokens) printf("tLCURL\n"); return(tLCURL);}
+"\}"		{if (g_tokens) printf("tRCURL\n"); return(tRCURL);}
 
 . 		{ fprintf(stderr, "Error: (line %d) unexpected character '%s'\n", yylineno, yytext); exit(1); }
 %%
 
 /* Main */
+/*
 int main()
 {
 	yylex();
 	return 0;
 }
+*/
