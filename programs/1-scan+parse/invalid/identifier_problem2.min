@@ -1,4 +1,5 @@
 // This program should generate a lexical error on the identifier character make up.
 
-var 000: int = 3;
-
+var *i: float;
+var &e: int;
+var (s): string = "";

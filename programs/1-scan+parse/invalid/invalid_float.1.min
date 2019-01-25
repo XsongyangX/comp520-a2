@@ -1,4 +1,8 @@
 // This program generates an error while scanning a float.
 var f: float;
 f = .2;
-
+f = 2.;
+f = .;
+f = .0;
+f = 0.;
+f = 0.0.0;

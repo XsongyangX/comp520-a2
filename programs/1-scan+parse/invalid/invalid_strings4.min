@@ -1,3 +1,3 @@
 // The program contains scanning errors on strings.
-var incompleteQuotes: string = ";
 
+var invalidEscape3: string = "\c";

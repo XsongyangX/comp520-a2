@@ -1,3 +1,4 @@
 // The program generates scanning error due to missing semi-colons.
 
-var n: int = 3
+e = 3.0
+

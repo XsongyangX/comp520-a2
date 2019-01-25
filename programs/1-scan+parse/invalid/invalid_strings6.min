@@ -1,0 +1,4 @@
+// The program contains scanning errors on strings.
+
+var invalidEscape5: string = "\/";
+var invalidEscape6: string = "\R";

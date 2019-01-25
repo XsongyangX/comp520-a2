@@ -1,5 +1,5 @@
 // The program generates a scanning error because numbers have leading zeros.
 
-var i: int = 000;
+var k: int = 001000;
 
 

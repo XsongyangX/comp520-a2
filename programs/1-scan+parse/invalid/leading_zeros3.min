@@ -1,5 +1,4 @@
 // The program generates a scanning error because numbers have leading zeros.
 
-var i: int = 000;
-
+var g: float = 0000000000000.0000000000000628;
 
