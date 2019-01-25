@@ -12,9 +12,9 @@ Initial version: Only print out the tokens.
 /* Helper definitions */
 DIGIT [0-9]
 LETTER [a-zA-z]
-INT 0|[1-9]{DIGIT}*
+INT 0|([1-9]{DIGIT}*)
 FLOAT {INT}\.{DIGIT}*
-SYMBOL [`~@#$%^&\*][+\-/<>=_\|]|['\.,;:!?\{\}\[\]\(\)]|[\a\b\f\n\r\t\v\" ]
+SYMBOL [`~@#$%^&\*+\-/<>=_\|'\.,;:!?\{\}\[\]\(\)\a\b\f\n\r\t\v\" ]
 IDENTIFIER ({LETTER}|_)({LETTER}|{DIGIT}|_)*
 
 /* Additional options */

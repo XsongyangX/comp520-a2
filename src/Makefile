@@ -1,9 +1,9 @@
 all: lex.yy.c
-	gcc -o min lex.yy.c -lfl
+	gcc -o minic lex.yy.c -lfl
 
 lex.yy.c:
 	flex min.l
 
 clean:
-	rm min
+	rm minic
 	rm lex.yy.c
