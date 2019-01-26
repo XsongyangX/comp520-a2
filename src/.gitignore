@@ -1,0 +1,5 @@
+.nfs*
+lex.yy.c
+minic
+y.*
+

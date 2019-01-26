@@ -39,7 +39,7 @@ void yyerror(const char *s) {
  */
 
 // values 
-%token <intval> tINTVAL
+%token <intval> tINT
 %token <identifier> tIDENTIFIER
 %token <floatval> tFLOAT
 %token <string> tSTRING
@@ -53,9 +53,11 @@ void yyerror(const char *s) {
 // math
 %token tPLUS tMINUS tTIMES tDIVIDE tLPAREN tRPAREN
 // boolean
-%token tEQUAL tNEQUAL tGEQ tLEQ tGREATER tLESSER tAND tOR
+%token tEQUAL tNEQUAL tGEQ tLEQ tGREATER tLESSER tAND tOR tNOT
 // blocks
 %token tLCURL tRCURL
+// unused in scanner
+%token UMINUS
 
 /* Precedence directives resolve grammar ambiguities by breaking ties between shift/reduce
  * operations. Tokens are grouped into precendence levels, with lower precedence coming first
@@ -63,8 +65,12 @@ void yyerror(const char *s) {
  * the same precedence. Ties at the same level are broken using either %left or %right, which
  * denote left-associative and right-associative respectively.
  */
+%left tOR
+%left tAND
+%left tGEQ tLEQ tGREATER tLESSER tEQUAL tNEQUAL
 %left tPLUS tMINUS
 %left tTIMES tDIVIDE
+%left UMINUS tNOT
 
 /* Start */
 %start program
@@ -79,9 +85,56 @@ void yyerror(const char *s) {
 %%
 
 program : tCOMMENT program 
+	| if program
+	| while program
         | statement tSEMICOLON program 
         | statement tSEMICOLON
+	| tCOMMENT
+	|
         ;
 
+if : tIF tLPAREN expression tRPAREN tCOMMENT tLCURL program tRCURL ifelse
+	| tIF tLPAREN expression tRPAREN tLCURL program tRCURL ifelse
+	;
 
+ifelse : tELSE tIF tLPAREN expression tRPAREN tCOMMENT tLCURL program tRCURL ifelse
+	| tELSE tIF tLPAREN expression tRPAREN tLCURL program tRCURL ifelse
+	| tELSE tLPAREN program tRPAREN tCOMMENT tLCURL program tRCURL
+	| tELSE tLPAREN program tRPAREN tLCURL program tRCURL
+	|
+	;
+
+while : tWHILE tLPAREN expression tRPAREN tCOMMENT tLCURL program tRCURL
+	| tWHILE tLPAREN expression tRPAREN tLCURL program tRCURL
+	;
+
+statement : tREAD tLPAREN tIDENTIFIER tRPAREN
+	| tPRINT tLPAREN expression tRPAREN
+	| tVAR tIDENTIFIER tCOLON type tASSIGN expression
+	| tIDENTIFIER tASSIGN expression
+	;
+
+type : tKEYINT
+    	| tKEYFLOAT
+	| tKEYSTRING
+	| tBOOLEAN
+	;
+
+expression : tTRUE | tFALSE | tINT | tFLOAT | tSTRING
+	| expression tPLUS expression
+	| expression tMINUS expression
+	| expression tTIMES expression
+	| expression tDIVIDE expression
+	| tNOT expression
+	| tMINUS expression	%prec UMINUS
+	| tLPAREN expression tRPAREN
+	| expression tGEQ expression
+	| expression tLEQ expression
+	| expression tGREATER expression
+	| expression tLESSER expression
+	| expression tEQUAL expression
+	| expression tNEQUAL expression
+	| expression tAND expression
+	| expression tOR expression
+	;
 %%

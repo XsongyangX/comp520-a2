@@ -63,6 +63,7 @@ false 	{if (g_tokens) printf("tFALSE\n"); return(tFALSE);}
 "("		{if (g_tokens) printf("tLPAREN\n"); return(tLPAREN);}
 ")"		{if (g_tokens) printf("tRPAREN\n"); return(tRPAREN);}
 
+"!" 		{if (g_tokens) printf("tNOT\n"); return(tNOT);}
 "=="		{if (g_tokens) printf("tEQUAL\n"); return(tEQUAL);}
 "!="		{if (g_tokens) printf("tNEQUAL\n"); return(tNEQUAL);}
 ">="		{if (g_tokens) printf("tGEQ\n"); return(tGEQ);}
