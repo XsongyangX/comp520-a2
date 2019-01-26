@@ -1,14 +1,46 @@
 #include <stdio.h>
-
-/* Global */
-int g_tokens = 1;
+#include "main.h"
+#include <string.h>
 
 void yyparse();
 int yylex();
+int g_tokens;
 
-int main(void)
+// main
+int main(int argc, char** argv)
 {
-	if (g_tokens) while (yylex()) {};
-	yyparse();
-	return 0;
+	// check if an argument is provided
+	if (argc != 2)
+	{
+		fprintf(stderr, "Must provide an argument: scan|tokens|parse\n");
+		return 1;
+	}
+
+	// get command line argument
+	if ( 0 == strcmp(argv[1], "scan"))
+	{
+		g_tokens = 0;
+		yylex();
+		printf("OK\n");
+		return 0;
+	}
+	else if ( 0 == strcmp(argv[1], "tokens"))
+	{
+		g_tokens = 1;
+		while (yylex()) {}
+		return 0;
+	}
+	else if ( 0 == strcmp(argv[1], "parse"))
+	{
+		g_tokens = 0;
+		yyparse();
+		printf("OK\n");
+		return 0;
+	}
+	else 
+	{
+		fprintf(stderr, "Valid arguments are scan|tokens|parse\n");
+		return 1;
+	}
+
 }	

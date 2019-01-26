@@ -6,9 +6,10 @@ Initial version: Only print out the tokens.
 
 /* Imports */
 %{
-	#include "parser.tab.h" // from bison
+	#include "y.tab.h" // from bison
 	#include <string.h>
 	#include <stdlib.h>
+	#include "main.h"
 %}
 
 /* Helper definitions */
@@ -48,7 +49,7 @@ print 	{if (g_tokens) printf("tPRINT\n"); return(tPRINT);}
 true 	{if (g_tokens) printf("tTRUE\n"); return(tTRUE);}
 false 	{if (g_tokens) printf("tFALSE\n"); return(tFALSE);}
 
-{IDENTIFIER} 	{if (g_tokens) printf("tINDENTIFIER\n"); return(tINDENTIFIER);}
+{IDENTIFIER} 	{if (g_tokens) printf("tIDENTIFIER\n"); return(tIDENTIFIER);}
 ":"		{if (g_tokens) printf("tCOLON\n"); return(tCOLON);}
 "=" 		{if (g_tokens) printf("tASSIGN\n"); return(tASSIGN);}
 {INT} 		{if (g_tokens) printf("tINT\n"); return(tINT);}
@@ -79,11 +80,4 @@ false 	{if (g_tokens) printf("tFALSE\n"); return(tFALSE);}
 . 		{ fprintf(stderr, "Error: (line %d) unexpected character '%s'\n", yylineno, yytext); exit(1); }
 %%
 
-/* Main */
-/*
-int main()
-{
-	yylex();
-	return 0;
-}
-*/
+int g_tokens;

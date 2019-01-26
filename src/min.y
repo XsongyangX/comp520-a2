@@ -88,8 +88,6 @@ program : tCOMMENT program
 	| if program
 	| while program
         | statement tSEMICOLON program 
-        | statement tSEMICOLON
-	| tCOMMENT
 	|
         ;
 
