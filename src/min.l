@@ -16,8 +16,9 @@ Initial version: Only print out the tokens.
 DIGIT [0-9]
 LETTER [a-zA-z]
 INT 0|([1-9]{DIGIT}*)
-FLOAT {INT}\.{DIGIT}*
-SYMBOL [`~@#$%^&\*+\-/<>=_\|'\.,;:!?\{\}\[\]\(\)\a\b\f\n\r\t\v\" ]
+FLOAT {INT}\.{DIGIT}+
+SYMBOL [`~@#\$%\^&\*\+\-/<>=_\|'\.,;:!\?\{\}\[\]\(\) ]
+ESCAPE [(\\a)(\\b)(\\f)(\\n)(\\r)(\\t)(\\v)(\\")(\\\)]
 IDENTIFIER ({LETTER}|_)({LETTER}|{DIGIT}|_)*
 
 /* Additional options */
@@ -49,12 +50,12 @@ print 	{if (g_tokens) printf("tPRINT\n"); return(tPRINT);}
 true 	{if (g_tokens) printf("tTRUE\n"); return(tTRUE);}
 false 	{if (g_tokens) printf("tFALSE\n"); return(tFALSE);}
 
-{IDENTIFIER} 	{if (g_tokens) printf("tIDENTIFIER\n"); return(tIDENTIFIER);}
+{IDENTIFIER} 	{if (g_tokens) printf("tIDENTIFIER(%s)\n", yytext); return(tIDENTIFIER);}
 ":"		{if (g_tokens) printf("tCOLON\n"); return(tCOLON);}
 "=" 		{if (g_tokens) printf("tASSIGN\n"); return(tASSIGN);}
-{INT} 		{if (g_tokens) printf("tINT\n"); return(tINT);}
-{FLOAT} 	{if (g_tokens) printf("tFLOAT\n"); return(tFLOAT);}
-\"({SYMBOL}|{LETTER}|{DIGIT})*\" 	{if (g_tokens) printf("tSTRING\n"); return(tSTRING);}
+{INT} 		{if (g_tokens) printf("tINT(%s)\n", yytext); return(tINT);}
+{FLOAT} 	{if (g_tokens) printf("tFLOAT(%s)\n", yytext); return(tFLOAT);}
+\"({LETTER}|{DIGIT}|{SYMBOL}|{ESCAPE})*\"	 	{if (g_tokens) printf("tSTRING(%s)\n", yytext); return(tSTRING);}
 ";" 		{if (g_tokens) printf("tSEMICOLON\n"); return(tSEMICOLON);}
 
 "+" 		{if (g_tokens) printf("tPLUS\n"); return(tPLUS);}
@@ -77,7 +78,7 @@ false 	{if (g_tokens) printf("tFALSE\n"); return(tFALSE);}
 "\{" 		{if (g_tokens) printf("tLCURL\n"); return(tLCURL);}
 "\}"		{if (g_tokens) printf("tRCURL\n"); return(tRCURL);}
 
-. 		{ fprintf(stderr, "Error: (line %d) unexpected character '%s'\n", yylineno, yytext); exit(1); }
+. 		{ fprintf(stderr, "Error: (line %d) unexpected character '%s', length of scanned token '%lu'\n", yylineno, yytext, yyleng); exit(1); }
 %%
 
 int g_tokens;
