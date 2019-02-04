@@ -2,11 +2,11 @@
 
 Song Yang 260744153
 
-Assignment description: https://www.cs.mcgill.ca/~cs520/2019/assignments/Assignment1.pdf
+Assignment description: https://www.cs.mcgill.ca/~cs520/2019/assignments/Assignment2.pdf
 
-Language specification: https://www.cs.mcgill.ca/~cs520/2019/assignments/Assignment1_Specifications.pdf
+Language specification: https://www.cs.mcgill.ca/~cs520/2019/assignments/Assignment2_Specifications.pdf
 
-Grading rubric: https://www.cs.mcgill.ca/~cs520/2019/assignments/Assignment1_Rubric.pdf
+Grading rubric: https://www.cs.mcgill.ca/~cs520/2019/assignments/Assignment2_Rubric.pdf
 
 Reference compiler: ssh teaching.cs.mcgill.ca, then run ~cs520/minic
 
