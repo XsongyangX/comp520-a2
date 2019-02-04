@@ -17,9 +17,8 @@ DIGIT [0-9]
 LETTER [a-zA-z]
 INT 0|([1-9]{DIGIT}*)
 FLOAT {INT}\.{DIGIT}+
-SYMBOL [`~@#\$%\^&\*\+\-/\<>\=_\|'\.,;:\!\?\{\}\[\]\(\) ]
+SYMBOL [`~@#$%^&\*\+\-/<>=_\|'\.,;:!?\{\}\[\]\(\) ]
 ESCAPE [(\\a)(\\b)(\\f)(\\n)(\\r)(\\t)(\\v)(\\\")(\\\\)]
-ESCAPED [abfnrtv\"\\]
 IDENTIFIER ({LETTER}|_)({LETTER}|{DIGIT}|_)*
 
 /* Additional options */
@@ -57,7 +56,9 @@ false 	{if (g_tokens) printf("tFALSE\n"); return(tFALSE);}
 {INT} 		{if (g_tokens) printf("tINT(%s)\n", yytext); return(tINT);}
 {FLOAT} 	{if (g_tokens) printf("tFLOAT(%s)\n", yytext); return(tFLOAT);}
 
-(\"\")|\"(({DIGIT}*{LETTER}*{SYMBOL}*)*(\\{ESCAPED})({DIGIT}*{LETTER}*{SYMBOL}*)*)\"	{if (g_tokens) printf("tSTRING(%s)\n", yytext); return(tSTRING);}
+\"({LETTER}|{SYMBOL}|{DIGIT}|{ESCAPE})*\"	{
+		if (g_tokens) printf("tSTRING(%s)\n", yytext); return(tSTRING);
+	}
 
 ";" 		{if (g_tokens) printf("tSEMICOLON\n"); return(tSEMICOLON);}
 
