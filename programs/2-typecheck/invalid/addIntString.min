@@ -1,0 +1,4 @@
+// Produces an error when add strings to int
+var s: string;
+var i: int;
+var j: int = i + s;
