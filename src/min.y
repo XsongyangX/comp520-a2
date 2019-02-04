@@ -97,8 +97,8 @@ if : tIF tLPAREN expression tRPAREN tCOMMENT tLCURL program tRCURL ifelse
 
 ifelse : tELSE tIF tLPAREN expression tRPAREN tCOMMENT tLCURL program tRCURL ifelse
 	| tELSE tIF tLPAREN expression tRPAREN tLCURL program tRCURL ifelse
-	| tELSE tLPAREN program tRPAREN tCOMMENT tLCURL program tRCURL
-	| tELSE tLPAREN program tRPAREN tLCURL program tRCURL
+	| tELSE tCOMMENT tLCURL program tRCURL
+	| tELSE tLCURL program tRCURL
 	|
 	;
 
