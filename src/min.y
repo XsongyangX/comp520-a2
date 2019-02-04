@@ -108,19 +108,15 @@ while : tWHILE tLPAREN expression tRPAREN tCOMMENT tLCURL program tRCURL
 
 statement : tREAD tLPAREN tIDENTIFIER tRPAREN
 	| tPRINT tLPAREN expression tRPAREN
-	| tVAR tIDENTIFIER tCOLON type tASSIGN assign
+	| tVAR tIDENTIFIER tCOLON type tASSIGN expression
 	| tVAR tIDENTIFIER tCOLON type
-	| tIDENTIFIER tASSIGN assign
+	| tIDENTIFIER tASSIGN expression
 	;
 
 type : tKEYINT
-    	| tKEYFLOAT
+    | tKEYFLOAT
 	| tKEYSTRING
 	| tBOOLEAN
-	;
-
-assign : tIDENTIFIER
-     	| expression
 	;
 
 expression : tTRUE | tFALSE | tINT | tFLOAT | tSTRING
