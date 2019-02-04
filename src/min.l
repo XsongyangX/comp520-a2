@@ -56,7 +56,7 @@ false 	{if (g_tokens) printf("tFALSE\n"); return(tFALSE);}
 {INT} 		{if (g_tokens) printf("tINT(%s)\n", yytext); return(tINT);}
 {FLOAT} 	{if (g_tokens) printf("tFLOAT(%s)\n", yytext); return(tFLOAT);}
 
-\"({LETTER}|{SYMBOL}|{DIGIT}|{ESCAPE})*\"	{
+\"([[a-zA-z0-9`~!@#$%^&\*\(\)\-+\{\}\[\]<>\.?:;'\",/\| ]|(\\a)|(\\b)|(\\f)|(\\n)|(\\r)|(\\t)|(\\v)|(\\\")|(\\\\))*\"	{
 		if (g_tokens) printf("tSTRING(%s)\n", yytext); return(tSTRING);
 	}
 
