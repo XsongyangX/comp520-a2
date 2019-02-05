@@ -9,6 +9,13 @@ VALID_ASSIGNMENT = [('int', 'int'), ('float', 'float'), ('float', 'int'),\
 ('string', 'string'), ('boolean', 'boolean')]
 VAR_INITIALIZATION = {'int': 0, 'float': 0.0, 'string': "\"\"", 'boolean': 'false'}
 
+def writeToFile(comment, code, fileName):
+
+	with open(fileName, "w") as file:
+		file.write(comment + code)
+	
+	return
+
 def assignmentTypeConflict():
 	"""Invalid assignment type """
 	
@@ -19,12 +26,6 @@ def assignmentTypeConflict():
 	
 		return False
 	
-	def writeToFile(comment, code, fileName):
-	
-		with open(fileName, "w") as file:
-			file.write(comment + code)
-		
-		return
 	
 	for storage in TYPES:
 		for assigned in TYPES:
@@ -56,6 +57,12 @@ def assignmentTypeConflict():
 				writeToFile(comment, indirectAssignment, fileNameIndirect)
 	
 	return
+
+def declarationProblem():
+	"""Variable has not been declared """
+	
+	comment = "//" + declarationProblem.__doc__ + "\n"
+	code = 
 
 def main():
 
