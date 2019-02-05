@@ -10,7 +10,7 @@ VALID_ASSIGNMENT = [('int', 'int'), ('float', 'float'), ('float', 'int'),\
 VAR_INITIALIZATION = {'int': 0, 'float': 0.0, 'string': "\"\"", 'boolean': 'false'}
 
 def assignmentTypeConflict():
-	"""	Invalid assignment type	"""
+	"""Invalid assignment type """
 	
 	def invalidCombination(storage, assigned):
 	
@@ -21,6 +21,9 @@ def assignmentTypeConflict():
 	
 	def writeToFile(comment, code, fileName):
 	
+		with open(fileName, "w") as file:
+			file.write(comment + code)
+		
 		return
 	
 	for storage in TYPES:
@@ -32,7 +35,7 @@ def assignmentTypeConflict():
 				
 				# introductory comment
 				comment = "//" + assignmentTypeConflict.__doc__\
-				+ storage + ":=" + assigned
+				+ storage + ":=" + assigned + "\n"
 				
 				# direct assignment with the default initialization
 				directAssignment = "var a: " + storage + " = "\

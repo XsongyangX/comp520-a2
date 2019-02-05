@@ -1,0 +1,2 @@
+//Invalid assignment type float:=boolean
+var a: float = false;

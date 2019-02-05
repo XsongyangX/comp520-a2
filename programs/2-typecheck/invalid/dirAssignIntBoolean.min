@@ -1,0 +1,2 @@
+//Invalid assignment type int:=boolean
+var a: int = false;
