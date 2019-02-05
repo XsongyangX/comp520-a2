@@ -79,21 +79,21 @@ def operationsTypeConflict(delete=False):
 	if delete:
 		import os
 	
-	def invalidCombination(type1, type2, returnType):
+	def invalidCombination(type1, type2, returnType, validSet):
 		
-		if (type1, type2, returnType) not in VALID_OP_MATH:
+		if (type1, type2, returnType) not in validSet:
 			return True
 		
 		return False
 	
+	combinations = [(type1, type2, returnType) \
+	for type1 in TYPES for type2 in TYPES for returnType in TYPES]
+	
 	# math operations
 	for op in OP_MATH:
-		combinations = [(type1, type2, returnType) \
-		for type1 in TYPES for type2 in TYPES for returnType in TYPES]
-		
 		for combination in combinations:
 			type1, type2, returnType = combination
-			if invalidCombination(type1, type2, returnType):
+			if invalidCombination(type1, type2, returnType, VALID_OP_MATH):
 				
 				# form the program to print
 				comment = "//" + operationsTypeConflict.__doc__ + "\n"
@@ -108,6 +108,25 @@ def operationsTypeConflict(delete=False):
 				else:
 					writeToFile(comment, code, fileName)
 				
+	# boolean operations
+	for op in OP_BOOL:
+		for combination in combinations:
+			type1, type2, returnType = combination
+			if invalidCombination(type1, type2, \
+			returnType, [('boolean', 'boolean', 'boolean')]):
+				
+				# form the program to print
+				comment = "//" + operationsTypeConflict.__doc__ + "\n"
+				code = "var a: " + type1 + ";\n"\
+				+ "var b: " + type2 + ";\n"\
+				+ "var return: " + returnType + " = a " + op + " b;"
+				fileName = OP_TO_WORDS[op] + type1.capitalize() + type2.capitalize() \
+				+ returnType.capitalize() + ".min"
+				
+				if delete:
+					os.remove(fileName)
+				else:
+					writeToFile(comment, code, fileName)
 def main():
 
 	assignmentTypeConflict(delete=False)
