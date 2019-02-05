@@ -1,0 +1,4 @@
+//Invalid assignment type string:=boolean
+var a: string;
+var b: boolean;
+a = b;

@@ -1,0 +1,2 @@
+//Invalid assignment type boolean:=float
+var a: boolean = 0.0;

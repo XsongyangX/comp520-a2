@@ -1,0 +1,4 @@
+//Invalid assignment type boolean:=int
+var a: boolean;
+var b: int;
+a = b;

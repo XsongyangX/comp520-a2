@@ -1,0 +1,4 @@
+//Invalid operation on certain types 
+var a: string;
+var b: int;
+var return: float = a <= b;

@@ -1,0 +1,4 @@
+//Invalid operation on certain types 
+var a: float;
+var b: int;
+var return: int = a > b;

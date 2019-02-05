@@ -1,0 +1,2 @@
+//Invalid assignment type string:=float
+var a: string = 0.0;

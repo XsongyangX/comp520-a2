@@ -204,9 +204,9 @@ def operationsTypeConflict(delete=False):
 				writeToFile(comment, code, fileName)
 def main():
 
-	assignmentTypeConflict(delete=True)
+	assignmentTypeConflict(delete=False)
 	
-	operationsTypeConflict(delete=True)
+	operationsTypeConflict(delete=False)
 	
 	return 
 	
