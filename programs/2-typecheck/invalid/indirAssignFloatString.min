@@ -1,4 +1,4 @@
 //Invalid assignment type float:=string
 var a: float;
 var b: string;
-a = b
+a = b;

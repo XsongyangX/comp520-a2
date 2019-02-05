@@ -45,7 +45,7 @@ def assignmentTypeConflict():
 				indirectAssignment = "var a: " + storage + ";\n"
 				indirectAssignment = indirectAssignment +\
 				"var b: " + assigned + ";\n" +\
-				"a = b";
+				"a = b;"
 				
 				# generate a meaningful fileName
 				target = storage.capitalize() + assigned.capitalize()

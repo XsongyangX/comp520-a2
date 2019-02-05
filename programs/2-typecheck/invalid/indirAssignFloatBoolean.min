@@ -1,4 +1,4 @@
 //Invalid assignment type float:=boolean
 var a: float;
 var b: boolean;
-a = b
+a = b;
