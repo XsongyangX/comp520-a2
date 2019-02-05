@@ -1,4 +1,0 @@
-//Invalid operation on certain types 
-var a: int;
-var b: boolean;
-var return: boolean = a / b;

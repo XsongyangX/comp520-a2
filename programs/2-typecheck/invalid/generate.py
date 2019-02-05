@@ -15,8 +15,9 @@ VALID_OP_MATH = [('int', 'int', 'int'), ('float', 'float', 'float'),\
 OP_BOOL = ['&&', '||']
 OP_COMPARE = ['==', '!=', '<', '>', '<=', '>=']
 OP_TO_WORDS = {'+': "add", "-": "minus", "*": "times", "/": "divide",\
-"&&": "and", "||": "or", "==": "equals", "!=": "not", "<": "lesser", ">": "greater",\
-"<=": "leq", ">=": "geq"}
+"&&": "and", "||": "or", "==": "equals", "!=": "neq", "<": "lesser", ">": "greater",\
+"<=": "leq", ">=": "geq", "!": "not"}
+OP_UNARY = ['-', '!']
 def writeToFile(comment, code, fileName):
 
 	with open(fileName, "w") as file:
@@ -86,8 +87,15 @@ def operationsTypeConflict(delete=False):
 		
 		return False
 	
+	def invalidUnary(unary, returnType, validSet):
+		if (unary, returnType) not in validSet:
+			return True
+		return False
+	
 	combinations = [(type1, type2, returnType) \
 	for type1 in TYPES for type2 in TYPES for returnType in TYPES]
+	unaryCombinations = [(unary, returnType) for unary in TYPES\
+	for returnType in TYPES]
 	
 	# math operations
 	for op in OP_MATH:
@@ -127,11 +135,78 @@ def operationsTypeConflict(delete=False):
 					os.remove(fileName)
 				else:
 					writeToFile(comment, code, fileName)
+	
+	# compare operations
+	for op in OP_COMPARE:
+		for combination in combinations:
+			type1, type2, returnType = combination
+			if invalidCombination(type1, type2, \
+			returnType, [('boolean', 'boolean', 'boolean'),\
+			('int', 'int', 'boolean'), ('float', 'float', 'boolean'),\
+			('string', 'string', 'boolean')]):
+				
+				# form the program to print
+				comment = "//" + operationsTypeConflict.__doc__ + "\n"
+				code = "var a: " + type1 + ";\n"\
+				+ "var b: " + type2 + ";\n"\
+				+ "var return: " + returnType + " = a " + op + " b;"
+				fileName = OP_TO_WORDS[op] + type1.capitalize() + type2.capitalize() \
+				+ returnType.capitalize() + ".min"
+				
+				if delete:
+					os.remove(fileName)
+				else:
+					writeToFile(comment, code, fileName)
+
+	# unary operations
+	# unary minus
+	op = '-'
+	for combination in unaryCombinations:
+		unary, returnType = combination
+		if invalidUnary(unary, returnType, \
+		[('int', 'boolean'), ('float', 'boolean')]):
+				
+			# form the program to print
+			comment = "//" + operationsTypeConflict.__doc__ + "\n"
+			code = "var a: " + unary + ";\n"\
+			+ "var return: " + returnType + " = " + op + "a;"
+			fileName = "uminus" + unary.capitalize() + returnType.capitalize() + ".min"
+			
+			if delete:
+				try:
+					os.remove(fileName)
+				except FileNotFoundError as e:
+					print(str(e))
+					continue
+			else:
+				writeToFile(comment, code, fileName)
+				
+	# unary not
+	op = '!'
+	for combination in unaryCombinations:
+		unary, returnType = combination
+		if invalidUnary(unary, returnType,\
+		[('boolean', 'boolean')]):
+				
+			# form the program to print
+			comment = "//" + operationsTypeConflict.__doc__ + "\n"
+			code = "var a: " + unary + ";\n"\
+			+ "var return: " + returnType + " = " + op + "a;"
+			fileName = OP_TO_WORDS[op] + unary.capitalize() + returnType.capitalize() + ".min"
+			
+			if delete:
+				try:
+					os.remove(fileName)
+				except FileNotFoundError as e:
+					print(str(e))
+					continue
+			else:
+				writeToFile(comment, code, fileName)
 def main():
 
-	assignmentTypeConflict(delete=False)
+	assignmentTypeConflict(delete=True)
 	
-	operationsTypeConflict(delete=False)
+	operationsTypeConflict(delete=True)
 	
 	return 
 	

@@ -1,4 +1,0 @@
-//Invalid assignment type string:=float
-var a: string;
-var b: float;
-a = b;

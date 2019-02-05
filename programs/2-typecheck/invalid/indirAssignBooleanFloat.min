@@ -1,4 +1,0 @@
-//Invalid assignment type boolean:=float
-var a: boolean;
-var b: float;
-a = b;

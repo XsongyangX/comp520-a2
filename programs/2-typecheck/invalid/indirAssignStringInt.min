@@ -1,4 +1,0 @@
-//Invalid assignment type string:=int
-var a: string;
-var b: int;
-a = b;

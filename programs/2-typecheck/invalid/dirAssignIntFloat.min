@@ -1,2 +1,0 @@
-//Invalid assignment type int:=float
-var a: int = 0.0;

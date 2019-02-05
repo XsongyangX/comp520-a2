@@ -1,2 +1,0 @@
-//Invalid assignment type string:=boolean
-var a: string = false;
