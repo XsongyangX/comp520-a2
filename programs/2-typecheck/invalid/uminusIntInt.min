@@ -1,3 +1,0 @@
-//Invalid operation on certain types 
-var a: int;
-var return: int = -a;
