@@ -1,4 +1,0 @@
-// Generates an error when adding string to floats
-var s: string;
-var f: float;
-var j: float = s + f;

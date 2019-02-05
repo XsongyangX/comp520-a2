@@ -1,4 +1,0 @@
-// Generates a type conflict when adding floats to strings
-var s: string;
-var f: float;
-var k: float = f + s;

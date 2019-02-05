@@ -1,4 +1,0 @@
-// Produces a binary operation type conflict
-var s: string;
-var i: int;
-var j: int = s + i;
