@@ -164,7 +164,7 @@ def operationsTypeConflict(delete=False):
 	for combination in unaryCombinations:
 		unary, returnType = combination
 		if invalidUnary(unary, returnType, \
-		[('int', 'int'), ('float', 'float'), ('float', 'int')]):
+		[('int', 'int'), ('float', 'float'), ('int', 'float')]):
 				
 			# form the program to print
 			comment = "//" + operationsTypeConflict.__doc__ + "\n"
