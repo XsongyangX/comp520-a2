@@ -2,6 +2,7 @@
 var s: string = "";
 s = "Hi my name is Bob";
 s = "Hi my name is\n";
+var k: string;
 k = "\b";
 k = "\\";
 k = "\a";

@@ -1,8 +1,8 @@
 // Test if nesting
-if (True==False){
+if (true==false){
 	print("contradiction!");
 }
-else if (False==False){
+else if (false==false){
 	print("hi\n");
 	
 	if (1==3){
