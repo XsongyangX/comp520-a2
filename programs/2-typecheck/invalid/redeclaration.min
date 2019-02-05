@@ -1,0 +1,4 @@
+// Redeclare a variable inside the same scope
+
+var a: int;
+var a: int;

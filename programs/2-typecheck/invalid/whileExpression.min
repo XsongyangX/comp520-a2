@@ -1,0 +1,6 @@
+// while expression does not evaluate to boolean
+
+var a: int = 3;
+var b: int = 2;
+
+while (a+b) {}

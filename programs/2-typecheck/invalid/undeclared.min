@@ -1,0 +1,4 @@
+// Assign a variable that was not declared previously
+
+var a: int;
+b = 5;

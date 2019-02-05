@@ -1,0 +1,11 @@
+// else if expression does not evaluate to boolean
+
+var a: boolean;
+var b: string;
+
+if (true) {
+	print("true");
+}
+else if (a+b) {
+	print("else if");
+}

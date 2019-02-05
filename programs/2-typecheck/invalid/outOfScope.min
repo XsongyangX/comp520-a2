@@ -1,0 +1,9 @@
+// assign a variable outside of its inner declared scope
+
+var a: int;
+if (true) {
+	var a: float;
+	a = 5.0;
+	var b: int;
+}
+b = 5;
