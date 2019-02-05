@@ -32,6 +32,8 @@ void yyerror(const char *s) {
 	char *identifier;
 }
 
+%type <program> program
+
 /* Token directives define the token types to be returned by the scanner (excluding character
  * tokens). Each token definition takes [optionally, a reference to the associated field in the
  * yylval union] and an identifier. Multiple tokens can eb defined per directive by using a list
@@ -87,7 +89,7 @@ void yyerror(const char *s) {
 program : tCOMMENT program 
 	| if program
 	| while program
-        | statement tSEMICOLON program 
+    | statement tSEMICOLON program 
 	|
         ;
 
