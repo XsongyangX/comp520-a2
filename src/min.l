@@ -8,7 +8,6 @@ Initial version: Only print out the tokens.
 %{
 	#include "y.tab.h" // from bison
 	#include <string.h>
-	#include <stdlib.h>
 	#include "main.h"
 %}
 
@@ -17,7 +16,6 @@ DIGIT [0-9]
 LETTER [a-zA-z]
 INT 0|([1-9]{DIGIT}*)
 FLOAT {INT}\.{DIGIT}+
-SYMBOL [ `~!@#$%^&*()_+={}|;':"<>,.?/\-[]]
 ESCAPE (\\a)|(\\b)|(\\f)|(\\n)|(\\r)|(\\t)|(\\v)|(\\\")|(\\\\)
 IDENTIFIER ({LETTER}|_)({LETTER}|{DIGIT}|_)*
 
@@ -50,14 +48,28 @@ print 	{if (g_tokens) printf("tPRINT\n"); return(tPRINT);}
 true 	{if (g_tokens) printf("tTRUE\n"); return(tTRUE);}
 false 	{if (g_tokens) printf("tFALSE\n"); return(tFALSE);}
 
-{IDENTIFIER} 	{if (g_tokens) printf("tIDENTIFIER(%s)\n", yytext); return(tIDENTIFIER);}
+{IDENTIFIER} 	{
+	if (g_tokens) printf("tIDENTIFIER(%s)\n", yytext); 
+	yylval.identifier = strdup(yytext);
+	return(tIDENTIFIER);
+	}
 ":"		{if (g_tokens) printf("tCOLON\n"); return(tCOLON);}
 "=" 		{if (g_tokens) printf("tASSIGN\n"); return(tASSIGN);}
-{INT} 		{if (g_tokens) printf("tINT(%s)\n", yytext); return(tINT);}
-{FLOAT} 	{if (g_tokens) printf("tFLOAT(%s)\n", yytext); return(tFLOAT);}
+{INT} 		{
+	if (g_tokens) printf("tINT(%s)\n", yytext); 
+	yylval.intval = atoi(yytext);
+	return(tINT);
+	}
+{FLOAT} 	{
+	if (g_tokens) printf("tFLOAT(%s)\n", yytext); 
+	yylval.floatval = atof(yytext);
+	return(tFLOAT);
+	}
 
 \"({ESCAPE}|[a-zA-Z 0-9]|[~@#$%^&*()_+`{}'.,;:!?=/<>|]|-|\[|\])*\"	{
-		if (g_tokens) printf("tSTRING(%s)\n", yytext); return(tSTRING);
+	if (g_tokens) printf("tSTRING(%s)\n", yytext);
+	yylval.string = strdup(yytext);
+	return(tSTRING);
 	}
 
 ";" 		{if (g_tokens) printf("tSEMICOLON\n"); return(tSEMICOLON);}

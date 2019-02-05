@@ -60,7 +60,7 @@ void yyerror(const char *s) {
 %token UMINUS
 
 /* Precedence directives resolve grammar ambiguities by breaking ties between shift/reduce
- * operations. Tokens are grouped into precendence levels, with lower precedence coming first
+ * operations. Tokens are grouped into precedence levels, with lower precedence coming first
  * and then higher precedence in later directives. Tokens specified in the same directive have
  * the same precedence. Ties at the same level are broken using either %left or %right, which
  * denote left-associative and right-associative respectively.
