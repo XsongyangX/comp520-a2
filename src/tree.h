@@ -47,6 +47,11 @@ typedef enum {
 } ExpressionKind;
 
 typedef struct Program Program;
+typedef struct Expression Expression;
+typedef struct ControlFlow ControlFlow;
+typedef struct Statement Statement;
+
+
 struct Program {
 	int lineno;
 	ProgramKind kind;
@@ -65,7 +70,6 @@ struct Program {
 	
 };
 
-typedef struct Expression Expression;
 struct Expression {
 	int lineno;
 	ExpressionKind kind;
@@ -87,7 +91,6 @@ struct Expression {
 	} content;
 };
 
-typedef struct ControlFlow ControlFlow;
 struct ControlFlow {
 	int lineno;
 	ControlFlowKind kind;
@@ -108,7 +111,6 @@ struct ControlFlow {
 	} content;
 };
 
-typedef struct Statement Statement;
 struct Statement {
 	int lineno;
 	StatementKind kind;
