@@ -5,7 +5,7 @@ lex.yy.c:
 	flex min.l
 
 y.tab.c:
-	bison --yacc --verbose -d min.y tree.h
+	bison --yacc --verbose -d min.y
 
 clean:
 	rm lex.yy.c
