@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include "main.h"
 #include <string.h>
+#include "tree.h"
 
 void yyparse();
 int yylex();
