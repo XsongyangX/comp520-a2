@@ -33,6 +33,7 @@ void yyerror(const char *s) {
     float floatval;
     char *string;
 	char *identifier;
+	Program *program;
 }
 
 %type <program> program
