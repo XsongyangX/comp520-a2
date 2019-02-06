@@ -50,10 +50,19 @@ typedef struct Program Program;
 struct Program {
 	int lineno;
 	ProgramKind kind;
-	struct {
-		Program *program;
-		Program *next;
-	} list;
+	union {
+		// for control flows
+		struct {
+			ControlFlow *controlFlow;
+			Program *next;
+		} controlFlow;
+		// for statements
+		struct {
+			Statement *statement;
+			Program *next;
+		} statement;
+	} content;
+	
 };
 
 typedef struct Expression Expression;
