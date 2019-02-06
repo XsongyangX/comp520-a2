@@ -40,7 +40,7 @@ void yyerror(const char *s) {
 	Program *program;
 }
 
-%type <program> programStart program
+%type <program> programStart program 
 
 /* Token directives define the token types to be returned by the scanner (excluding character
  * tokens). Each token definition takes [optionally, a reference to the associated field in the
@@ -102,11 +102,11 @@ void yyerror(const char *s) {
 programStart: program {root = $1;}
 	;
 
-program : tCOMMENT program 
-	| if program
+program : tCOMMENT program {$$ = $2;}
+	| if program 
 	| while program
     | statement tSEMICOLON program 
-	|
+	| %empty {$$ = NULL;}
     ;
 
 if : tIF tLPAREN expression tRPAREN tCOMMENT tLCURL program tRCURL ifelse

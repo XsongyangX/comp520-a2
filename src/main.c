@@ -6,6 +6,8 @@ void yyparse();
 int yylex();
 int g_tokens;
 
+Program *root;
+
 // main
 int main(int argc, char** argv)
 {

@@ -20,7 +20,7 @@ typedef enum {
 	k_statementKindInitialization,
 	k_statememtKindPrint,
 	k_statementKindRead
-} Statement;
+} StatementKind;
 
 typedef enum {
 	k_expressionKindAdd,
@@ -50,9 +50,50 @@ struct Program {
 	ProgramKind kind;
 	struct {
 		Program *program;
-		Program *oneLine;
-	} binary;
+		Program *next;
+	} list;
 };
 
-Program *makeProgram(ProgramKind kind, Program *program, Program *oneLine);
+typedef struct ControlFlow ControlFlow;
+struct ControlFlow {
+	int lineno;
+	ControlFlowKind kind;
+	union {
+		// for a starting if statement and continuing else-if statement
+		struct {
+			Expression *condition;
+			Program *block;
+			ControlFlow *elsePart;
+		} continuing;
+		// for a terminating else statement
+		Program *block;
+		// for a while loop
+		struct {
+			Expression *condition;
+			Program *block;
+		} whileLoop;
+	} content;
+};
+
+typedef struct Statement Statement;
+struct Statement {
+	int lineno;
+	StatementKind kind;
+	union {
+		// for initialization and assignment
+		struct {
+			char *identifier;
+			Expression *assignment;
+		} initialization;
+		// for declaration and read
+		char *identifier;
+		// for print
+		Expression *printValue;
+	} content;
+};
+
+typedef struct Expression Expression;
+
+Program *makeProgram(ProgramKind kind, Program *program, Program *next);
+ControlFlow *makeControlFlow(ControlFlowKind kind, Expression *expression, Program *block);
 #endif
