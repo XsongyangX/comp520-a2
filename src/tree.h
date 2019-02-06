@@ -20,4 +20,6 @@ struct Program {
 		Program *oneLine;
 	} binary;
 };
+
+Program *makeProgram(ProgramKind kind, Program *program, Program *oneLine);
 #endif
