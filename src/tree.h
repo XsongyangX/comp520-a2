@@ -56,6 +56,28 @@ struct Program {
 	} list;
 };
 
+typedef struct Expression Expression;
+struct Expression {
+	int lineno;
+	ExpressionKind kind;
+	union {
+		// for binary operations
+		struct {
+			Expression *left;
+			Expression *right;
+		} binary;
+		// for unary operations
+		Expression *unary;
+		// for identifier
+		char *identifier;
+		// for literals
+		bool boolean;
+		int intVal;
+		float floatVal;
+		char *string;
+	} content;
+};
+
 typedef struct ControlFlow ControlFlow;
 struct ControlFlow {
 	int lineno;
@@ -94,27 +116,6 @@ struct Statement {
 	} content;
 };
 
-typedef struct Expression Expression;
-struct Expression {
-	int lineno;
-	ExpressionKind kind;
-	union {
-		// for binary operations
-		struct {
-			Expression *left;
-			Expression *right;
-		} binary;
-		// for unary operations
-		Expression *unary;
-		// for identifier
-		char *identifier;
-		// for literals
-		bool boolean;
-		int intVal;
-		float floatVal;
-		char *string;
-	} content;
-};
 
 Program *makeProgram(ProgramKind kind, Program *program, Program *next);
 ControlFlow *makeControlFlow(ControlFlowKind kind, Expression *expression, Program *block);
