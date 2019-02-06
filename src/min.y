@@ -5,6 +5,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+// AST .h
+#include "tree.h"
+
 // Scanner line number
 extern int yylineno;
 // yylex() from flex
@@ -82,6 +85,11 @@ void yyerror(const char *s) {
 
 /* Error messages */
 %error-verbose
+
+%code requires
+{
+	#include "tree.h"
+}
 
 /* Grammar rules */
 %%
