@@ -10,6 +10,10 @@
 
 // Scanner line number
 extern int yylineno;
+
+// AST root
+extern Program *root;
+
 // yylex() from flex
 int yylex();
 
@@ -36,7 +40,7 @@ void yyerror(const char *s) {
 	Program *program;
 }
 
-%type <program> program
+%type <program> programStart program
 
 /* Token directives define the token types to be returned by the scanner (excluding character
  * tokens). Each token definition takes [optionally, a reference to the associated field in the
@@ -79,7 +83,7 @@ void yyerror(const char *s) {
 %left UMINUS tNOT
 
 /* Start */
-%start program
+%start programStart
 
 /* For line numbers while parsing */
 %locations
@@ -94,6 +98,9 @@ void yyerror(const char *s) {
 
 /* Grammar rules */
 %%
+
+programStart: program {root = $1;}
+	;
 
 program : tCOMMENT program 
 	| if program
