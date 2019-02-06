@@ -38,9 +38,16 @@ void yyerror(const char *s) {
     char *string;
 	char *identifier;
 	Program *program;
+	Expression *expression;
+	Statement *statement;
+	ControlFlow *controlFlow;
 }
 
+// type definitions based on the AST
 %type <program> programStart program 
+%type <expression> expression
+%type <statement> statement
+%type <controlFlow> if while ifelse
 
 /* Token directives define the token types to be returned by the scanner (excluding character
  * tokens). Each token definition takes [optionally, a reference to the associated field in the
