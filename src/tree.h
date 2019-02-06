@@ -130,5 +130,6 @@ struct Statement {
 
 Program *makeProgram_controlFlow(ProgramKind kind, ControlFlow *controlFlow, 
 	Program *next);
-ControlFlow *makeControlFlow(ControlFlowKind kind, Expression *expression, Program *block);
+ControlFlow *makeControlFlow(ControlFlowKind kind, Expression *expression, 
+	Program *block);
 #endif
