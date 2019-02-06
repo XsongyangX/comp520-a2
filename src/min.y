@@ -91,7 +91,7 @@ program : tCOMMENT program
 	| while program
     | statement tSEMICOLON program 
 	|
-        ;
+    ;
 
 if : tIF tLPAREN expression tRPAREN tCOMMENT tLCURL program tRCURL ifelse
 	| tIF tLPAREN expression tRPAREN tLCURL program tRCURL ifelse
