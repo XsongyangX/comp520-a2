@@ -128,6 +128,7 @@ struct Statement {
 };
 
 
-Program *makeProgram(ProgramKind kind, Program *program, Program *next);
+Program *makeProgram_controlFlow(ProgramKind kind, ControlFlow *controlFlow, 
+	Program *next);
 ControlFlow *makeControlFlow(ControlFlowKind kind, Expression *expression, Program *block);
 #endif
