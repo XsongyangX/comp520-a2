@@ -98,7 +98,7 @@ struct Statement {
 		struct {
 			char *identifier;
 			Expression *assignment;
-		} initialization;
+		} assign;
 		// for declaration and read
 		char *identifier;
 		// for print
@@ -127,33 +127,31 @@ struct Expression {
 	} content;
 };
 
-Program *makeProgram_controlFlow(ProgramKind kind, ControlFlow *controlFlow, 
+Program *makeProgram_controlFlow(ControlFlow *controlFlow, 
 	Program *next);
-Program *makeProgram_statement(ProgramKind kind, Statement *statement,
+Program *makeProgram_statement(Statement *statement,
 	Program *next);
 	
-ControlFlow *makeControlFlow_if(ControlFlowKind kind, Expression *condition, 
+ControlFlow *makeControlFlow_if(Expression *condition, 
 	Program *block, ControlFlow *elsePart);
-ControlFlow *makeControlFlow_while(ControlFlowKind kind, Expression *condition,
+ControlFlow *makeControlFlow_while(Expression *condition,
 	Program *block);
-ControlFlow *makeControlFlow_else(ControlFlowKind kind, Program *block);
+ControlFlow *makeControlFlow_else(Program *block);
 
-Statement *makeStatement_initialization(StatementKind kind, char *identifier,
+Statement *makeStatement_assign(StatementKind kind, char *identifier,
 	Expression *assignment);
-Statement *makeStatement_assignment(StatementKind kind, char *identifier,
-	Expression *assignment);
-Statement *makeStatement_declaration(StatementKind kind, char *identifier);
-Statement *makeStatement_read(StatementKind kind, char *identifier);
-Statement *makeStatement_print(StatementKind kind, Expression *printValue);
+// for read and declaration
+Statement *makeStatement_identifier(StatementKind kind, char *identifier);
+Statement *makeStatement_print(Expression *printValue);
 
 Expression *makeExpression_binary(ExpressionKind kind, Expression *left,
 	Expression *right);
 Expression *makeExpression_unary(ExpressionKind kind, Expression *unary);
-Expression *makeExpression_identifier(ExpressionKind kind, char *identifier);
-Expression *makeExpression_boolean(ExpressionKind kind, bool literal);
-Expression *makeExpression_int(ExpressionKind kind, int literal);
-Expression *makeExpression_float(ExpressionKind kind, float literal);
-Expression *makeExpression_string(ExpressionKind kind, char *string);
+Expression *makeExpression_identifier(char *identifier);
+Expression *makeExpression_boolean(bool literal);
+Expression *makeExpression_int(int literal);
+Expression *makeExpression_float(float literal);
+Expression *makeExpression_string(char *string);
 
 
 #endif
