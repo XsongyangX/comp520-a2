@@ -51,7 +51,7 @@ void yyerror(const char *s) {
 
 /* Token directives define the token types to be returned by the scanner (excluding character
  * tokens). Each token definition takes [optionally, a reference to the associated field in the
- * yylval union] and an identifier. Multiple tokens can eb defined per directive by using a list
+ * yylval union] and an identifier. Multiple tokens can be defined per directive by using a list
  * of identifiers separated by spaces.
  */
 
@@ -110,56 +110,124 @@ programStart: program {root = $1;}
 	;
 
 program : tCOMMENT program {$$ = $2;}
-	| if program 
-	| while program
-    | statement tSEMICOLON program 
+	| if program {
+		$$ = makeProgram_controlFlow($1, $2);
+	}
+	| while program {
+		$$ = makeProgram_controlFlow($1, $2);
+	}
+	| statement tSEMICOLON program {
+		$$ = makeProgram_statement($1, $3);
+	}
 	| %empty {$$ = NULL;}
     ;
 
-if : tIF tLPAREN expression tRPAREN tCOMMENT tLCURL program tRCURL ifelse
-	| tIF tLPAREN expression tRPAREN tLCURL program tRCURL ifelse
+if : tIF tLPAREN expression tRPAREN tCOMMENT tLCURL program tRCURL ifelse {
+		$$ = makeControlFlow_continuing(k_controlFlowKindIf, $3, $7, $9);
+	}
+	| tIF tLPAREN expression tRPAREN tLCURL program tRCURL ifelse {
+		$$ = makeControlFlow_continuing(k_controlFlowKindIf, $3, $6, $8);
+	}
 	;
 
-ifelse : tELSE tIF tLPAREN expression tRPAREN tCOMMENT tLCURL program tRCURL ifelse
-	| tELSE tIF tLPAREN expression tRPAREN tLCURL program tRCURL ifelse
-	| tELSE tCOMMENT tLCURL program tRCURL
-	| tELSE tLCURL program tRCURL
-	|
+ifelse : tELSE tIF tLPAREN expression tRPAREN tCOMMENT tLCURL program tRCURL ifelse {
+		$$ = makeControlFlow_continuing(k_controlFlowKindElseIf, $4, $8, $10);
+	}
+	| tELSE tIF tLPAREN expression tRPAREN tLCURL program tRCURL ifelse {
+		$$ = makeControlFlow_continuing(k_controlFlowKindElseIf, $4, $7, $9);
+	}
+	| tELSE tCOMMENT tLCURL program tRCURL {
+		$$ = makeControlFlow_else($4);
+	}
+	| tELSE tLCURL program tRCURL {
+		$$ = makeControlFlow_else($3);
+	}
+	| %empty {$$ = NULL;}
 	;
 
-while : tWHILE tLPAREN expression tRPAREN tCOMMENT tLCURL program tRCURL
-	| tWHILE tLPAREN expression tRPAREN tLCURL program tRCURL
+while : tWHILE tLPAREN expression tRPAREN tCOMMENT tLCURL program tRCURL {
+		$$ = makeControlFlow_while($3, $7);
+	}
+	| tWHILE tLPAREN expression tRPAREN tLCURL program tRCURL {
+		$$ = makeControlFlow_while($3, $6);
+	}
 	;
 
-statement : tREAD tLPAREN tIDENTIFIER tRPAREN
-	| tPRINT tLPAREN expression tRPAREN
-	| tVAR tIDENTIFIER tCOLON type tASSIGN expression
-	| tVAR tIDENTIFIER tCOLON type
-	| tIDENTIFIER tASSIGN expression
+statement : tREAD tLPAREN tIDENTIFIER tRPAREN {
+		$$ = makeStatement_identifier(k_statementKindRead, $3);
+	}
+	| tPRINT tLPAREN expression tRPAREN {
+		$$ = makeStatement_print($3);
+	}
+	| tVAR tIDENTIFIER tCOLON type tASSIGN expression {
+		$$ = makeStatement_assign(k_statementKindInitialization, $2, $6);
+	}
+	| tVAR tIDENTIFIER tCOLON type {
+		$$ = makeStatement_identifier(k_statementKindDeclaration, $2);
+	}
+	| tIDENTIFIER tASSIGN expression {
+		$$ = makeStatement_assign(k_statementKindAssignment, $1, $3);
+	}
 	;
 
 type : tKEYINT
-    | tKEYFLOAT
+	| tKEYFLOAT
 	| tKEYSTRING
 	| tBOOLEAN
 	;
 
-expression : tTRUE | tFALSE | tINT | tFLOAT | tSTRING
-	| expression tPLUS expression
-	| expression tMINUS expression
-	| expression tTIMES expression
-	| expression tDIVIDE expression
-	| tNOT expression
-	| tMINUS expression	%prec UMINUS
-	| tLPAREN expression tRPAREN
-	| expression tGEQ expression
-	| expression tLEQ expression
-	| expression tGREATER expression
-	| expression tLESSER expression
-	| expression tEQUAL expression
-	| expression tNEQUAL expression
-	| expression tAND expression
-	| expression tOR expression
-	| tIDENTIFIER
+expression : tTRUE {$$ = makeExpression_boolean(true);}
+	| tFALSE {$$ = makeExpression_boolean(false);}
+	| tINT {$$ = makeExpression_int($1);}
+	| tFLOAT {$$ = makeExpression_float($1);}
+	| tSTRING {$$ = makeExpression_string($1);}
+	| expression tPLUS expression {
+		$$ = makeExpression_binary(k_expressionKindAdd, $1, $3);
+	}
+	| expression tMINUS expression {
+		$$ = makeExpression_binary(k_expressionKindMinus, $1, $3);
+	}
+	| expression tTIMES expression {
+		$$ = makeExpression_binary(k_expressionKindTimes, $1, $3);
+	}
+	| expression tDIVIDE expression {
+		$$ = makeExpression_binary(k_expressionKindDivide, $1, $3);
+	}
+	| tNOT expression {
+		$$ = makeExpression_unary(k_expressionKindNot, $2);
+	}
+	| tMINUS expression	%prec UMINUS {
+		$$ = makeExpression_unary(k_expressionKindUMinus, $2);
+	}
+	| tLPAREN expression tRPAREN {
+		$$ = $2;
+	}
+	| expression tGEQ expression {
+		$$ = makeExpression_binary(k_expressionKindGEQ, $1, $3);
+	}
+	| expression tLEQ expression {
+		$$ = makeExpression_binary(k_expressionKindLEQ, $1, $3);
+	}
+	| expression tGREATER expression {
+		$$ = makeExpression_binary(k_expressionKindGreater, $1, $3);
+	}
+	| expression tLESSER expression {
+		$$ = makeExpression_binary(k_expressionKindLesser, $1, $3);
+	}
+	| expression tEQUAL expression {
+		$$ = makeExpression_binary(k_expressionKindEqual, $1, $3);
+	}
+	| expression tNEQUAL expression {
+		$$ = makeExpression_binary(k_expressionKindNEqual, $1, $3);
+	}
+	| expression tAND expression {
+		$$ = makeExpression_binary(k_expressionKindAnd, $1, $3);
+	}
+	| expression tOR expression {
+		$$ = makeExpression_binary(k_expressionKindOr, $1, $3);
+	}
+	| tIDENTIFIER {
+		$$ = makeExpression_identifier($1);
+	}
 	;
 
