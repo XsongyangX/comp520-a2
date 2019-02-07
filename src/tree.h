@@ -132,12 +132,13 @@ Program *makeProgram_controlFlow(ControlFlow *controlFlow,
 Program *makeProgram_statement(Statement *statement,
 	Program *next);
 	
-ControlFlow *makeControlFlow_if(Expression *condition, 
-	Program *block, ControlFlow *elsePart);
+ControlFlow *makeControlFlow_continuing(ControlFlowKind kind, 
+	Expression *condition, Program *block, ControlFlow *elsePart);
 ControlFlow *makeControlFlow_while(Expression *condition,
 	Program *block);
 ControlFlow *makeControlFlow_else(Program *block);
 
+// for assignment and initialization
 Statement *makeStatement_assign(StatementKind kind, char *identifier,
 	Expression *assignment);
 // for read and declaration
