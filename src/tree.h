@@ -20,7 +20,7 @@ typedef enum {
 	k_statementKindDeclaration,
 	k_statementKindAssignment,
 	k_statementKindInitialization,
-	k_statememtKindPrint,
+	k_statementKindPrint,
 	k_statementKindRead
 } StatementKind;
 
