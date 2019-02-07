@@ -40,9 +40,16 @@ int main(int argc, char** argv)
 		printf("OK\n");
 		return 0;
 	}
+	else if ( 0 == strcmp(argv[1], "pretty"))
+	{
+		g_tokens = 0;
+		yyparse();
+		printf("OK\n");
+		return 0;
+	}
 	else 
 	{
-		fprintf(stderr, "Valid arguments are scan|tokens|parse\n");
+		fprintf(stderr, "Valid arguments are scan|tokens|parse|pretty\n");
 		return 1;
 	}
 
