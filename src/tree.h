@@ -47,9 +47,9 @@ typedef enum {
 } ExpressionKind;
 
 typedef struct Program Program;
-typedef struct Expression Expression;
 typedef struct ControlFlow ControlFlow;
 typedef struct Statement Statement;
+typedef struct Expression Expression;
 
 
 struct Program {
@@ -68,27 +68,6 @@ struct Program {
 		} statement;
 	} content;
 	
-};
-
-struct Expression {
-	int lineno;
-	ExpressionKind kind;
-	union {
-		// for binary operations
-		struct {
-			Expression *left;
-			Expression *right;
-		} binary;
-		// for unary operations
-		Expression *unary;
-		// for identifier
-		char *identifier;
-		// for literals
-		bool boolean;
-		int intVal;
-		float floatVal;
-		char *string;
-	} content;
 };
 
 struct ControlFlow {
@@ -127,6 +106,26 @@ struct Statement {
 	} content;
 };
 
+struct Expression {
+	int lineno;
+	ExpressionKind kind;
+	union {
+		// for binary operations
+		struct {
+			Expression *left;
+			Expression *right;
+		} binary;
+		// for unary operations
+		Expression *unary;
+		// for identifier
+		char *identifier;
+		// for literals
+		bool boolean;
+		int intVal;
+		float floatVal;
+		char *string;
+	} content;
+};
 
 Program *makeProgram_controlFlow(ProgramKind kind, ControlFlow *controlFlow, 
 	Program *next);
@@ -137,4 +136,24 @@ ControlFlow *makeControlFlow_if(ControlFlowKind kind, Expression *condition,
 	Program *block, ControlFlow *elsePart);
 ControlFlow *makeControlFlow_while(ControlFlowKind kind, Expression *condition,
 	Program *block);
+ControlFlow *makeControlFlow_else(ControlFlowKind kind, Program *block);
+
+Statement *makeStatement_initialization(StatementKind kind, char *identifier,
+	Expression *assignment);
+Statement *makeStatement_assignment(StatementKind kind, char *identifier,
+	Expression *assignment);
+Statement *makeStatement_declaration(StatementKind kind, char *identifier);
+Statement *makeStatement_read(StatementKind kind, char *identifier);
+Statement *makeStatement_print(StatementKind kind, Expression *printValue);
+
+Expression *makeExpression_binary(ExpressionKind kind, Expression *left,
+	Expression *right);
+Expression *makeExpression_unary(ExpressionKind kind, Expression *unary);
+Expression *makeExpression_identifier(ExpressionKind kind, char *identifier);
+Expression *makeExpression_boolean(ExpressionKind kind, bool literal);
+Expression *makeExpression_int(ExpressionKind kind, int literal);
+Expression *makeExpression_float(ExpressionKind kind, float literal);
+Expression *makeExpression_string(ExpressionKind kind, char *string);
+
+
 #endif
