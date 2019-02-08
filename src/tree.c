@@ -141,14 +141,13 @@ Expression *makeExpression_unary(ExpressionKind kind, Expression *unary){
 	return e;
 }
 
-Expression *makeExpression_identifier(char *identifier, TypeToken t_type){
+Expression *makeExpression_identifier(char *identifier){
 	
 	Expression *e = malloc(sizeof(Expression));
 	e->lineno = yylineno;
 	e->kind = k_expressionKindIdentifier;
 	
-	e->content.var.identifier = strdup(identifier);
-	e->content.var.t_type = t_type;
+	e->content.identifier = strdup(identifier);
 	
 	return e;
 }

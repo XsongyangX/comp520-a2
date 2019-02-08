@@ -133,10 +133,7 @@ struct Expression {
 		// for unary operations
 		Expression *unary;
 		// for identifier
-		struct {
-			char *identifier;
-			TypeToken t_type;
-		} var;
+		char *identifier;
 		// for literals
 		bool boolean;
 		int intVal;
@@ -169,7 +166,7 @@ Statement *makeStatement_print(Expression *printValue);
 Expression *makeExpression_binary(ExpressionKind kind, Expression *left,
 	Expression *right);
 Expression *makeExpression_unary(ExpressionKind kind, Expression *unary);
-Expression *makeExpression_identifier(char *identifier, TypeToken t_type);
+Expression *makeExpression_identifier(char *identifier);
 Expression *makeExpression_boolean(bool literal);
 Expression *makeExpression_int(int literal);
 Expression *makeExpression_float(float literal);
