@@ -19,6 +19,9 @@ for folder in os.listdir("pretty"):
 	
 	for sourceFile in os.listdir(os.path.join("pretty/", folder)):
 		
+		if (sourceFile == "compare"):
+			continue
+		
 		with open(os.path.join("pretty/", folder, sourceFile), "r") as prettyPrint:
 		
 			with open(os.path.join("pretty/", folder, "compare", sourceFile)) as \
