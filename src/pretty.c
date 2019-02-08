@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <string.h>
+#include <stdbool.h>
 #include "pretty.h"
 
 char *t_typeToString(TypeToken t_type){
