@@ -15,7 +15,7 @@ int main(int argc, char** argv)
 	// check if an argument is provided
 	if (argc != 2)
 	{
-		fprintf(stderr, "Must provide an argument: scan|tokens|parse\n");
+		fprintf(stderr, "Must provide an argument: scan|tokens|parse|pretty\n");
 		return 1;
 	}
 
