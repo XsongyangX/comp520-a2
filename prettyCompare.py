@@ -16,4 +16,4 @@ if len(sys.argv) != 2:
 for folder in os.listdir("pretty"):
 
 	for subfolder in os.listdir(os.path.join("pretty/", folder)):
-		print("in " + str(subfolder))
+		print("in " + str(subfolder) + " of " + str(folder))
