@@ -12,11 +12,17 @@ if [ -d ./pretty ]; then
 	echo "Pretty directory found"
 else
 	mkdir pretty
+	echo "Create pretty directory"
 fi
 	
 # create a subdirectory for each phase described in 'programs' directory
 for sub in $(ls programs)
 do
-	mkdir ./pretty/$sub
+	if [ -d ./pretty/$sub]; then
+		echo "subdirectory exists"
+	else
+		mkdir ./pretty/$sub
+		echo "subdirectory created: $sub"
+	fi
 done
 
