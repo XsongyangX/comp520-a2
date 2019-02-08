@@ -69,7 +69,7 @@ void prettyControlFlow(ControlFlow *cf, int tabsSoFar) {
 		case k_controlFlowKindIf:
 			// if statement + expression
 			printf("if ( ");
-			prettyExpression(cf->content.continuing.condition, 0); // 0 for conditionals
+			prettyExpression(cf->content.continuing.condition); // 0 for conditionals
 			printf(" )\n");
 			printTabs(tabsSoFar); // for positioning {
 			printf("{\n");
@@ -92,7 +92,7 @@ void prettyControlFlow(ControlFlow *cf, int tabsSoFar) {
 			
 			// else if statement + expression, similar to previous case
 			printf("else if ( ");
-			prettyExpression(cf->content.continuing.condition, 0); // 0 for conditionals
+			prettyExpression(cf->content.continuing.condition); // 0 for conditionals
 			printf(" )\n");
 			printTabs(tabsSoFar); // for the {
 			printf("{\n");
@@ -133,7 +133,7 @@ void prettyControlFlow(ControlFlow *cf, int tabsSoFar) {
 		case k_controlFlowKindWhile:
 			
 			printf("while ( ");
-			prettyExpression(cf->content.whileLoop.condition, 0); // 0 for conditionals
+			prettyExpression(cf->content.whileLoop.condition); // 0 for conditionals
 			printf(" )\n");
 			printTabs(tabsSoFar);
 			printf("{\n");
@@ -154,14 +154,14 @@ void prettyControlFlow(ControlFlow *cf, int tabsSoFar) {
 	
 }
 
-void prettyStatement(Statement *s, int tabsSoFar) {
+void prettyStatement(Statement *s) {
 	
 	switch (s->kind){
 		
 		case k_statementKindAssignment:
 		
 			printf("%s = ", s->content.assign.identifier);
-			prettyExpression(s->content.assign.assignment, 0); // 0 for assignments
+			prettyExpression(s->content.assign.assignment); 
 			// to verify whether to tab or not
 			break;
 			
@@ -169,7 +169,7 @@ void prettyStatement(Statement *s, int tabsSoFar) {
 		
 			printf("var %s: %s = ", s->content.initialization.identifier, 
 				t_typeToString(s->content.initialization.t_type));
-			prettyExpression(s->content.initialization.assignment, 0); // 0 for assignments
+			prettyExpression(s->content.initialization.assignment); 
 			// to verify whether to tab or not
 			break;
 			
@@ -190,7 +190,7 @@ void prettyStatement(Statement *s, int tabsSoFar) {
 		case k_statementKindPrint:
 		
 			printf("print( ");
-			prettyExpression(s->content.printValue, 0);
+			prettyExpression(s->content.printValue);
 			printf(" )");
 			// to verify whether to tab 
 			break;

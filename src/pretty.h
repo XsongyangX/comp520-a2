@@ -5,8 +5,8 @@
 
 void prettyProgram(Program *p, int tabsSoFar);
 void prettyControlFlow(ControlFlow *cf, int tabsSoFar);
-void prettyStatement(Statement *s, int tabsSoFar);
-void prettyExpression(Expression *e, int tabsSoFar);
+void prettyStatement(Statement *s);
+void prettyExpression(Expression *e);
 
 char *t_typeToString(TypeToken t_type);
 void printTabs(int tabsSoFar);
