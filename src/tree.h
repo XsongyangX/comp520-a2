@@ -45,6 +45,13 @@ typedef enum {
 	k_expressionKindStringLiteral
 } ExpressionKind;
 
+typedef enum {
+	t_int,
+	t_float,
+	t_boolean,
+	t_string
+} TypeToken;
+
 typedef struct Program Program;
 typedef struct ControlFlow ControlFlow;
 typedef struct Statement Statement;
@@ -99,7 +106,10 @@ struct Statement {
 			Expression *assignment;
 		} assign;
 		// for declaration and read
-		char *identifier;
+		struct {
+			char *identifier;
+			TypeToken t_type;
+		} var;
 		// for print
 		Expression *printValue;
 	} content;
@@ -117,7 +127,10 @@ struct Expression {
 		// for unary operations
 		Expression *unary;
 		// for identifier
-		char *identifier;
+		struct {
+			char *identifier;
+			TypeToken t_type;
+		} var;
 		// for literals
 		bool boolean;
 		int intVal;
@@ -141,13 +154,14 @@ ControlFlow *makeControlFlow_else(Program *block);
 Statement *makeStatement_assign(StatementKind kind, char *identifier,
 	Expression *assignment);
 // for read and declaration
-Statement *makeStatement_identifier(StatementKind kind, char *identifier);
+Statement *makeStatement_identifier(StatementKind kind, char *identifier,
+	TypeToken t_type);
 Statement *makeStatement_print(Expression *printValue);
 
 Expression *makeExpression_binary(ExpressionKind kind, Expression *left,
 	Expression *right);
 Expression *makeExpression_unary(ExpressionKind kind, Expression *unary);
-Expression *makeExpression_identifier(char *identifier);
+Expression *makeExpression_identifier(char *identifier, TypeToken t_type);
 Expression *makeExpression_boolean(bool literal);
 Expression *makeExpression_int(int literal);
 Expression *makeExpression_float(float literal);

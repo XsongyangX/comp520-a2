@@ -61,3 +61,17 @@ void prettyControlFlow(ControlFlow *cf) {
 	}
 	
 }
+
+void prettyStatement(Statement *s) {
+	
+	switch (s->kind){
+		
+		case k_statementKindInitialization:
+		case k_statementKindAssignment:
+		
+			printf();
+		
+			break;
+	}
+	
+}

@@ -160,20 +160,20 @@ statement : tREAD tLPAREN tIDENTIFIER tRPAREN {
 		$$ = makeStatement_print($3);
 	}
 	| tVAR tIDENTIFIER tCOLON type tASSIGN expression {
-		$$ = makeStatement_assign(k_statementKindInitialization, $2, $6);
+		$$ = makeStatement_assign(k_statementKindInitialization, $2, $6, $4);
 	}
 	| tVAR tIDENTIFIER tCOLON type {
-		$$ = makeStatement_identifier(k_statementKindDeclaration, $2);
+		$$ = makeStatement_identifier(k_statementKindDeclaration, $2, $4);
 	}
 	| tIDENTIFIER tASSIGN expression {
 		$$ = makeStatement_assign(k_statementKindAssignment, $1, $3);
 	}
 	;
 
-type : tKEYINT
-	| tKEYFLOAT
-	| tKEYSTRING
-	| tBOOLEAN
+type : tKEYINT {$$ = t_int;}
+	| tKEYFLOAT {$$ = t_float;}
+	| tKEYSTRING {$$ = t_string;}
+	| tBOOLEAN {$$ = t_boolean;}
 	;
 
 expression : tTRUE {$$ = makeExpression_boolean(true);}
