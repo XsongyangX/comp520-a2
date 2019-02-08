@@ -210,7 +210,7 @@ void prettyExpression(Expression *e) {
 		case k_expressionKindBooleanLiteral:
 			if (content.boolean){
 				printf("true");
-					
+			}
 			else{
 				printf("false");
 			}
