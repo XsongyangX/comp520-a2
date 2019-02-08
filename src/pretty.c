@@ -153,23 +153,113 @@ void prettyControlFlow(ControlFlow *cf, int tabsSoFar) {
 	
 }
 
-void prettyStatement(Statement *s) {
+void prettyStatement(Statement *s, int tabsSoFar) {
 	
 	switch (s->kind){
-		
 		
 		case k_statementKindAssignment:
 		
 			printf("%s = ", s->content.assign.identifier);
-			prettyExpression(s->content.assign.assignment);
-		
+			prettyExpression(s->content.assign.assignment, 0); // 0 for assignments
+			// to verify whether to tab or not
 			break;
 			
 		case k_statementKindInitialization:
 		
-			printf("var %s %s = ", s->content.initialization.t_type
+			printf("var %s: %s = ", s->content.initialization.identifier, 
+				t_typeToString(s->content.initialization.t_type));
+			prettyExpression(s->content.initialization.assignment, 0); // 0 for assignments
+			// to verify whether to tab or not
+			break;
+			
+		case k_statementKindDeclaration:
+			
+			printf("var %s: %s", s->content.var.identifier,
+				t_typeToString(s->content.var.t_type));
+			// to verify whether to tab 
 			
 			break;
+			
+		case k_statementKindRead:
+		
+			printf("read( %s )", s->content.identifier);
+			// to verify whether to tab 
+			break;
+			
+		case k_statementKindPrint:
+		
+			printf("print( ");
+			prettyExpression(s->content.printValue, 0);
+			printf(" )");
+			// to verify whether to tab 
+			break;
+	} 
+	
+}
+
+char *getOperationSymbols(ExpressionKind kind){
+	
+	switch (kind) {
+		
+		case k_expressionKindAdd:
+			return "+";
+			break;
+		
+		case k_expressionKindMinus:
+		case k_expressionKindUMinus:
+			return "-";
+			break;
+			
+		case k_expressionKindTimes:
+			return "*";
+			break;
+			
+		case k_expressionKindDivide:
+			return "/";
+			break;
+			
+		case k_expressionKindNot:
+			return "!";
+			break;
+			
+		case k_expressionKindGEQ:
+			return ">=";
+			break;
+			
+		case k_expressionKindLEQ:
+			return "<=";
+			break;
+			
+		case k_expressionKindGreater:
+			return ">";
+			break;
+			
+		case k_expressionKindLesser:
+			return "<";
+			break;
+			
+		case k_expressionKindEqual:
+			return "==";
+			break;
+			
+		case k_expressionKindNEqual:
+			return "!=";
+			break;
+			
+		case k_expressionKindAnd:
+			return "&&";
+			break;
+			
+		case k_expressionKindOr:
+			return "||";
+			break;
 	}
+	
+	return "notASymbol";
+}
+
+void prettyExpression(Expression *e, int tabsSoFar) {
+	
+	
 	
 }
