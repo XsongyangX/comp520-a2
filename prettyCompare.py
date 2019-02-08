@@ -12,7 +12,7 @@ import os
 if len(sys.argv) != 2:
 	raise Exception("Needs exactly 1 argument: destroy | keep")
 
-def compare(prettyPrintFile, printPrintFile2):
+def compare(prettyPrintFile, prettyPrintFile2):
 
 	for (line1, line2) in zip(prettyPrintFile, prettyPrintFile2):
 		
