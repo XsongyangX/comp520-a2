@@ -50,6 +50,10 @@ do
 	fi
 done
 
+echo "--"
+echo "initial pretty print"
+echo "--"
+
 # call compiler to pretty print source programs
 for sub in $(ls programs)
 do
@@ -58,6 +62,10 @@ do
 		./src/minic pretty $program > ./pretty/$sub/$program
 	done
 done
+
+echo "--"
+echo "secondary pretty print"
+echo "--"
 
 # call compiler to pretty print on the pretty output
 for sub in $(ls pretty)
