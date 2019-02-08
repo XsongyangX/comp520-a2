@@ -198,7 +198,7 @@ void prettyStatement(Statement *s) {
 	
 }
 
-void prettyExpression(Expression *e, int tabsSoFar) {
+void prettyExpression(Expression *e) {
 	
 	switch (e->kind) {
 		// non-operation 
@@ -207,15 +207,23 @@ void prettyExpression(Expression *e, int tabsSoFar) {
 			break;
 			
 		case k_expressionKindBooleanLiteral:
-			printf("%s", e->content.boolean);
+			switch (e->content.boolean){
+				case true:
+					printf("true");
+					break;
+					
+				case false:
+					printf("false");
+					break;
+			}
 			break;
 			
 		case k_expressionKindIntLiteral:
-			printf("%s", e->content.intVal);
+			printf("%i", e->content.intVal);
 			break;
 			
 		case k_expressionKindFloatLiteral:
-			printf("%s", e->content.floatVal);
+			printf("%f", e->content.floatVal);
 			break;
 			
 		case k_expressionKindStringLiteral:
