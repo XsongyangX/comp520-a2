@@ -30,7 +30,7 @@ for folder in os.listdir("pretty"):
 				# pretty print identity does not hold
 				if (str(prettyPrint) != str(prettyPrint2)):
 				
-					print("identity violated :" + str(sourceFile))
+					print("identity violated : " + str(sourceFile))
 
 # destroy pretty folder if wanted
 if (sys.argv[1] == "destroy"):
