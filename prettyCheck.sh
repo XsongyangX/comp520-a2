@@ -18,7 +18,8 @@ fi
 # create a subdirectory for each phase described in 'programs' directory
 for sub in $(ls programs)
 do
-	if [[ -d ./pretty/$sub]]; then
+	if [ -d ./pretty/$sub]
+	then
 		echo "subdirectory exists"
 	else
 		mkdir ./pretty/$sub
