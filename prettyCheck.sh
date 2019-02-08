@@ -59,7 +59,7 @@ for sub in $(ls programs)
 do
 	for program in $(ls programs/$sub/valid/ | egrep '*.min')
 	do
-		cat ./src/minic/$program | ./src/minic pretty > ./pretty/$sub/$program
+		cat ./programs/$sub/valid/$program | ./src/minic pretty > ./pretty/$sub/$program
 	done
 done
 
@@ -72,7 +72,7 @@ for sub in $(ls pretty)
 do
 	for program in $(ls pretty/$sub/ | egrep '*.min')
 	do
-		cat ./src/minic/$program | ./src/minic pretty > ./pretty/$sub/compare/$program
+		cat ./programs/$sub/valid/$program | ./src/minic pretty > ./pretty/$sub/compare/$program
 	done
 done
 
