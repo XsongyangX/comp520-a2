@@ -21,7 +21,7 @@ for folder in os.listdir("pretty"):
 		
 		with open(os.path.join("pretty/", folder, sourceFile), "r") as prettyPrint:
 		
-			with open(os.path.join("pretty/", folder, "compare", sourceFile as\
+			with open(os.path.join("pretty/", folder, "compare", sourceFile as \
 			prettyPrint2:
 				
 				# pretty print identity does not hold
