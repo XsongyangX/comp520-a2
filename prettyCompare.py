@@ -28,7 +28,7 @@ for folder in os.listdir("pretty"):
 			prettyPrint2:
 				
 				# pretty print identity does not hold
-				if str(prettyPrint1) != str(prettyPrint2):
+				if str(prettyPrint) != str(prettyPrint2):
 					print("identity violated : " + str(sourceFile))
 					compare(prettyPrint, prettyPrint2)
 					
