@@ -42,7 +42,7 @@ for folder in os.listdir("pretty"):
 			prettyPrint2:
 				
 				# check for identity
-				compare(prettyPrint, prettyPrint2, fileName)
+				compare(prettyPrint, prettyPrint2, sourceFile)
 					
 
 					
