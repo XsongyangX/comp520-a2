@@ -41,6 +41,7 @@ void yyerror(const char *s) {
 	Expression *expression;
 	Statement *statement;
 	ControlFlow *controlFlow;
+	TypeToken t_type;
 }
 
 // type definitions based on the AST
@@ -60,6 +61,7 @@ void yyerror(const char *s) {
 %token <identifier> tIDENTIFIER
 %token <floatval> tFLOAT
 %token <string> tSTRING
+%token <t_type> tKEYINT tKEYFLOAT tKEYSTRING tBOOLEAN
 
 // comment
 %token tCOMMENT 
