@@ -68,5 +68,9 @@ do
 	done
 done
 
+echo "-----"
+echo "python script"
+echo "-----"
+
 # call python script to compare
 ./prettyCompare.py $1
