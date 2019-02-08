@@ -53,7 +53,7 @@ done
 # call compiler to pretty print source programs
 for sub in $(ls programs)
 do
-	for program in programs/$sub/valid/*.min
+	for program in $(ls programs/$sub/valid/*.min)
 	do
 		./src/minic pretty $program > ./pretty/$sub/$program
 	done
@@ -62,7 +62,7 @@ done
 # call compiler to pretty print on the pretty output
 for sub in $(ls pretty)
 do
-	for program in pretty/$sub/*.min
+	for program in $(ls pretty/$sub/*.min)
 	do
 		./src/minic pretty $program > ./pretty/$sub/compare/$program
 	done
