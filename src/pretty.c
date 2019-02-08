@@ -47,7 +47,7 @@ void prettyProgram(Program *p, int tabsSoFar) {
 			
 		case k_programKindStatement:
 			
-			prettyStatement(p->content.statement.statement, tabsSoFar);
+			prettyStatement(p->content.statement.statement);
 			printf(";\n");
 			printTabs(tabsSoFar);
 			prettyProgram(p->content.statement.next, tabsSoFar);
