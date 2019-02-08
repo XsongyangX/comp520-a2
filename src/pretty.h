@@ -8,7 +8,7 @@ void prettyControlFlow(ControlFlow *cf, int tabsSoFar);
 void prettyStatement(Statement *s, int tabsSoFar);
 void prettyExpression(Expression *e, int tabsSoFar);
 
-char *t_typeToString(TokenType t_type);
+char *t_typeToString(TypeToken t_type);
 void printTabs(int tabsSoFar);
 char *getOperationSymbol(ExpressionKind kind);
 #endif

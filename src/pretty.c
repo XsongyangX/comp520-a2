@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include "pretty.h"
 
-char *t_typeToString(TokenType t_type){
+char *t_typeToString(TypeToken t_type){
 	
 	switch (t_type) {
 		case t_int:
