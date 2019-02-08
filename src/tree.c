@@ -69,12 +69,11 @@ ControlFlow *makeControlFlow_else(Program *block){
 }
 
 /* Statement nodes */
-Statement *makeStatement_assign(StatementKind kind, char *identifier, 
-	Expression *assignment){
+Statement *makeStatement_assign(char *identifier, Expression *assignment){
 	
 	Statement *s = malloc(sizeof(Statement));
 	s->lineno = yylineno;
-	s->kind = kind;
+	s->kind = k_statementKindAssignment;
 	
 	s->content.assign.identifier = strdup(identifier);
 	s->content.assign.assignment = assignment;
@@ -87,7 +86,7 @@ Statement *makeStatement_initialization(char *identifier, TypeToken t_type,
 		
 		Statement *s = malloc(sizeof(Statement));
 		s->lineno = yylineno;
-		s->kind = kind;
+		s->kind = k_statementKindInitialization;
 		
 		s->content.initialization.identifier = strdup(identifier);
 		s->content.initialization.t_type = t_type;

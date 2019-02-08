@@ -169,7 +169,7 @@ statement : tREAD tLPAREN tIDENTIFIER tRPAREN {
 		$$ = makeStatement_identifier(k_statementKindDeclaration, $2, $4);
 	}
 	| tIDENTIFIER tASSIGN expression {
-		$$ = makeStatement_assign(k_statementKindAssignment, $1, $3);
+		$$ = makeStatement_assign($1, $3);
 	}
 	;
 
