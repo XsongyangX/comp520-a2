@@ -111,11 +111,13 @@ struct Statement {
 			TypeToken t_type;
 			Expression *assignment;
 		} initialization;
-		// for declaration and read
+		// for declaration
 		struct {
 			char *identifier;
 			TypeToken t_type;
 		} var;
+		// for read
+		char *identifier;
 		// for print
 		Expression *printValue;
 	} content;
@@ -158,9 +160,11 @@ Statement *makeStatement_assign(char *identifier, Expression *assignment);
 // for initialization
 Statement *makeStatement_initialization(char *identifier, TypeToken t_type,
 	Expression *assignment);
-// for read and declaration
-Statement *makeStatement_identifier(StatementKind kind, char *identifier,
-	TypeToken t_type);
+// declaration
+Statement *makeStatement_declaration(char *identifier, TypeToken t_type);
+// for read
+Statement *makeStatement_read(char *identifier);
+// for print
 Statement *makeStatement_print(Expression *printValue);
 
 Expression *makeExpression_binary(ExpressionKind kind, Expression *left,

@@ -93,15 +93,25 @@ Statement *makeStatement_initialization(char *identifier, TypeToken t_type,
 		s->content.initialization.assignment = assignment;
 	}
 
-Statement *makeStatement_identifier(StatementKind kind, char* identifier,
-	TypeToken t_type){
+Statement *makeStatement_declaration(char* identifier, TypeToken t_type){
 	
 	Statement *s = malloc(sizeof(Statement));
 	s->lineno = yylineno;
-	s->kind = kind;
+	s->kind = k_statementKindDeclaration;
 	
 	s->content.var.identifier = strdup(identifier);
 	s->content.var.t_type = t_type;
+	return s;
+}
+
+Statement *makeStatement_read(char *identifier){
+	
+	Statement *s = malloc(sizeof(Statement));
+	s->lineno = yylineno;
+	s->kind = k_statementKindRead;
+	
+	s->content.identifier = strdup(identifier);
+	
 	return s;
 }
 

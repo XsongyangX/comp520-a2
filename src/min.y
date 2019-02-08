@@ -157,7 +157,7 @@ while : tWHILE tLPAREN expression tRPAREN tCOMMENT tLCURL program tRCURL {
 	;
 
 statement : tREAD tLPAREN tIDENTIFIER tRPAREN {
-		$$ = makeStatement_identifier(k_statementKindRead, $3);
+		$$ = makeStatement_read($3);
 	}
 	| tPRINT tLPAREN expression tRPAREN {
 		$$ = makeStatement_print($3);
@@ -166,7 +166,7 @@ statement : tREAD tLPAREN tIDENTIFIER tRPAREN {
 		$$ = makeStatement_initialization($2, $4, $6);
 	}
 	| tVAR tIDENTIFIER tCOLON type {
-		$$ = makeStatement_identifier(k_statementKindDeclaration, $2, $4);
+		$$ = makeStatement_identifier($2, $4);
 	}
 	| tIDENTIFIER tASSIGN expression {
 		$$ = makeStatement_assign($1, $3);
