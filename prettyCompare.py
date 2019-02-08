@@ -24,14 +24,21 @@ for folder in os.listdir("pretty"):
 		
 		with open(os.path.join("pretty/", folder, sourceFile), "r") as prettyPrint:
 		
-			with open(os.path.join("pretty/", folder, "compare", sourceFile)) as \
+			with open(os.path.join("pretty/", folder, "compare", sourceFile), "r") as \
 			prettyPrint2:
 				
 				# pretty print identity does not hold
-				if (str(prettyPrint) != str(prettyPrint2)):
-				
+				if str(prettyPrint1) != str(prettyPrint2):
 					print("identity violated : " + str(sourceFile))
+					compare(prettyPrint, prettyPrint2)
+					
+def compare(prettyPrintFile, printPrintFile2):
 
+	for (line1, line2) in zip(prettyPrintFile, prettyPrintFile2):
+		
+		if line1 != line2:
+			print(line1, line2)
+					
 # destroy pretty folder if wanted
 if (sys.argv[1] == "destroy"):
 	os.system("rm -r pretty")
