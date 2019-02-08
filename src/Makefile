@@ -7,8 +7,8 @@ pretty.o:
 y.tab.o: y.tab.c 
 	gcc -c y.tab.c y.tab.h
 	
-lex.yy.o: lex.yy.c
-	gcc -c lex.yy.c
+lex.yy.o: lex.yy.c y.tab.c
+	gcc -c lex.yy.c y.tab.h
 	
 main.o:
 	gcc -c main.c main.h
