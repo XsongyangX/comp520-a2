@@ -1,4 +1,4 @@
-all: lex.yy.o y.tab.o main.o tree.o
+all: lex.yy.o y.tab.o main.o tree.o pretty.o
 	gcc -o minic lex.yy.o y.tab.o main.o tree.o pretty.o -lfl
 
 pretty.o:
