@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <string.h>
 #include "pretty.h"
 
 char *t_typeToString(TypeToken t_type){
@@ -197,69 +198,113 @@ void prettyStatement(Statement *s, int tabsSoFar) {
 	
 }
 
-char *getOperationSymbols(ExpressionKind kind){
+void prettyExpression(Expression *e, int tabsSoFar) {
 	
-	switch (kind) {
-		
-		case k_expressionKindAdd:
-			return "+";
+	switch (e->kind) {
+		// non-operation 
+		case k_expressionKindIdentifier:
+			printf("%s", e->content.identifier);
+			break;
+			
+		case k_expressionKindBooleanLiteral:
+			printf("%s", e->content.boolean);
+			break;
+			
+		case k_expressionKindIntLiteral:
+			printf("%s", e->content.intVal);
+			break;
+			
+		case k_expressionKindFloatLiteral:
+			printf("%s", e->content.floatVal);
+			break;
+			
+		case k_expressionKindStringLiteral:
+			printf("%s", e->content.string);
 			break;
 		
-		case k_expressionKindMinus:
+		// operations
+		// unary
+		case k_expressionKindNot:
+			printf("!");
+			prettyExpression(e->content.unary);
+			break;
+			
 		case k_expressionKindUMinus:
-			return "-";
+			printf("-");
+			prettyExpression(e->content.unary);
+			break;
+			
+		// binary
+		case k_expressionKindAdd:
+			prettyExpression(e->content.binary.left);
+			printf("+");
+			prettyExpression(e->content.binary.right);
+			break;
+			
+		case k_expressionKindMinus:
+			prettyExpression(e->content.binary.left);
+			printf("-");
+			prettyExpression(e->content.binary.right);
 			break;
 			
 		case k_expressionKindTimes:
-			return "*";
+			prettyExpression(e->content.binary.left);
+			printf("*");
+			prettyExpression(e->content.binary.right);
 			break;
 			
 		case k_expressionKindDivide:
-			return "/";
-			break;
-			
-		case k_expressionKindNot:
-			return "!";
+			prettyExpression(e->content.binary.left);
+			printf("/");
+			prettyExpression(e->content.binary.right);
 			break;
 			
 		case k_expressionKindGEQ:
-			return ">=";
+			prettyExpression(e->content.binary.left);
+			printf(">=");
+			prettyExpression(e->content.binary.right);
 			break;
 			
 		case k_expressionKindLEQ:
-			return "<=";
+			prettyExpression(e->content.binary.left);
+			printf("<=");
+			prettyExpression(e->content.binary.right);
 			break;
 			
 		case k_expressionKindGreater:
-			return ">";
+			prettyExpression(e->content.binary.left);
+			printf(">");
+			prettyExpression(e->content.binary.right);
 			break;
 			
 		case k_expressionKindLesser:
-			return "<";
+			prettyExpression(e->content.binary.left);
+			printf("<");
+			prettyExpression(e->content.binary.right);
 			break;
 			
 		case k_expressionKindEqual:
-			return "==";
+			prettyExpression(e->content.binary.left);
+			printf("==");
+			prettyExpression(e->content.binary.right);
 			break;
 			
 		case k_expressionKindNEqual:
-			return "!=";
+			prettyExpression(e->content.binary.left);
+			printf("!=");
+			prettyExpression(e->content.binary.right);
 			break;
 			
 		case k_expressionKindAnd:
-			return "&&";
+			prettyExpression(e->content.binary.left);
+			printf("&&");
+			prettyExpression(e->content.binary.right);
 			break;
 			
 		case k_expressionKindOr:
-			return "||";
+			prettyExpression(e->content.binary.left);
+			printf("||");
+			prettyExpression(e->content.binary.right);
 			break;
 	}
-	
-	return "notASymbol";
-}
-
-void prettyExpression(Expression *e, int tabsSoFar) {
-	
-	
-	
 }

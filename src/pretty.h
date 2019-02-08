@@ -10,5 +10,4 @@ void prettyExpression(Expression *e, int tabsSoFar);
 
 char *t_typeToString(TypeToken t_type);
 void printTabs(int tabsSoFar);
-char *getOperationSymbol(ExpressionKind kind);
 #endif
