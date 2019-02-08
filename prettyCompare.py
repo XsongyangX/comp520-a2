@@ -12,11 +12,18 @@ import os
 if len(sys.argv) != 2:
 	raise Exception("Needs exactly 1 argument: destroy | keep")
 
-def compare(prettyPrintFile, prettyPrintFile2):
-
-	for (line1, line2) in zip(prettyPrintFile, prettyPrintFile2):
+def compare(prettyPrintFile, prettyPrintFile2, fileName):
+	
+	identical = True
+	
+	for (lineno,(line1, line2)) in enumerate(zip(prettyPrintFile, prettyPrintFile2)):
 		
 		if line1 != line2:
+			if identical == True:
+				identical = False
+				print("identity violated : " + str(fileName))
+			
+			print("line " + str(lineno) + ":")
 			print(line1, line2)
 	
 # compare files
@@ -34,10 +41,8 @@ for folder in os.listdir("pretty"):
 			with open(os.path.join("pretty/", folder, "compare", sourceFile), "r") as \
 			prettyPrint2:
 				
-				# pretty print identity does not hold
-				if str(prettyPrint) != str(prettyPrint2):
-					print("identity violated : " + str(sourceFile))
-					compare(prettyPrint, prettyPrint2)
+				# check for identity
+				compare(prettyPrint, prettyPrint2, fileName)
 					
 
 					
