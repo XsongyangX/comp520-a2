@@ -49,6 +49,7 @@ void yyerror(const char *s) {
 %type <expression> expression
 %type <statement> statement
 %type <controlFlow> if while ifelse
+%type <t_type> type
 
 /* Token directives define the token types to be returned by the scanner (excluding character
  * tokens). Each token definition takes [optionally, a reference to the associated field in the
@@ -61,12 +62,12 @@ void yyerror(const char *s) {
 %token <identifier> tIDENTIFIER
 %token <floatval> tFLOAT
 %token <string> tSTRING
-%token <t_type> tKEYINT tKEYFLOAT tKEYSTRING tBOOLEAN
+
 
 // comment
 %token tCOMMENT 
 // keywords
-%token tVAR tIF tELSE tWHILE tREAD tPRINT tTRUE tFALSE
+%token tVAR tIF tELSE tWHILE tREAD tPRINT tTRUE tFALSE tKEYINT tKEYFLOAT tKEYSTRING tBOOLEAN
 // assignments
 %token tCOLON tASSIGN tSEMICOLON
 // math
