@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # parse command line arguments
-if [ $# -lt 1]
+if [[ $# -lt 1]]
 then
 	echo "Missing arguments"
 	echo "Usage: $0 <mode>"
