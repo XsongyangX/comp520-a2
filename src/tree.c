@@ -76,20 +76,33 @@ Statement *makeStatement_assign(StatementKind kind, char *identifier,
 	s->lineno = yylineno;
 	s->kind = kind;
 	
-	s->content.assign.identifier = identifier;
+	s->content.assign.identifier = strdup(identifier);
 	s->content.assign.assignment = assignment;
 	
 	return s;
 }
 
-Statement *makeStatement_identifier(StatementKind kind, char* identifier){
+Statement *makeStatement_initialization(char *identifier, TypeToken t_type,
+	Expression *assignment){
+		
+		Statement *s = malloc(sizeof(Statement));
+		s->lineno = yylineno;
+		s->kind = kind;
+		
+		s->content.initialization.identifier = strdup(identifier);
+		s->content.initialization.t_type = t_type;
+		s->content.initialization.assignment = assignment;
+	}
+
+Statement *makeStatement_identifier(StatementKind kind, char* identifier,
+	TypeToken t_type){
 	
 	Statement *s = malloc(sizeof(Statement));
 	s->lineno = yylineno;
 	s->kind = kind;
 	
-	s->content.identifier = identifier;
-	
+	s->content.var.identifier = strdup(identifier);
+	s->content.var.t_type = t_type;
 	return s;
 }
 
@@ -129,13 +142,14 @@ Expression *makeExpression_unary(ExpressionKind kind, Expression *unary){
 	return e;
 }
 
-Expression *makeExpression_identifier(char *identifier){
+Expression *makeExpression_identifier(char *identifier, TypeToken t_type){
 	
 	Expression *e = malloc(sizeof(Expression));
 	e->lineno = yylineno;
 	e->kind = k_expressionKindIdentifier;
 	
-	e->content.identifier = identifier;
+	e->content.var.identifier = strdup(identifier);
+	e->content.var.t_type = t_type;
 	
 	return e;
 }
@@ -179,7 +193,7 @@ Expression *makeExpression_string(char *string){
 	e->lineno = yylineno;
 	e->kind = k_expressionKindStringLiteral;
 	
-	e->content.string = string;
+	e->content.string = strdup(string);
 	
 	return e;
 }

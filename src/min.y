@@ -163,7 +163,7 @@ statement : tREAD tLPAREN tIDENTIFIER tRPAREN {
 		$$ = makeStatement_print($3);
 	}
 	| tVAR tIDENTIFIER tCOLON type tASSIGN expression {
-		$$ = makeStatement_assign(k_statementKindInitialization, $2, $6, $4);
+		$$ = makeStatement_initialization($2, $4, $6);
 	}
 	| tVAR tIDENTIFIER tCOLON type {
 		$$ = makeStatement_identifier(k_statementKindDeclaration, $2, $4);

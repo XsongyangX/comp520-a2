@@ -100,11 +100,17 @@ struct Statement {
 	int lineno;
 	StatementKind kind;
 	union {
-		// for initialization and assignment
+		// for assignment
 		struct {
 			char *identifier;
 			Expression *assignment;
 		} assign;
+		// for initialization
+		struct {
+			char *identifier;
+			TypeToken t_type;
+			Expression *assignment;
+		} initialization;
 		// for declaration and read
 		struct {
 			char *identifier;
@@ -150,8 +156,10 @@ ControlFlow *makeControlFlow_while(Expression *condition,
 	Program *block);
 ControlFlow *makeControlFlow_else(Program *block);
 
-// for assignment and initialization
-Statement *makeStatement_assign(StatementKind kind, char *identifier,
+// for assignment
+Statement *makeStatement_assign(char *identifier, Expression *assignment);
+// for initialization
+Statement *makeStatement_initialization(char *identifier, TypeToken t_type,
 	Expression *assignment);
 // for read and declaration
 Statement *makeStatement_identifier(StatementKind kind, char *identifier,
