@@ -208,14 +208,11 @@ void prettyExpression(Expression *e) {
 			break;
 			
 		case k_expressionKindBooleanLiteral:
-			switch (e->content.boolean){
-				case true:
-					printf("true");
-					break;
+			if (content.boolean){
+				printf("true");
 					
-				case false:
-					printf("false");
-					break;
+			else{
+				printf("false");
 			}
 			break;
 			
