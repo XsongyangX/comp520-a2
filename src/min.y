@@ -56,7 +56,7 @@ void yyerror(const char *s) {
  * of identifiers separated by spaces.
  */
 
-// values 
+// values and types
 %token <intval> tINT
 %token <identifier> tIDENTIFIER
 %token <floatval> tFLOAT
@@ -66,7 +66,7 @@ void yyerror(const char *s) {
 // comment
 %token tCOMMENT 
 // keywords
-%token tVAR tKEYFLOAT tKEYINT tKEYSTRING tBOOLEAN tIF tELSE tWHILE tREAD tPRINT tTRUE tFALSE
+%token tVAR tIF tELSE tWHILE tREAD tPRINT tTRUE tFALSE
 // assignments
 %token tCOLON tASSIGN tSEMICOLON
 // math
