@@ -9,7 +9,7 @@ Program *makeProgram_controlFlow(ControlFlow *controlFlow,
 	
 	Program *p = malloc(sizeof(Program));
 	p->lineno = yylineno;
-	p->kind = k_programKindProgram;
+	p->kind = k_programKindControlFlow;
 	
 	p->content.controlFlow.controlFlow = controlFlow;
 	p->content.controlFlow.next = next;
@@ -22,7 +22,7 @@ Program *makeProgram_statement(Statement *statement,
 	
 	Program *p = malloc(sizeof(Program));
 	p->lineno = yylineno;
-	p->kind = k_programKindControlFlow;
+	p->kind = k_programKindStatement;
 	
 	p->content.statement.statement = statement;
 	p->content.statement.next = next;

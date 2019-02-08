@@ -4,7 +4,6 @@
 #include <stdbool.h>
 
 typedef enum {
-	k_programKindProgram,
 	k_programKindControlFlow,
 	k_programKindStatement
 } ProgramKind;
