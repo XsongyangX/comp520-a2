@@ -1,6 +1,7 @@
 #include <stdlib.h>
 #include "tree.h"
 
+char *strdup(const char*);
 extern int yylineno;
 
 /* Program nodes */

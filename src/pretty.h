@@ -3,9 +3,11 @@
 
 #include "tree.h"
 
-void prettyProgram(Program *p);
-void prettyControlFlow(ControlFlow *cf);
-void prettyStatement(Statement *s);
-void prettyExpression(Expression *e);
+void prettyProgram(Program *p, int tabsSoFar);
+void prettyControlFlow(ControlFlow *cf, int tabsSoFar);
+void prettyStatement(Statement *s, int tabsSoFar);
+void prettyExpression(Expression *e, int tabsSoFar);
 
+char *t_typeToString(TokenType t_type);
+void printTabs(int tabsSoFar);
 #endif
