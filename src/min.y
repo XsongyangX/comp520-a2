@@ -166,7 +166,7 @@ statement : tREAD tLPAREN tIDENTIFIER tRPAREN {
 		$$ = makeStatement_initialization($2, $4, $6);
 	}
 	| tVAR tIDENTIFIER tCOLON type {
-		$$ = makeStatement_identifier($2, $4);
+		$$ = makeStatement_declaration($2, $4);
 	}
 	| tIDENTIFIER tASSIGN expression {
 		$$ = makeStatement_assign($1, $3);
