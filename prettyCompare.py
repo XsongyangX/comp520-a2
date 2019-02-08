@@ -15,5 +15,20 @@ if len(sys.argv) != 2:
 # compare files
 for folder in os.listdir("pretty"):
 
-	for subfolder in os.listdir(os.path.join("pretty/", folder)):
-		print("in " + str(subfolder) + " of " + str(folder))
+	print("in " + str(folder))
+	
+	for sourceFile in os.listdir(os.path.join("pretty/", folder)):
+		
+		with open(os.path.join("pretty/", folder, sourceFile), "r") as prettyPrint:
+		
+			with open(os.path.join("pretty/", folder, "compare", sourceFile as\
+			prettyPrint2:
+				
+				# pretty print identity does not hold
+				if (str(prettyPrint) != str(prettyPrint2)):
+				
+					print("identity violated :" + str(sourceFile))
+
+# destroy pretty folder if wanted
+if (sys.argv[1] == "destroy"):
+	os.removedirs("pretty")
