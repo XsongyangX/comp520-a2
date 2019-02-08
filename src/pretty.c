@@ -243,73 +243,73 @@ void prettyExpression(Expression *e) {
 		// binary
 		case k_expressionKindAdd:
 			prettyExpression(e->content.binary.left);
-			printf("+");
+			printf(" + ");
 			prettyExpression(e->content.binary.right);
 			break;
 			
 		case k_expressionKindMinus:
 			prettyExpression(e->content.binary.left);
-			printf("-");
+			printf(" - ");
 			prettyExpression(e->content.binary.right);
 			break;
 			
 		case k_expressionKindTimes:
 			prettyExpression(e->content.binary.left);
-			printf("*");
+			printf(" * ");
 			prettyExpression(e->content.binary.right);
 			break;
 			
 		case k_expressionKindDivide:
 			prettyExpression(e->content.binary.left);
-			printf("/");
+			printf(" / ");
 			prettyExpression(e->content.binary.right);
 			break;
 			
 		case k_expressionKindGEQ:
 			prettyExpression(e->content.binary.left);
-			printf(">=");
+			printf(" >= ");
 			prettyExpression(e->content.binary.right);
 			break;
 			
 		case k_expressionKindLEQ:
 			prettyExpression(e->content.binary.left);
-			printf("<=");
+			printf(" <= ");
 			prettyExpression(e->content.binary.right);
 			break;
 			
 		case k_expressionKindGreater:
 			prettyExpression(e->content.binary.left);
-			printf(">");
+			printf(" > ");
 			prettyExpression(e->content.binary.right);
 			break;
 			
 		case k_expressionKindLesser:
 			prettyExpression(e->content.binary.left);
-			printf("<");
+			printf(" < ");
 			prettyExpression(e->content.binary.right);
 			break;
 			
 		case k_expressionKindEqual:
 			prettyExpression(e->content.binary.left);
-			printf("==");
+			printf(" == ");
 			prettyExpression(e->content.binary.right);
 			break;
 			
 		case k_expressionKindNEqual:
 			prettyExpression(e->content.binary.left);
-			printf("!=");
+			printf(" != ");
 			prettyExpression(e->content.binary.right);
 			break;
 			
 		case k_expressionKindAnd:
 			prettyExpression(e->content.binary.left);
-			printf("&&");
+			printf(" && ");
 			prettyExpression(e->content.binary.right);
 			break;
 			
 		case k_expressionKindOr:
 			prettyExpression(e->content.binary.left);
-			printf("||");
+			printf(" || ");
 			prettyExpression(e->content.binary.right);
 			break;
 	}
