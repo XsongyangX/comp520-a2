@@ -34,4 +34,4 @@ for folder in os.listdir("pretty"):
 
 # destroy pretty folder if wanted
 if (sys.argv[1] == "destroy"):
-	os.removedirs("pretty")
+	os.system("rm -r pretty")
