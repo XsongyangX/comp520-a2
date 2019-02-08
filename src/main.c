@@ -2,6 +2,7 @@
 #include "main.h"
 #include <string.h>
 #include "tree.h"
+#include "pretty.h"
 
 void yyparse();
 int yylex();
