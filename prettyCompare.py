@@ -15,5 +15,5 @@ if len(sys.argv) != 2:
 # compare files
 for folder in os.listdir("pretty"):
 
-	for subfolder in os.listdir(os.path.join("pretty/", folder))
+	for subfolder in os.listdir(os.path.join("pretty/", folder)):
 		print("in" + str(subfolder))
