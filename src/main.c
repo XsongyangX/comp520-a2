@@ -45,7 +45,7 @@ int main(int argc, char** argv)
 	{
 		g_tokens = 0;
 		yyparse();
-		prettyProgram(root);
+		prettyProgram(root, 0);
 		return 0;
 	}
 	else 
