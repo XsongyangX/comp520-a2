@@ -63,6 +63,3 @@ Symbol *getSymbol(SymbolTable *st, char *name){
 	if (st->parent == NULL) return NULL;
 	return getSymbol(st->parent, name);
 }
-	
-	
-}
