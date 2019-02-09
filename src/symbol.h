@@ -39,6 +39,6 @@ SymbolTable *symbolFromProgramStart(Program *root);
 void symbolFromProgram(Program *p, SymbolTable *parent);
 void symbolFromControlFlow(ControlFlow *cf, SymbolTable *parent);
 void symbolFromStatement(Statement *s, SymbolTable *parent);
-t_type symbolFromExpression(Expression *e, SymbolTable *parent);
+TypeToken symbolFromExpression(Expression *e, SymbolTable *parent);
 
 #endif
