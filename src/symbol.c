@@ -111,7 +111,7 @@ void symbolFromControlFlow(ControlFlow *cf, SymbolTable *parent){
 		case k_controlFlowKindIf:
 		case k_controlFlowKindElseIf:
 			
-			t_conditional = symbolFromExpression(
+			conditional = symbolFromExpression(
 				cf->content.continuing.condition, parent);
 			
 			// condition is not boolean
@@ -145,7 +145,7 @@ void symbolFromControlFlow(ControlFlow *cf, SymbolTable *parent){
 		
 			innerScope = scopeSymbolTable(parent);
 			
-			t_conditional = symbolFromExpression(
+			conditional = symbolFromExpression(
 				cf->content.whileLoop.condition, parent);
 			
 			// condition is not boolean
