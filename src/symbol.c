@@ -58,7 +58,7 @@ Symbol *getSymbol(SymbolTable *st, char *name){
 	int i = hash(name);
 	
 	// check current scope
-	for (Symbol *s = t->table[i]; s; s = s->next) {
+	for (Symbol *s = st->table[i]; s; s = s->next) {
 		if (strcmp(s->name, name) == 0) return s;
 	}
 	
@@ -107,7 +107,7 @@ void symbolFromControlFlow(ControlFlow *cf, SymbolTable *parent){
 		case k_controlFlowKindIf:
 		case k_controlFlowKindElseIf:
 			
-			t_type t_conditional = symbolFromExpression(
+			TypeToken t_conditional = symbolFromExpression(
 				cf->content.continuing.condition, parent);
 			
 			// condition is not boolean
@@ -141,7 +141,7 @@ void symbolFromControlFlow(ControlFlow *cf, SymbolTable *parent){
 		
 			SymbolTable *innerScope = scopeSymbolTable(parent);
 			
-			t_type t_conditional = symbolFromExpression(
+			TypeToken t_conditional = symbolFromExpression(
 				cf->content.whileLoop.condition, parent);
 			
 			// condition is not boolean
