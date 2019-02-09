@@ -25,7 +25,7 @@ SymbolTable *scopeSymbolTable(SymbolTable *st) {
 
 int hash(char *name) {
 	unsigned int hash = 0;
-	while (*name) hash = (hash << 1) + *str++;
+	while (*name) hash = (hash << 1) + *name++;
 	return hash & HashSize;
 }
 
