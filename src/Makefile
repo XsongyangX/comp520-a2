@@ -1,8 +1,11 @@
 all: lex.yy.o y.tab.o main.o tree.o pretty.o symbol.o
 	gcc -o minic lex.yy.o y.tab.o main.o tree.o pretty.o -lfl
 
+type.o:
+	gcc -c type.c type.h
+
 symbol.o:
-	gcc -c symbol.c symbol.h tree.h
+	gcc -c symbol.c symbol.h type.h
 
 pretty.o:
 	gcc -c pretty.c pretty.h

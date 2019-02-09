@@ -3,6 +3,7 @@
 #include <stdlib.h>
 
 #include "symbol.h"
+#include "type.h"
 
 SymbolTable *initSymbolTable() {
 	
@@ -194,7 +195,7 @@ void symbolFromStatement(Statement *s, SymbolTable *parent){
 				parent);
 			
 			// check for type correspondence
-			
+			isAssignCompatible(var->t_type, assigned);
 			
 			break;
 		
