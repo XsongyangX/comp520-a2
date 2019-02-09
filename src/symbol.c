@@ -202,7 +202,30 @@ void symbolFromStatement(Statement *s, SymbolTable *parent){
 		case k_statementKindDeclaration:
 		
 			name = s->content.var.identifier;
+			
+			// declaration conflict handled in call
+			putSymbol(parent, name, 
+				s->content.var.t_type, 
+				s->lineno);
+			
+			break;
+			
+		case k_statementKindInitialization:
 		
+			name = s->content.var.identifier;
+			
+			// declaration conflict checked in call
+			var = putSymbol(parent, name,
+				s->content.intialization.t_type,
+				s->lineno);
+			
+			assigned = symbolFromExpression(
+				s->content.initialization.assignment,
+				parent);
+				
+			// check for type compatibility
+			assign(var, assigned, s->lineno);
+			
 			break;
 	}
 	
