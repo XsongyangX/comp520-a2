@@ -26,12 +26,19 @@ struct SymbolTable {
 	struct SymbolTable *parent;
 };
 
+// symbol table api
 SymbolTable *initSymbolTable();
 SymbolTable *scopeSymbolTable(SymbolTable *st);
 int hash(char *name);
 Symbol *putSymbol(SymbolTable *st, char *name, 
-	TypeToken t_type);
+	TypeToken t_type, int lineno);
 Symbol *getSymbol(SymbolTable *st, char *name);
 
+// build symbol table
+SymbolTable *symbolFromProgramStart(Program *root);
+void symbolFromProgram(Program *p, SymbolTable *parent);
+void symbolFromControlFlow(ControlFlow *cf, SymbolTable *parent);
+void symbolFromStatement(Statement *s, SymbolTable *parent);
+t_type symbolFromExpression(Expression *e, SymbolTable *parent);
 
 #endif
