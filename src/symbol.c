@@ -121,7 +121,7 @@ void symbolFromControlFlow(ControlFlow *cf, SymbolTable *parent){
 				int lineno = cf->content.continuing.condition->lineno;
 				
 				fprintf(stderr, 
-					"Error: (line %d) condition is not of type boolean", 
+					"Error: (line %d) condition is not of type boolean\n", 
 					lineno);
 				
 				exit(1);
@@ -155,7 +155,7 @@ void symbolFromControlFlow(ControlFlow *cf, SymbolTable *parent){
 				int lineno = cf->content.continuing.condition->lineno;
 				
 				fprintf(stderr, 
-					"Error: (line %d) condition is not of type boolean", 
+					"Error: (line %d) condition is not of type boolean\n", 
 					lineno);
 				
 				exit(1);
@@ -195,7 +195,7 @@ void symbolFromStatement(Statement *s, SymbolTable *parent){
 				parent);
 			
 			// check for type compatibility inside the call
-			assign(var, assigned);
+			assign(var, assigned, s->lineno);
 			
 			break;
 		
