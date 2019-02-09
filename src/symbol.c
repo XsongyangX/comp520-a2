@@ -148,7 +148,7 @@ void symbolFromControlFlow(ControlFlow *cf, SymbolTable *parent){
 				cf->content.whileLoop.condition, parent);
 			
 			// condition is not boolean
-			if (t_type != t_boolean){
+			if (t_conditional != t_boolean){
 				
 				// get line number
 				int lineno = cf->content.continuing.condition->lineno;
