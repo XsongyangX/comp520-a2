@@ -216,7 +216,7 @@ void symbolFromStatement(Statement *s, SymbolTable *parent){
 			
 			// declaration conflict checked in call
 			var = putSymbol(parent, name,
-				s->content.intialization.t_type,
+				s->content.initialization.t_type,
 				s->lineno);
 			
 			assigned = symbolFromExpression(
