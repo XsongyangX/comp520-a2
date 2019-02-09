@@ -114,7 +114,7 @@ void symbolFromControlFlow(ControlFlow *cf, SymbolTable *parent){
 				cf->content.continuing.condition, parent);
 			
 			// condition is not boolean
-			if (t_type != t_boolean){
+			if (t_conditional != t_boolean){
 				
 				// get line number
 				int lineno = cf->content.continuing.condition->lineno;
@@ -168,11 +168,13 @@ void symbolFromControlFlow(ControlFlow *cf, SymbolTable *parent){
 
 void symbolFromStatement(Statement *s, SymbolTable *parent){
 	
+	char *name;
+	
 	switch (s->kind) {
 		
 		case k_statementKindAssignment:
 		
-			char *name = s->content.assign.identifier;
+			name = s->content.assign.identifier;
 		
 			Symbol *var = getSymbol(parent, name);
 			
@@ -189,7 +191,7 @@ void symbolFromStatement(Statement *s, SymbolTable *parent){
 		
 		case k_statementKindDeclaration:
 		
-			char *name = s->content.var.identifier;
+			name = s->content.var.identifier;
 		
 			break;
 	}
