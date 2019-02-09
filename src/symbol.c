@@ -178,7 +178,7 @@ void symbolFromStatement(Statement *s, SymbolTable *parent){
 		
 			name = s->content.assign.identifier;
 			
-			*var = getSymbol(parent, name);
+			var = getSymbol(parent, name);
 			
 			// symbol not found
 			if (var == NULL) {
