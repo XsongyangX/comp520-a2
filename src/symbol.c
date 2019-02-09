@@ -103,7 +103,7 @@ void symbolFromControlFlow(ControlFlow *cf, SymbolTable *parent){
 	
 	if (cf == NULL) return;
 	
-	Type t_conditional;
+	Symbol conditional;
 	SymbolTable *innerScope;
 	
 	switch (cf->kind) {
@@ -115,7 +115,7 @@ void symbolFromControlFlow(ControlFlow *cf, SymbolTable *parent){
 				cf->content.continuing.condition, parent);
 			
 			// condition is not boolean
-			if (t_conditional != t_boolean){
+			if (conditional->t_type != t_boolean){
 				
 				// get line number
 				int lineno = cf->content.continuing.condition->lineno;
@@ -149,7 +149,7 @@ void symbolFromControlFlow(ControlFlow *cf, SymbolTable *parent){
 				cf->content.whileLoop.condition, parent);
 			
 			// condition is not boolean
-			if (t_conditional != t_boolean){
+			if (conditional->t_type != t_boolean){
 				
 				// get line number
 				int lineno = cf->content.continuing.condition->lineno;
@@ -171,7 +171,7 @@ void symbolFromStatement(Statement *s, SymbolTable *parent){
 	
 	char *name;
 	Symbol *var;
-	Type assigned;
+	Symbol *assigned;
 	
 	switch (s->kind) {
 		
@@ -194,8 +194,8 @@ void symbolFromStatement(Statement *s, SymbolTable *parent){
 			assigned = symbolFromExpression(s->content.assign.assignment,
 				parent);
 			
-			// check for type correspondence
-			isAssignCompatible(var->t_type, assigned);
+			// check for type compatibility inside the call
+			assign(var, assigned);
 			
 			break;
 		
