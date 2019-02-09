@@ -31,7 +31,7 @@ int hash(char *name) {
 
 // Putting a symbol does not initialize its value
 Symbol *putSymbol(SymbolTable *st, char *name, 
-	TypeToken t_type, int lineno) {
+	Type t_type, int lineno) {
 		
 	int i = hash(name);
 	for (Symbol *s = st->table[i]; s; s = s->next) {
@@ -102,7 +102,7 @@ void symbolFromControlFlow(ControlFlow *cf, SymbolTable *parent){
 	
 	if (cf == NULL) return;
 	
-	TypeToken t_conditional;
+	Type t_conditional;
 	SymbolTable *innerScope;
 	
 	switch (cf->kind) {
@@ -169,20 +169,29 @@ void symbolFromControlFlow(ControlFlow *cf, SymbolTable *parent){
 void symbolFromStatement(Statement *s, SymbolTable *parent){
 	
 	char *name;
+	Symbol *var;
+	Type assigned;
 	
 	switch (s->kind) {
 		
 		case k_statementKindAssignment:
 		
 			name = s->content.assign.identifier;
-		
-			Symbol *var = getSymbol(parent, name);
+			
+			*var = getSymbol(parent, name);
 			
 			// symbol not found
 			if (var == NULL) {
-				fprintf(stderr, "Identifier not found: %s\n", name);
+				int lineno = s->lineno;
+				fprintf(stderr,
+					"Error: (line %d) identifier not found: %s\n",
+					lineno,
+					name);
 				exit(1);
 			}
+			
+			assigned = symbolFromExpression(s->content.assign.assignment,
+				parent);
 			
 			// check for type correspondence
 			

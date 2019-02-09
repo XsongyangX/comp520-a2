@@ -11,7 +11,7 @@ typedef struct SymbolTable SymbolTable;
 
 struct Symbol {
 	char *name;
-	TypeToken t_type;
+	Type t_type;
 	union {
 		char *string;
 		bool boolean;
@@ -31,7 +31,7 @@ SymbolTable *initSymbolTable();
 SymbolTable *scopeSymbolTable(SymbolTable *st);
 int hash(char *name);
 Symbol *putSymbol(SymbolTable *st, char *name, 
-	TypeToken t_type, int lineno);
+	Type t_type, int lineno);
 Symbol *getSymbol(SymbolTable *st, char *name);
 
 // build symbol table
@@ -39,6 +39,6 @@ SymbolTable *symbolFromProgramStart(Program *root);
 void symbolFromProgram(Program *p, SymbolTable *parent);
 void symbolFromControlFlow(ControlFlow *cf, SymbolTable *parent);
 void symbolFromStatement(Statement *s, SymbolTable *parent);
-TypeToken symbolFromExpression(Expression *e, SymbolTable *parent);
+Type symbolFromExpression(Expression *e, SymbolTable *parent);
 
 #endif

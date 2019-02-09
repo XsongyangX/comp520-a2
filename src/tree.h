@@ -50,7 +50,7 @@ typedef enum {
 	t_float,
 	t_boolean,
 	t_string
-} TypeToken;
+} Type;
 
 typedef struct Program Program;
 typedef struct ControlFlow ControlFlow;
@@ -108,13 +108,13 @@ struct Statement {
 		// for initialization
 		struct {
 			char *identifier;
-			TypeToken t_type;
+			Type t_type;
 			Expression *assignment;
 		} initialization;
 		// for declaration
 		struct {
 			char *identifier;
-			TypeToken t_type;
+			Type t_type;
 		} var;
 		// for read
 		char *identifier;
@@ -158,10 +158,10 @@ ControlFlow *makeControlFlow_else(Program *block);
 // for assignment
 Statement *makeStatement_assign(char *identifier, Expression *assignment);
 // for initialization
-Statement *makeStatement_initialization(char *identifier, TypeToken t_type,
+Statement *makeStatement_initialization(char *identifier, Type t_type,
 	Expression *assignment);
 // declaration
-Statement *makeStatement_declaration(char *identifier, TypeToken t_type);
+Statement *makeStatement_declaration(char *identifier, Type t_type);
 // for read
 Statement *makeStatement_read(char *identifier);
 // for print

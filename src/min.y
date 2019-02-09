@@ -41,7 +41,7 @@ void yyerror(const char *s) {
 	Expression *expression;
 	Statement *statement;
 	ControlFlow *controlFlow;
-	TypeToken t_type;
+	Type t_type;
 }
 
 // type definitions based on the AST

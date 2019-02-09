@@ -82,7 +82,7 @@ Statement *makeStatement_assign(char *identifier, Expression *assignment){
 	return s;
 }
 
-Statement *makeStatement_initialization(char *identifier, TypeToken t_type,
+Statement *makeStatement_initialization(char *identifier, Type t_type,
 	Expression *assignment){
 		
 		Statement *s = malloc(sizeof(Statement));
@@ -94,7 +94,7 @@ Statement *makeStatement_initialization(char *identifier, TypeToken t_type,
 		s->content.initialization.assignment = assignment;
 	}
 
-Statement *makeStatement_declaration(char* identifier, TypeToken t_type){
+Statement *makeStatement_declaration(char* identifier, Type t_type){
 	
 	Statement *s = malloc(sizeof(Statement));
 	s->lineno = yylineno;
