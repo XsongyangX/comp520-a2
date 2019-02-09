@@ -102,12 +102,15 @@ void symbolFromControlFlow(ControlFlow *cf, SymbolTable *parent){
 	
 	if (cf == NULL) return;
 	
+	TypeToken t_conditional;
+	SymbolTable *innerScope;
+	
 	switch (cf->kind) {
 		
 		case k_controlFlowKindIf:
 		case k_controlFlowKindElseIf:
 			
-			TypeToken t_conditional = symbolFromExpression(
+			t_conditional = symbolFromExpression(
 				cf->content.continuing.condition, parent);
 			
 			// condition is not boolean
@@ -123,7 +126,7 @@ void symbolFromControlFlow(ControlFlow *cf, SymbolTable *parent){
 				exit(1);
 			}
 			
-			SymbolTable *innerScope = scopeSymbolTable(parent);
+			innerScope = scopeSymbolTable(parent);
 			
 			symbolFromProgram(cf->content.continuing.block, innerScope);
 			symbolFromControlFlow(cf->content.continuing.elsePart, parent);
@@ -132,16 +135,16 @@ void symbolFromControlFlow(ControlFlow *cf, SymbolTable *parent){
 		
 		case k_controlFlowKindElse:
 			
-			SymbolTable *innerScope = scopeSymbolTable(parent);
+			innerScope = scopeSymbolTable(parent);
 			symbolFromProgram(cf->content.block, innerScope);
 			
 			break;
 			
 		case k_controlFlowKindWhile:
 		
-			SymbolTable *innerScope = scopeSymbolTable(parent);
+			innerScope = scopeSymbolTable(parent);
 			
-			TypeToken t_conditional = symbolFromExpression(
+			t_conditional = symbolFromExpression(
 				cf->content.whileLoop.condition, parent);
 			
 			// condition is not boolean
