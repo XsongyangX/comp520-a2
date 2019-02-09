@@ -227,6 +227,40 @@ void symbolFromStatement(Statement *s, SymbolTable *parent){
 			assign(var, assigned, s->lineno);
 			
 			break;
+			
+		case k_statementKindRead:
+			
+			name = s->content.identifier;
+			
+			var = getSymbol(parent, name);
+			
+			// variable not found
+			if (var == NULL) {
+				int lineno = s->lineno;
+				fprintf(stderr,
+					"Error: (line %d) identifier not found: %s\n",
+					lineno,
+					name);
+				exit(1);
+			}
+			
+			break;
+		
+		case k_statementKindPrint:
+		
+			assigned = symbolFromExpression(s->content.printValue,
+				parent);
+				
+			// check if it is a string
+			if (assigned->t_type != t_string) {
+				int lineno = s->lineno;
+				fprintf(stderr,
+					"Error: (line %d) print value must be a string\n",
+					lineno);
+				exit(1);
+			}
+			
+			break;
 	}
 	
 }
