@@ -103,7 +103,7 @@ void symbolFromControlFlow(ControlFlow *cf, SymbolTable *parent){
 	
 	if (cf == NULL) return;
 	
-	Symbol conditional;
+	Symbol *conditional;
 	SymbolTable *innerScope;
 	
 	switch (cf->kind) {
