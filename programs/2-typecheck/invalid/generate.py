@@ -1,5 +1,7 @@
 #!/usr/bin/python3
 
+import sys
+
 """
 Generate all simple invalid program for type checking.
 """
@@ -203,13 +205,21 @@ def operationsTypeConflict(delete=False):
 			else:
 				writeToFile(comment, code, fileName)
 def main():
-
-	assignmentTypeConflict(delete=False)
 	
-	operationsTypeConflict(delete=False)
+	# get command line arg
+	if (len(sys.argv) != 2):
+		raise Exception("This script takes one argument: generate|delete")
+		
+	delete = False
+	if sys.argv[1] == "delete":
+		delete = True
+		
+	assignmentTypeConflict(delete=delete)
+	
+	operationsTypeConflict(delete=delete)
 	
 	return 
-	
+
 # execute only as a script
 if __name__ == "__main__":
 	main()
