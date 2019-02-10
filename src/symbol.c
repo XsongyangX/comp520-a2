@@ -273,7 +273,7 @@ void symbolFromStatement(Statement *s, SymbolTable *parent){
 			
 		case k_statementKindRead:
 			
-			name = s->content.identifier;
+			name = s->content.readVar.identifier;
 			
 			var = getSymbol(parent, name);
 			
