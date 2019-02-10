@@ -74,7 +74,7 @@ SymbolTable *symbolFromProgramStart(Program *root){
 	SymbolTable *globalScope = initSymbolTable();
 	
 	symbolFromProgram(root, globalScope);
-	
+	if (g_symbols) printf("HEY\n");
 	return globalScope;
 }
 
