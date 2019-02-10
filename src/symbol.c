@@ -73,8 +73,12 @@ SymbolTable *symbolFromProgramStart(Program *root){
 	
 	SymbolTable *globalScope = initSymbolTable();
 	
+	if (g_symbols) {
+		printf("---SYMBOL TABLE BEGIN---\n");
+	}
+	
 	symbolFromProgram(root, globalScope);
-	if (g_symbols) printf("HEY\n");
+	
 	return globalScope;
 }
 
@@ -130,7 +134,15 @@ void symbolFromControlFlow(ControlFlow *cf, SymbolTable *parent){
 			
 			innerScope = scopeSymbolTable(parent);
 			
+			if (g_symbols) {
+				printf("**Inner table START{\n");
+			}
+			
 			symbolFromProgram(cf->content.continuing.block, innerScope);
+			
+			if (g_symbols) {
+				printf("**Inner table END}\n");
+			}
 			symbolFromControlFlow(cf->content.continuing.elsePart, parent);
 			
 			break;
@@ -138,12 +150,21 @@ void symbolFromControlFlow(ControlFlow *cf, SymbolTable *parent){
 		case k_controlFlowKindElse:
 			
 			innerScope = scopeSymbolTable(parent);
+			
+			if (g_symbols) {
+				printf("**Inner table START{\n");
+			}
+			
 			symbolFromProgram(cf->content.block, innerScope);
+			
+			if (g_symbols) {
+				printf("**Inner table END}\n");
+			}
 			
 			break;
 			
 		case k_controlFlowKindWhile:
-		
+			
 			innerScope = scopeSymbolTable(parent);
 			
 			conditional = symbolFromExpression(
@@ -162,8 +183,15 @@ void symbolFromControlFlow(ControlFlow *cf, SymbolTable *parent){
 				exit(1);
 			}
 			
+			if (g_symbols) {
+				printf("**Inner table START{\n");
+			}
+			
 			symbolFromProgram(cf->content.whileLoop.block, innerScope);
 			
+			if (g_symbols) {
+				printf("**Inner table END}\n");
+			}
 			break;
 	}
 }
@@ -209,6 +237,13 @@ void symbolFromStatement(Statement *s, SymbolTable *parent){
 				s->content.var.t_type, 
 				s->lineno);
 			
+			if (g_symbols) {
+				printf("var %s: type %s\n",
+					name,
+					s->content.var.t_type
+					);
+			}
+			
 			break;
 			
 		case k_statementKindInitialization:
@@ -226,6 +261,13 @@ void symbolFromStatement(Statement *s, SymbolTable *parent){
 				
 			// check for type compatibility
 			checkAssignCompatible(var->t_type, assigned, s->lineno);
+			
+			if (g_symbols) {
+				printf("var %s: type %s\n",
+					name,
+					s->content.initialization.t_type
+					);
+			}
 			
 			break;
 			
