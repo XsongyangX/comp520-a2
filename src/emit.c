@@ -10,6 +10,11 @@ void emitToFile(char *fileName) {
 	targetFile = fopen(strcat(fileName, ".c"), "w");
 }
 
+void fprintTabs(int count){
+	for (int i = 0; i < count; i++)
+		fprintf(targetFile, "\t");
+}
+
 void emitProgramStart(Program *root){
 	// includes
 	fprintf(targetFile, 
@@ -21,11 +26,6 @@ void emitProgramStart(Program *root){
 	fprintTabs(1);
 	emitProgram(root, 1);
 	fprintf(targetFile, "\n}");
-}
-
-void fprintTabs(int count){
-	for (int i = 0; i < count; i++)
-		fprintf(targetFile, "\t");
 }
 
 void emitProgram(Program *p, int tabs){
