@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <string.h>
 void main(){
-	int a;
-	int b;
-	float return = (a+b);
+	int aX;
+	int bX;
+	float returnX = (aX+bX);
 }

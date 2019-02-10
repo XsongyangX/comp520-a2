@@ -1,21 +1,21 @@
 #include <stdio.h>
 #include <string.h>
 void main(){
-	float pi = 0.000000;
-	int even;
-	int prev;
-	int next;
-	int n = 1;
-	char *message = "Enter the number of iterations:\n";
-	printf("%s",message);
-	scanf("%d",&n);
-	int iter = 1;
-	while ((iter<=n)){
-		even = (2*n);
-		prev = (even-1);
-		next = (even+1);
-		pi = (((pi*even)*even)/(next*prev));
-		iter = (iter+1);
+	float piX = 0.000000;
+	int evenX;
+	int prevX;
+	int nextX;
+	int nX = 1;
+	char *messageX = "Enter the number of iterations:\n";
+	printf("%s",messageX);
+	scanf("%d",&nX);
+	int iterX = 1;
+	while ((iterX<=nX)){
+		evenX = (2*nX);
+		prevX = (evenX-1);
+		nextX = (evenX+1);
+		piX = (((piX*evenX)*evenX)/(nextX*prevX));
+		iterX = (iterX+1);
 	}
-	printf("%f",(pi*2));
+	printf("%f",(piX*2));
 }

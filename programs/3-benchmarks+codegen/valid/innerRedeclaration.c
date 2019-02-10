@@ -1,8 +1,8 @@
 #include <stdio.h>
 #include <string.h>
 void main(){
-	char *s;
+	char *sX;
 	if (1){
-		int s = 3;
+		int sX = 3;
 	}
 	}

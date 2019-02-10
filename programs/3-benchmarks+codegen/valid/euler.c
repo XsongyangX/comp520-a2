@@ -1,14 +1,14 @@
 #include <stdio.h>
 #include <string.h>
 void main(){
-	float e = 1.000000;
-	int n = 1;
-	char *message = "Enter the number of iterations:\n";
-	printf("%s",message);
-	scanf("%d",&n);
-	while ((n>0)){
-		e = (e*(1.000000+(1.000000/n)));
-		n = (n-1);
+	float eX = 1.000000;
+	int nX = 1;
+	char *messageX = "Enter the number of iterations:\n";
+	printf("%s",messageX);
+	scanf("%d",&nX);
+	while ((nX>0)){
+		eX = (eX*(1.000000+(1.000000/nX)));
+		nX = (nX-1);
 	}
-	printf("%f",e);
+	printf("%f",eX);
 }

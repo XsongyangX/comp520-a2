@@ -1,14 +1,14 @@
 #include <stdio.h>
 #include <string.h>
 void main(){
-	char *a;
-	a = "\\";
-	a = "\"";
-	a = "\a";
-	a = "\b";
-	a = "\f";
-	a = "\n";
-	a = "\r";
-	a = "\t";
-	a = "\v";
+	char *aX;
+	aX = "\\";
+	aX = "\"";
+	aX = "\a";
+	aX = "\b";
+	aX = "\f";
+	aX = "\n";
+	aX = "\r";
+	aX = "\t";
+	aX = "\v";
 }
