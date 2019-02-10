@@ -14,7 +14,12 @@ void emitProgramStart(Program *root){
 	// includes
 	fprintf(targetFile, 
 		"#include <stdio.h>\n#include <string.h>\n");
-	emitProgram(root, 0);
+		
+	// main function body
+	fprintf(targetFile,
+		"void main(){\n");
+	emitProgram(root, 1);
+	fprintf(targetFile, "}\n");
 }
 
 void fprintTabs(int count){
@@ -116,7 +121,7 @@ void emitControlFlow(ControlFlow *cf, int tabs){
 
 void emitStatement(Statement *s){
 	
-	char *type;
+	
 	Type readType;
 	Type printType;
 	
@@ -125,15 +130,17 @@ void emitStatement(Statement *s){
 		case k_statementKindDeclaration:
 			
 			// type identifier
-			type = typeToString(s->content.var.t_type);
-			if ( 0 != strcmp(type, "boolean"))
-				fprintf(targetFile, "%s %s", 
-					type,
-					s->content.var.identifier);
-			else 
+			
+			if (t_boolean == s->content.var.t_type)
 				fprintf(targetFile, "int %s",
 					s->content.var.identifier);
-					
+			else if (t_string == s->content.var.t_type);
+				fprintf(targetFile, "char *%s",
+					s->content.var.identifier);
+			else
+				fprintf(targetFile, "%s %s", 
+					type,
+					typeToString(s->content.var.t_type));
 			break;
 			
 		case k_statementKindAssignment:
@@ -148,14 +155,16 @@ void emitStatement(Statement *s){
 		case k_statementKindInitialization:
 		
 			// type identifier
-			type = typeToString(s->content.var.t_type);
-			if ( 0 != strcmp(type, "boolean"))
-				fprintf(targetFile, "%s %s = ", 
-					type,
-					s->content.var.identifier);
-			else 
+			if (t_boolean == s->content.var.t_type)
 				fprintf(targetFile, "int %s = ",
 					s->content.var.identifier);
+			else if (t_string == s->content.var.t_type);
+				fprintf(targetFile, "char *%s = ",
+					s->content.var.identifier);
+			else
+				fprintf(targetFile, "%s %s = ", 
+					type,
+					typeToString(s->content.var.t_type));
 			
 			emitExpression(s->content.initialization.assignment);
 			
