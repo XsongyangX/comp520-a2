@@ -15,6 +15,10 @@ void fprintTabs(int count){
 		fprintf(targetFile, "\t");
 }
 
+bool appendX(char *word){
+	return strcat(word, "X");
+}
+
 void emitProgramStart(Program *root){
 	// includes
 	fprintf(targetFile, 
@@ -136,20 +140,20 @@ void emitStatement(Statement *s){
 			
 			if (t_boolean == s->content.var.t_type)
 				fprintf(targetFile, "int %s",
-					s->content.var.identifier);
+					appendX(s->content.var.identifier));
 			else if (t_string == s->content.var.t_type)
 				fprintf(targetFile, "char *%s",
-					s->content.var.identifier);
+					appendX(s->content.var.identifier);
 			else
 				fprintf(targetFile, "%s %s", 
 					typeToString(s->content.var.t_type),
-					s->content.var.identifier);
+					appendX(s->content.var.identifier);
 			break;
 			
 		case k_statementKindAssignment:
 		
 			fprintf(targetFile, "%s = ",
-				s->content.assign.identifier);
+				appendX(s->content.assign.identifier));
 			
 			emitExpression(s->content.assign.assignment);
 		
@@ -158,16 +162,16 @@ void emitStatement(Statement *s){
 		case k_statementKindInitialization:
 		
 			// type identifier
-			if (t_boolean == s->content.var.t_type)
+			if (t_boolean == s->content.intialization.t_type)
 				fprintf(targetFile, "int %s = ",
-					s->content.var.identifier);
-			else if (t_string == s->content.var.t_type)
+					appendX(s->content.intialization.identifier));
+			else if (t_string == s->content.intialization.t_type)
 				fprintf(targetFile, "char *%s = ",
-					s->content.var.identifier);
+					appendX(s->content.intialization.identifier));
 			else
 				fprintf(targetFile, "%s %s = ", 
-					typeToString(s->content.var.t_type),
-					s->content.var.identifier);
+					typeToString(s->content.intialization.t_type),
+					appendX(s->content.intialization.identifier));
 			
 			emitExpression(s->content.initialization.assignment);
 			
@@ -262,7 +266,7 @@ void emitExpression(Expression *e) {
 			
 		case k_expressionKindIdentifier:
 			
-			fprintf(targetFile, "%s", e->content.identifier);
+			fprintf(targetFile, "%s", appendX(e->content.identifier));
 			break;
 			
 		case k_expressionKindBooleanLiteral:
