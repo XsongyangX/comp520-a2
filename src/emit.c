@@ -242,17 +242,21 @@ void emitExpression(Expression *e) {
 		case k_expressionKindAnd:
 		case k_expressionKindOr:
 		
+			fprintf(targetFile, "(");
 			emitExpression(e->content.binary.left);
 			fprintf(targetFile, "%s", opToString(e->kind));
 			emitExpression(e->content.binary.right);
+			fprintf(targetFile, ")");
 			
 			break;
 			
 		case k_expressionKindNot:
 		case k_expressionKindUMinus:
 		
+			fprintf(targetFile, "(");
 			fprintf(targetFile, "%s", opToString(e->kind));
 			emitExpression(e->content.unary);
+			fprintf(targetFile, ")");
 			
 			break;
 			
