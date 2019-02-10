@@ -20,7 +20,7 @@ lex.yy.o: lex.yy.c y.tab.c
 	gcc -c lex.yy.c y.tab.h
 	
 main.o:
-	gcc -c main.c main.h pretty.h symbol.h
+	gcc -c main.c main.h pretty.h symbol.h emit.h
 	
 tree.o:
 	gcc -c tree.c tree.h
