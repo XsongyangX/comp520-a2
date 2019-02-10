@@ -240,7 +240,7 @@ void symbolFromStatement(Statement *s, SymbolTable *parent){
 			if (g_symbols) {
 				printf("var %s: type %s\n",
 					name,
-					s->content.var.t_type
+					typeToString(s->content.var.t_type)
 					);
 			}
 			
@@ -265,7 +265,7 @@ void symbolFromStatement(Statement *s, SymbolTable *parent){
 			if (g_symbols) {
 				printf("var %s: type %s\n",
 					name,
-					s->content.initialization.t_type
+					typeToString(s->content.initialization.t_type)
 					);
 			}
 			
