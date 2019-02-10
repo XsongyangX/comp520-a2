@@ -139,8 +139,8 @@ void emitStatement(Statement *s){
 					s->content.var.identifier);
 			else
 				fprintf(targetFile, "%s %s", 
-					s->content.var.t_type,
-					typeToString(s->content.var.t_type));
+					typeToString(s->content.var.t_type),
+					s->content.var.identifier,);
 			break;
 			
 		case k_statementKindAssignment:
@@ -162,9 +162,9 @@ void emitStatement(Statement *s){
 				fprintf(targetFile, "char *%s = ",
 					s->content.var.identifier);
 			else
-				fprintf(targetFile, "%s %s = ", 
-					s->content.var.t_type,
-					typeToString(s->content.var.t_type));
+				fprintf(targetFile, "%s %s", 
+					typeToString(s->content.var.t_type),
+					s->content.var.identifier,);
 			
 			emitExpression(s->content.initialization.assignment);
 			
