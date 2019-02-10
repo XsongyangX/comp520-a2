@@ -116,7 +116,7 @@ void emitControlFlow(ControlFlow *cf, int tabs){
 
 void emitStatement(Statement *s){
 	
-	Type type;
+	char *type;
 	
 	switch (s->kind) {
 		
