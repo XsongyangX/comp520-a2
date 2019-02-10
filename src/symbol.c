@@ -305,7 +305,7 @@ Type symbolFromExpression(Expression *e, SymbolTable *parent){
 			leftExpression = symbolFromExpression(
 				e->content.unary, parent);
 			
-			return checkUnaryOp(leftExpression, kind, e->lineno);
+			return checkUnaryOp(leftExpression, e->kind, e->lineno);
 			
 			break;
 			
