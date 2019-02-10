@@ -3,6 +3,8 @@
 #include "emit.h"
 #include "type.h"
 
+FILE *targetFile;
+
 void emitToFile(char *fileName) {
 	targetFile = fopen(strcat(fileName, ".c"), "w");
 }
@@ -39,5 +41,7 @@ void emitProgram(Program *p, int tabs){
 }
 
 void emitControlFlow(ControlFlow *cf, int tabs){
+	
+	switch (cf->kind)
 	
 }

@@ -3,8 +3,6 @@
 
 #include "tree.h"
 
-FILE *targetFile;
-
 void emitToFile(char *fileName);
 
 void emitProgramStart(Program *root);
