@@ -2,7 +2,7 @@
 #define EMIT_H
 
 #include "tree.h"
-#include <stdbool.h>
+
 
 void emitToFile(char *fileName);
 
@@ -14,5 +14,5 @@ void emitExpression(Expression *e);
 
 void fprintfTabs(int count);
 
-bool appendX(char *word);
+char *appendX(char *word);
 #endif 

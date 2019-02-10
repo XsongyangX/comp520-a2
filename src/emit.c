@@ -15,7 +15,7 @@ void fprintTabs(int count){
 		fprintf(targetFile, "\t");
 }
 
-bool appendX(char *word){
+char *appendX(char *word){
 	return strcat(word, "X");
 }
 
