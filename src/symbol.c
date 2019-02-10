@@ -270,8 +270,10 @@ Type symbolFromExpression(Expression *e, SymbolTable *parent){
 	Type leftExpression;
 	Type rightExpression;
 	
+	Symbol *var;
+	
 	switch (e->kind) {
-		// binary math operations
+		// binary operations
 		case k_expressionKindAdd:
 		case k_expressionKindMinus:
 		case k_expressionKindTimes:
@@ -293,6 +295,52 @@ Type symbolFromExpression(Expression *e, SymbolTable *parent){
 			// check type compatibility
 			return checkBinaryOp(leftExpression, 
 				rightExpression, e->kind, e->lineno);
+			
+			break;
+			
+		// unary operations
+		case k_expressionKindNot:
+		case k_expressionKindUMinus:
+		
+			leftExpression = symbolFromExpression(
+				e->content.unary, parent);
+			
+			return checkUnaryOp(leftExpression, kind, e->lineno);
+			
+			break;
+			
+		// identifier
+		case k_expressionKindIdentifier:
+		
+			var = getSymbol(parent, e->content.identifier);
+			
+			return var->t_type;
+			
+			break;
+			
+		// literals
+		
+		case k_expressionKindBooleanLiteral:
+			
+			return t_boolean;
+			
+			break;
+			
+		case k_expressionKindIntLiteral:
+		
+			return t_int;
+			
+			break;
+			
+		case k_expressionKindFloatLiteral:
+		
+			return t_float;
+			
+			break;
+			
+		case k_expressionKindStringLiteral:
+		
+			return t_string;
 			
 			break;
 	}
