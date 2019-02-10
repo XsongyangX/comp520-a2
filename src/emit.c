@@ -234,6 +234,18 @@ void emitExpression(Expression *e) {
 	
 	switch (e->kind) {
 		case k_expressionKindAdd:
+			
+			// string concatenation
+			if (e->content.binary.left == t_string){
+				fprintf(targetFile, "(strcat(");
+				emitExpression(e->content.binary.left);
+				fprintf(targetFile, ",");
+				emitExpression(e->content.binary.right);
+				fprintf(targetFile, "))");
+
+				break;
+			}
+		
 		case k_expressionKindMinus:
 		case k_expressionKindTimes:
 		case k_expressionKindDivide:
