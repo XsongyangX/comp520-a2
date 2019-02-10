@@ -248,7 +248,8 @@ void symbolFromStatement(Statement *s, SymbolTable *parent){
 			break;
 		
 		case k_statementKindPrint:
-		
+			// all types allowed inside print
+			/*
 			assigned = symbolFromExpression(s->content.printValue,
 				parent);
 				
@@ -260,7 +261,7 @@ void symbolFromStatement(Statement *s, SymbolTable *parent){
 					lineno);
 				exit(1);
 			}
-			
+			*/
 			break;
 	}
 	
