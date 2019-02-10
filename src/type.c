@@ -97,6 +97,26 @@ Type checkBinaryOp(Type left, Type right, ExpressionKind kind,
 	
 }
 
+Type checkUnaryOp(Type unary, ExpressionKind kind, int lineno){
+	
+	switch (kind) {
+		case k_expressionKindNot:
+			
+			if (unary != t_boolean) 
+				printUnaryError(unary, kind, lineno);
+			else return t_boolean;
+			
+			break;
+			
+		case k_expressionKindUMinus:
+		
+			if (unary == t_int) return t_int;
+			else if (unary == t_float) return t_float;
+			else printUnaryError(unary, kind, lineno);
+	}
+	
+}
+
 void printBinaryError(Type left, Type right, ExpressionKind kind, int lineno) {
 	
 	fprintf(stderr, 

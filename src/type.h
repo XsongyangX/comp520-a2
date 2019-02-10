@@ -10,4 +10,7 @@ char *opToString(ExpressionKind kind);
 
 Type checkBinaryOp(Type left, Type right, ExpressionKind kind, int lineno);
 void printBinaryError(Type left, Type right, ExpressionKind kind, int lineno);
+
+Type checkUnaryOp(Type unary, ExpressionKind kind, int lineno);
+void printUnaryError(Type unary, ExpressionKind kind, int lineno);
 #endif
