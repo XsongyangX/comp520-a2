@@ -1,7 +1,6 @@
 #include <stdio.h>
 #include "main.h"
 #include <string.h>
-#include "tree.h"
 #include "pretty.h"
 #include "symbol.h"
 
