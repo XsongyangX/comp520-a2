@@ -76,6 +76,7 @@ int main(int argc, char** argv)
 		yyparse();
 		symbolFromProgramStart(root);
 		emitToFile(argv[2]);
+		emitProgramStart(root);
 		printf("OK\n");
 		return 0;
 	}

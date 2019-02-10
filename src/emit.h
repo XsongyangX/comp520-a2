@@ -8,8 +8,8 @@ FILE *targetFile;
 void emitToFile(char *fileName);
 
 void emitProgramStart(Program *root);
-void emitProgram(Program *p);
-void emitControlFlow(ControlFlow *cf);
+void emitProgram(Program *p, int tabsSoFar);
+void emitControlFlow(ControlFlow *cf, int tabsSoFar);
 void emitStatement(Statement *s);
 void emitExpression(Expression *e);
 
