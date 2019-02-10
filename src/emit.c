@@ -162,16 +162,16 @@ void emitStatement(Statement *s){
 		case k_statementKindInitialization:
 		
 			// type identifier
-			if (t_boolean == s->content.intialization.t_type)
+			if (t_boolean == s->content.initialization.t_type)
 				fprintf(targetFile, "int %s = ",
-					appendX(s->content.intialization.identifier));
-			else if (t_string == s->content.intialization.t_type)
+					appendX(s->content.initialization.identifier));
+			else if (t_string == s->content.initialization.t_type)
 				fprintf(targetFile, "char *%s = ",
-					appendX(s->content.intialization.identifier));
+					appendX(s->content.initialization.identifier));
 			else
 				fprintf(targetFile, "%s %s = ", 
-					typeToString(s->content.intialization.t_type),
-					appendX(s->content.intialization.identifier));
+					typeToString(s->content.initialization.t_type),
+					appendX(s->content.initialization.identifier));
 			
 			emitExpression(s->content.initialization.assignment);
 			
