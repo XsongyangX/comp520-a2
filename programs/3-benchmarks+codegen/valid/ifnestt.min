@@ -1,0 +1,17 @@
+// Test if nesting
+if (true==false){
+	print("contradiction!");
+}
+else if (false==false){
+	print("hi\n");
+	
+	if (1==3){
+		print("stupendous");
+	}
+	else {
+		print("love");
+	}
+}
+else {
+	print("bye\n");
+}
