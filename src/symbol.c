@@ -252,7 +252,7 @@ void symbolFromStatement(Statement *s, SymbolTable *parent){
 				parent);
 				
 			// check if it is a string
-			if (assigned->t_type != t_string) {
+			if (assigned != t_string) {
 				int lineno = s->lineno;
 				fprintf(stderr,
 					"Error: (line %d) print value must be a string\n",
