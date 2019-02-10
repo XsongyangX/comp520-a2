@@ -44,6 +44,7 @@ Type checkBinaryOp(Type left, Type right, ExpressionKind kind,
 	int lineno) {
 	
 	switch (kind) {
+		// standard math + string concat
 		case k_expressionKindAdd:
 		case k_expressionKindMinus:
 		case k_expressionKindTimes:
@@ -62,8 +63,34 @@ Type checkBinaryOp(Type left, Type right, ExpressionKind kind,
 				if ((left == t_int && right == t_float)
 				|| (left == t_float && right == t_int)) return t_float;
 				
-				
+				// everything else is incorrect
+				else printBinaryError(left, right, kind, lineno);
 			}
+			// same type
+			else return left;
+			
+			break;
+			
+		// comparisons
+		case k_expressionKindGEQ:
+		case k_expressionKindLEQ:
+		case k_expressionKindGreater:
+		case k_expressionKindLesser:
+		case k_expressionKindEqual:
+		case k_expressionKindNEqual:
+		
+			if (left == right) return left;
+			else printBinaryError(left, right, kind, lineno);
+			
+			break;
+			
+		// strictly boolean binary op
+		case k_expressionKindAnd:
+		case k_expressionKindOr:
+			
+			if ((left == t_boolean) && (right == t_boolean)) 
+				return t_boolean;
+			else printBinaryError(left, right, kind, lineno);
 			
 			break;
 	}
