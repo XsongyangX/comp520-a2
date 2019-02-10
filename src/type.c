@@ -72,3 +72,37 @@ void assign(Symbol *var, Symbol *assigned, int lineno){
 			break;
 	}
 }
+
+Type checkBinaryOp(Type left, Type right, ExpressionKind kind,
+	int lineno) {
+	
+	switch (kind) {
+		case k_expressionKindAdd:
+		case k_expressionKindMinus:
+		case k_expressionKindTimes:
+		case k_expressionKindDivide:
+		
+			// no boolean
+			if (left == t_boolean || right == t_boolean){
+				printBinaryError(left, right, kind, lineno);
+				exit(1);
+			}
+			
+			break;
+	}
+	
+}
+
+void printBinaryError(Type left, Type right, ExpressionKind kind, int lineno) {
+	
+	fprintf(stderr, 
+		"Error: (line %d) incompatible types for binary %s: %s and %s\n",
+		lineno,
+		opToString(kind),
+		typeToString(left),
+		typeToString(right));
+}
+
+char *opToString(ExpressionKind kind) {
+	
+}

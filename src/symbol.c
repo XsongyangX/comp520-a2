@@ -264,3 +264,36 @@ void symbolFromStatement(Statement *s, SymbolTable *parent){
 	}
 	
 }
+
+Symbol *symbolFromExpression(Expression *e, SymbolTable *parent){
+	
+	Symbol *leftExpression;
+	Symbol *rightExpression;
+	
+	switch (e->kind) {
+		// binary math operations
+		case k_expressionKindAdd:
+		case k_expressionKindMinus:
+		case k_expressionKindTimes:
+		case k_expressionKindDivide:
+		case k_expressionKindGEQ:
+		case k_expressionKindLEQ:
+		case k_expressionKindGreater:
+		case k_expressionKindLesser:
+		case k_expressionKindEqual:
+		case k_expressionKindNEqual:
+		case k_expressionKindAnd:
+		case k_expressionKindOr:
+			
+			leftExpression = symbolFromExpression(
+				e->content.binary.left, parent);
+			rightExpression = symbolFromExpression(
+				e->content.binary.right, parent);
+			
+			// check type compatibility
+			return checkBinaryOp(leftExpression->t_type,
+				rightExpression->t_type, e->kind, e->lineno);
+			
+			break;
+	}
+}
