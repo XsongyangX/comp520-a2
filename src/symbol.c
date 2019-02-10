@@ -4,6 +4,7 @@
 
 #include "symbol.h"
 #include "type.h"
+#include "main.h"
 
 SymbolTable *initSymbolTable() {
 	

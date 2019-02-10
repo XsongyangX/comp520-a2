@@ -5,7 +5,7 @@ type.o:
 	gcc -c type.c type.h
 
 symbol.o:
-	gcc -c symbol.c symbol.h type.h
+	gcc -c symbol.c symbol.h type.h main.h
 
 pretty.o:
 	gcc -c pretty.c pretty.h
