@@ -12,12 +12,13 @@ typedef struct SymbolTable SymbolTable;
 struct Symbol {
 	char *name;
 	Type t_type;
+	/*
 	union {
 		char *string;
 		bool boolean;
 		int intVal;
 		float floatVal;
-	} value;
+	} value;*/
 	struct Symbol *next; // for linked-list
 };
 

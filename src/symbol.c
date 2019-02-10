@@ -170,7 +170,7 @@ void symbolFromControlFlow(ControlFlow *cf, SymbolTable *parent){
 void symbolFromStatement(Statement *s, SymbolTable *parent){
 	
 	char *name;
-	Type var;
+	Symbol *var;
 	Type assigned;
 	
 	switch (s->kind) {
@@ -195,7 +195,7 @@ void symbolFromStatement(Statement *s, SymbolTable *parent){
 				parent);
 			
 			// check for type compatibility inside the call
-			assign(var, assigned, s->lineno);
+			assign(var->t_type, assigned, s->lineno);
 			
 			break;
 		
@@ -224,7 +224,7 @@ void symbolFromStatement(Statement *s, SymbolTable *parent){
 				parent);
 				
 			// check for type compatibility
-			assign(var, assigned, s->lineno);
+			assign(var->t_type, assigned, s->lineno);
 			
 			break;
 			
@@ -291,8 +291,8 @@ Type symbolFromExpression(Expression *e, SymbolTable *parent){
 				e->content.binary.right, parent);
 			
 			// check type compatibility
-			return checkBinaryOp(leftExpression->t_type,
-				rightExpression->t_type, e->kind, e->lineno);
+			return checkBinaryOp(leftExpression, 
+				rightExpression, e->kind, e->lineno);
 			
 			break;
 	}
