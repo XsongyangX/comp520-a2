@@ -293,11 +293,11 @@ void symbolFromStatement(Statement *s, SymbolTable *parent){
 			break;
 		
 		case k_statementKindPrint:
-			// all types allowed inside print
-			/*
+			
 			assigned = symbolFromExpression(s->content.printValue,
 				parent);
-				
+			
+			/*			
 			// check if it is a string
 			if (assigned != t_string) {
 				int lineno = s->lineno;
@@ -307,6 +307,10 @@ void symbolFromStatement(Statement *s, SymbolTable *parent){
 				exit(1);
 			}
 			*/
+			
+			// Store type into tree
+			s->content.printValue->t_type = assigned;
+			
 			break;
 	}
 	

@@ -118,6 +118,7 @@ void emitStatement(Statement *s){
 	
 	char *type;
 	Type readType;
+	Type printType;
 	
 	switch (s->kind) {
 		
@@ -172,7 +173,24 @@ void emitStatement(Statement *s){
 		
 			fprintf(targetFile, "scanf(\"");
 			
-			readType;
+			readType = s->content.readVar.t_type;
+			
+			switch (readType) {
+				case t_boolean:
+					fprintf(targetFile, "%%d\",");
+					break;
+				case t_int:
+					fprintf(targetFile, "%%d\",");
+					break;
+				case t_float:
+					fprintf(targetFile, "%%f\",");
+					break;
+				case t_string:
+					fprintf(targetFile, "%%s\",");
+					break;
+			}
+			
+			fprintf(targetFile, "%s)", s->content.readVar.identifier);
 		
 			break;
 	}
