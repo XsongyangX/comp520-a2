@@ -172,7 +172,7 @@ void emitStatement(Statement *s){
 		
 			fprintf(targetFile, "scanf(\"");
 			
-			readType = 
+			readType;
 		
 			break;
 	}

@@ -287,6 +287,9 @@ void symbolFromStatement(Statement *s, SymbolTable *parent){
 				exit(1);
 			}
 			
+			// store type on tree
+			s->content.readVar.t_type = var->t_type;
+			
 			break;
 		
 		case k_statementKindPrint:
