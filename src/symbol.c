@@ -195,7 +195,7 @@ void symbolFromStatement(Statement *s, SymbolTable *parent){
 				parent);
 			
 			// check for type compatibility inside the call
-			assign(var->t_type, assigned, s->lineno);
+			checkAssignCompatible(var->t_type, assigned, s->lineno);
 			
 			break;
 		
@@ -224,7 +224,7 @@ void symbolFromStatement(Statement *s, SymbolTable *parent){
 				parent);
 				
 			// check for type compatibility
-			assign(var->t_type, assigned, s->lineno);
+			checkAssignCompatible(var->t_type, assigned, s->lineno);
 			
 			break;
 			

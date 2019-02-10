@@ -39,7 +39,6 @@ void checkAssignCompatible(Type var, Type assigned, int lineno){
 	
 }
 
-void assign(Type var, Type assigned, int lineno){
 	
 	checkAssignCompatible(var, assigned, lineno);
 	
@@ -72,7 +71,6 @@ void assign(Type var, Type assigned, int lineno){
 			break;
 	}
 }
-
 Type checkBinaryOp(Type left, Type right, ExpressionKind kind,
 	int lineno) {
 	
