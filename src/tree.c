@@ -111,7 +111,7 @@ Statement *makeStatement_read(char *identifier){
 	s->lineno = yylineno;
 	s->kind = k_statementKindRead;
 	
-	s->content.identifier = strdup(identifier);
+	s->content.readVar.identifier = strdup(identifier);
 	
 	return s;
 }
