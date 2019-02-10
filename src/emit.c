@@ -53,13 +53,14 @@ void emitControlFlow(ControlFlow *cf, int tabs){
 		
 			fprintf(targetFile, "if (");
 			emitExpression(cf->content.continuing.condition);
-			fprintf(targetFile, "){");
+			fprintf(targetFile, "){\n");
 			fprintTabs(tabs+1);
 			
 			emitProgram(cf->content.continuing.block, tabs + 1);
 			fprintTabs(tabs);
-			fprintf(targetFile, "}");
+			fprintf(targetFile, "}\n");
 			
+			fprintTabs(tabs);
 			emitControlFlow(cf->content.continuing.elsePart, tabs);
 			
 			break;
@@ -68,14 +69,52 @@ void emitControlFlow(ControlFlow *cf, int tabs){
 		
 			fprintf(targetFile, "else if (");
 			emitExpression(cf->content.continuing.condition);
-			fprintf(targetFile, "){");
+			fprintf(targetFile, "){\n");
 			fprintTabs(tabs+1);
 			
 			emitProgram(cf->content.continuing.block, tabs + 1);
 			fprintTabs(tabs);
-			fprintf(targetFile, "}");
+			fprintf(targetFile, "}\n");
 			
+			fprintTabs(tabs);
 			emitControlFlow(cf->content.continuing.elsePart, tabs);
+			
+			break;
+			
+		case k_controlFlowKindElse:
+		
+			fprintf(targetFile, "else {\n");
+			fprintTabs(tabs);
+			
+			emitProgram(cf->content.block, tabs + 1);
+			fprintTabs(tabs);
+			fprintf(targetFile, "}\n");
+			
+			fprintTabs(tabs);
+			
+			break;
+			
+		case k_controlFlowKindWhile:
+		
+			fprintf(targetFile, "while (");
+			emitExpression(cf->content.whileLoop.condition);
+			fprintf(targetFile, "){\n");
+			fprintTabs(tabs + 1);
+			
+			emitProgram(cf->content.whileLoop.block, tabs+1);
+			fprintTabs(tabs);
+			fprintf(targetFile, "}\n");
+			
+			fprintTabs(tabs);
+			
+			break;
 	}
+}
+
+void emitStatement(Statement *s){
+	
+}
+
+void emitExpression(Expression *e) {
 	
 }
