@@ -116,6 +116,8 @@ void emitControlFlow(ControlFlow *cf, int tabs){
 
 void emitStatement(Statement *s){
 	
+	Type type;
+	
 	switch (s->kind) {
 		
 		case k_statementKindDeclaration:
