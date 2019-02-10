@@ -204,13 +204,13 @@ void emitStatement(Statement *s){
 			
 			switch (readType) {
 				case t_boolean:
-					fprintf(targetFile, "%%d\",");
+					fprintf(targetFile, "%%d\",&");
 					break;
 				case t_int:
-					fprintf(targetFile, "%%d\",");
+					fprintf(targetFile, "%%d\",&");
 					break;
 				case t_float:
-					fprintf(targetFile, "%%f\",");
+					fprintf(targetFile, "%%f\",&");
 					break;
 				case t_string:
 					fprintf(targetFile, "%%s\",");
