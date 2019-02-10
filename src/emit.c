@@ -25,7 +25,7 @@ void emitProgramStart(Program *root){
 		"void main(){\n");
 	fprintTabs(1);
 	emitProgram(root, 1);
-	fprintf(targetFile, "\n}");
+	fprintf(targetFile, "}\n");
 }
 
 void emitProgram(Program *p, int tabs){
@@ -66,7 +66,6 @@ void emitControlFlow(ControlFlow *cf, int tabs){
 			fprintTabs(tabs+1);
 			
 			emitProgram(cf->content.continuing.block, tabs + 1);
-			fprintTabs(tabs);
 			fprintf(targetFile, "}\n");
 			
 			fprintTabs(tabs);
@@ -82,7 +81,6 @@ void emitControlFlow(ControlFlow *cf, int tabs){
 			fprintTabs(tabs+1);
 			
 			emitProgram(cf->content.continuing.block, tabs + 1);
-			fprintTabs(tabs);
 			fprintf(targetFile, "}\n");
 			
 			fprintTabs(tabs);
@@ -96,7 +94,6 @@ void emitControlFlow(ControlFlow *cf, int tabs){
 			fprintTabs(tabs);
 			
 			emitProgram(cf->content.block, tabs + 1);
-			fprintTabs(tabs);
 			fprintf(targetFile, "}\n");
 			
 			fprintTabs(tabs);
@@ -111,7 +108,6 @@ void emitControlFlow(ControlFlow *cf, int tabs){
 			fprintTabs(tabs + 1);
 			
 			emitProgram(cf->content.whileLoop.block, tabs+1);
-			fprintTabs(tabs);
 			fprintf(targetFile, "}\n");
 			
 			fprintTabs(tabs);
