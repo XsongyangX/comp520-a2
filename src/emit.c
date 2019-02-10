@@ -188,13 +188,13 @@ void emitStatement(Statement *s){
 					fprintf(targetFile, "%%d\\n\",");
 					break;
 				case t_int:
-					fprintf(targetFile, "%%d\\n",");
+					fprintf(targetFile, "%%d\\n\",");
 					break;
 				case t_float:
-					fprintf(targetFile, "%%f\\n",");
+					fprintf(targetFile, "%%f\\n\",");
 					break;
 				case t_string:
-					fprintf(targetFile, "%%s\\n",");
+					fprintf(targetFile, "%%s\\n\",");
 					break;
 			}
 			
