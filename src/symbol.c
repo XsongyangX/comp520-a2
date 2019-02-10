@@ -344,8 +344,10 @@ Type symbolFromExpression(Expression *e, SymbolTable *parent){
 				e->content.binary.right, parent);
 			
 			// check type compatibility
-			return checkBinaryOp(leftExpression, 
+			e->t_type = checkBinaryOp(leftExpression, 
 				rightExpression, e->kind, e->lineno);
+			
+			return e->t_type;
 			
 			break;
 			
@@ -356,7 +358,9 @@ Type symbolFromExpression(Expression *e, SymbolTable *parent){
 			leftExpression = symbolFromExpression(
 				e->content.unary, parent);
 			
-			return checkUnaryOp(leftExpression, e->kind, e->lineno);
+			e->t_type = checkUnaryOp(leftExpression, e->kind, e->lineno);
+			
+			return e->t_type;
 			
 			break;
 			
@@ -365,7 +369,9 @@ Type symbolFromExpression(Expression *e, SymbolTable *parent){
 		
 			var = getSymbol(parent, e->content.identifier);
 			
-			return var->t_type;
+			e->t_type = var->t_type;
+			
+			return e->t_type;
 			
 			break;
 			
@@ -373,26 +379,30 @@ Type symbolFromExpression(Expression *e, SymbolTable *parent){
 		
 		case k_expressionKindBooleanLiteral:
 			
-			return t_boolean;
+			e->t_type = t_boolean;
 			
+			return t_boolean;
 			break;
 			
 		case k_expressionKindIntLiteral:
 		
-			return t_int;
+			e->t_type = t_int;
 			
+			return t_int;
 			break;
 			
 		case k_expressionKindFloatLiteral:
 		
+			e->t_type = t_float;
+		
 			return t_float;
-			
 			break;
 			
 		case k_expressionKindStringLiteral:
 		
-			return t_string;
+			e->t_type = t_string;
 			
+			return t_string;
 			break;
 	}
 }

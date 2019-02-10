@@ -216,4 +216,30 @@ void emitStatement(Statement *s){
 
 void emitExpression(Expression *e) {
 	
+	switch (e->kind) {
+		case k_expressionKindAdd:
+		case k_expressionKindMinus:
+		case k_expressionKindTimes:
+		case k_expressionKindDivide:
+		case k_expressionKindGEQ:
+		case k_expressionKindLEQ:
+		case k_expressionKindGreater:
+		case k_expressionKindLesser:
+		case k_expressionKindEqual:
+		case k_expressionKindNEqual:
+		case k_expressionKindAnd:
+		case k_expressionKindOr:
+		
+			emitExpression(e->content.binary.left);
+			fprintf(targetFile, "%s", opToString(e->kind));
+			emitExpression(e->content.binary.right);
+			
+			break;
+			
+		case k_expressionKindNot:
+		case k_expressionKindUMinus:
+		
+			emitExpression(e->content.unary
+	}
+	
 }
