@@ -40,37 +40,6 @@ void checkAssignCompatible(Type var, Type assigned, int lineno){
 }
 
 	
-	checkAssignCompatible(var, assigned, lineno);
-	
-	switch (var) {
-		
-		case t_boolean:
-			var->value.boolean = assigned->value.boolean;
-			break;
-			
-		case t_int:
-			var->value.intVal = assigned->value.intVal;
-			break;
-			
-		case t_float:
-			
-			switch (assigned->t_type) {
-				
-				case t_int:
-					var->value.floatVal = assigned->value.intVal;
-					break;
-				
-				case t_float:
-					var->value.floatVal = assigned->value.floatVal;
-					break;
-			}
-			break;
-			
-		case t_string:
-			var->value.string = assigned->value.string;
-			break;
-	}
-}
 Type checkBinaryOp(Type left, Type right, ExpressionKind kind,
 	int lineno) {
 	
