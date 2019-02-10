@@ -15,7 +15,7 @@ Program *root;
 int main(int argc, char** argv)
 {
 	// check if an argument is provided
-	if (argc != 2 || argc != 3)
+	if (!(argc == 2 || argc == 3))
 	{
 		fprintf(stderr, 
 			"Must provide an argument: scan|tokens|parse|pretty|symbol|typecheck|codegen\n");
