@@ -21,6 +21,8 @@ void fprintTabs(int count){
 
 void emitProgram(Program *p, int tabs){
 	
+	if (p == NULL) return;
+	
 	switch (p->kind) {
 		
 		case k_programKindControlFlow:
@@ -43,6 +45,37 @@ void emitProgram(Program *p, int tabs){
 
 void emitControlFlow(ControlFlow *cf, int tabs){
 	
-	switch (cf->kind)
+	if (cf == NULL) return;
+	
+	switch (cf->kind) {
+		
+		case k_controlFlowKindIf:
+		
+			fprintf(targetFile, "if (");
+			emitExpression(cf->content.continuing.condition);
+			fprintf(targetFile, "){");
+			fprintTabs(tabs+1);
+			
+			emitProgram(cf->content.continuing.block, tabs + 1);
+			fprintTabs(tabs);
+			fprintf(targetFile, "}");
+			
+			emitControlFlow(cf->content.continuing.elsePart, tabs);
+			
+			break;
+		
+		case k_controlFlowKindElseIf:
+		
+			fprintf(targetFile, "else if (");
+			emitExpression(cf->content.continuing.condition);
+			fprintf(targetFile, "){");
+			fprintTabs(tabs+1);
+			
+			emitProgram(cf->content.continuing.block, tabs + 1);
+			fprintTabs(tabs);
+			fprintf(targetFile, "}");
+			
+			emitControlFlow(cf->content.continuing.elsePart, tabs);
+	}
 	
 }
