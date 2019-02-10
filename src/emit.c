@@ -147,7 +147,7 @@ void emitStatement(Statement *s){
 		
 			// type identifier
 			type = typeToString(s->content.var.t_type);
-			if (type != t_boolean)
+			if ( 0 != strcmp(type, "boolean"))
 				fprintf(targetFile, "%s %s = ", 
 					type,
 					s->content.var.identifier);
