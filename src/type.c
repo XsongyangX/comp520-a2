@@ -51,10 +51,8 @@ Type checkBinaryOp(Type left, Type right, ExpressionKind kind,
 		case k_expressionKindDivide:
 		
 			// no boolean
-			if (left == t_boolean || right == t_boolean){
+			if (left == t_boolean || right == t_boolean)
 				printBinaryError(left, right, kind, lineno);
-				exit(1);
-			}
 			
 			// different types
 			if (left != right) {
@@ -117,6 +115,17 @@ Type checkUnaryOp(Type unary, ExpressionKind kind, int lineno){
 	
 }
 
+void printUnaryError(Type unary, ExpressionKind kind, int lineno){
+	
+	fprintf(stderr,
+		"Error: (line %d) incompatible type for unary operation %s: %s\n",
+		lineno,
+		opToString(kind),
+		typeToString(unary));
+		
+	exit(1);
+}
+
 void printBinaryError(Type left, Type right, ExpressionKind kind, int lineno) {
 	
 	fprintf(stderr, 
@@ -125,6 +134,8 @@ void printBinaryError(Type left, Type right, ExpressionKind kind, int lineno) {
 		opToString(kind),
 		typeToString(left),
 		typeToString(right));
+		
+	exit(1);
 }
 
 char *opToString(ExpressionKind kind) {
