@@ -88,6 +88,16 @@ Type checkBinaryOp(Type left, Type right, ExpressionKind kind,
 				exit(1);
 			}
 			
+			// different types
+			if (left != right) {
+				
+				// only int and float
+				if ((left == t_int && right == t_float)
+				|| (left == t_float && right == t_int)) return t_float;
+				
+				
+			}
+			
 			break;
 	}
 	
