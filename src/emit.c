@@ -117,6 +117,7 @@ void emitControlFlow(ControlFlow *cf, int tabs){
 void emitStatement(Statement *s){
 	
 	char *type;
+	Type readType;
 	
 	switch (s->kind) {
 		
@@ -168,6 +169,10 @@ void emitStatement(Statement *s){
 			break;
 			
 		case k_statementKindRead:
+		
+			fprintf(targetFile, "scanf(\"");
+			
+			readType = 
 		
 			break;
 	}

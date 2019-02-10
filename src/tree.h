@@ -117,7 +117,10 @@ struct Statement {
 			Type t_type;
 		} var;
 		// for read
-		char *identifier;
+		struct {
+			char *identifier;
+			Type t_type;
+		} readVar;
 		// for print
 		Expression *printValue;
 	} content;
@@ -126,6 +129,7 @@ struct Statement {
 struct Expression {
 	int lineno;
 	ExpressionKind kind;
+	Type t_type;
 	union {
 		// for binary operations
 		struct {
