@@ -39,11 +39,11 @@ void checkAssignCompatible(Type var, Type assigned, int lineno){
 	
 }
 
-void assign(Symbol *var, Symbol *assigned, int lineno){
+void assign(Type var, Type assigned, int lineno){
 	
-	checkAssignCompatible(var->t_type, assigned->t_type, lineno);
+	checkAssignCompatible(var, assigned, lineno);
 	
-	switch (var->t_type) {
+	switch (var) {
 		
 		case t_boolean:
 			var->value.boolean = assigned->value.boolean;

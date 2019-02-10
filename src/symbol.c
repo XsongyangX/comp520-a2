@@ -103,7 +103,7 @@ void symbolFromControlFlow(ControlFlow *cf, SymbolTable *parent){
 	
 	if (cf == NULL) return;
 	
-	Symbol *conditional;
+	Type conditional;
 	SymbolTable *innerScope;
 	
 	switch (cf->kind) {
@@ -115,7 +115,7 @@ void symbolFromControlFlow(ControlFlow *cf, SymbolTable *parent){
 				cf->content.continuing.condition, parent);
 			
 			// condition is not boolean
-			if (conditional->t_type != t_boolean){
+			if (conditional != t_boolean){
 				
 				// get line number
 				int lineno = cf->content.continuing.condition->lineno;
@@ -149,7 +149,7 @@ void symbolFromControlFlow(ControlFlow *cf, SymbolTable *parent){
 				cf->content.whileLoop.condition, parent);
 			
 			// condition is not boolean
-			if (conditional->t_type != t_boolean){
+			if (conditional != t_boolean){
 				
 				// get line number
 				int lineno = cf->content.continuing.condition->lineno;
@@ -170,8 +170,8 @@ void symbolFromControlFlow(ControlFlow *cf, SymbolTable *parent){
 void symbolFromStatement(Statement *s, SymbolTable *parent){
 	
 	char *name;
-	Symbol *var;
-	Symbol *assigned;
+	Type var;
+	Type assigned;
 	
 	switch (s->kind) {
 		
@@ -265,10 +265,10 @@ void symbolFromStatement(Statement *s, SymbolTable *parent){
 	
 }
 
-Symbol *symbolFromExpression(Expression *e, SymbolTable *parent){
+Type symbolFromExpression(Expression *e, SymbolTable *parent){
 	
-	Symbol *leftExpression;
-	Symbol *rightExpression;
+	Type leftExpression;
+	Type rightExpression;
 	
 	switch (e->kind) {
 		// binary math operations
