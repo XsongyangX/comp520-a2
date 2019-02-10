@@ -163,7 +163,25 @@ void emitStatement(Statement *s){
 			
 		case k_statementKindPrint:
 		
-			fprintf(targetFile, "printf(\"%%s\",");
+			fprintf(targetFile, "printf(\"");
+			
+			printType = s->content.printValue->t_type;
+			
+			switch (printType) {
+				case t_boolean:
+					fprintf(targetFile, "%%d\",");
+					break;
+				case t_int:
+					fprintf(targetFile, "%%d\",");
+					break;
+				case t_float:
+					fprintf(targetFile, "%%f\",");
+					break;
+				case t_string:
+					fprintf(targetFile, "%%s\",");
+					break;
+			}
+			
 			emitExpression(s->content.printValue);
 			fprintf(targetFile, ")");
 		
