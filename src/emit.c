@@ -224,7 +224,7 @@ void emitStatement(Statement *s){
 					break;
 			}
 			
-			fprintf(targetFile, "%s)", s->content.readVar.identifier);
+			fprintf(targetFile, "%s)", appendX(s->content.readVar.identifier));
 		
 			break;
 	}
