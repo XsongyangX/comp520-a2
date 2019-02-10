@@ -3,6 +3,7 @@
 #include <string.h>
 #include "pretty.h"
 #include "symbol.h"
+#include "emit.h"
 
 void yyparse();
 int yylex();
@@ -14,10 +15,12 @@ Program *root;
 int main(int argc, char** argv)
 {
 	// check if an argument is provided
-	if (argc != 2)
+	if (argc != 2 || argc != 3)
 	{
 		fprintf(stderr, 
 			"Must provide an argument: scan|tokens|parse|pretty|symbol|typecheck|codegen\n");
+		fprintf(stderr,
+			"In the case of codegen, a file name is required as a 2nd argument\n");
 		return 1;
 	}
 
@@ -66,10 +69,22 @@ int main(int argc, char** argv)
 		printf("OK\n");
 		return 0;
 	}
+	else if ( 0 == strcmp(argv[1], "codegen"))
+	{
+		g_tokens = 0;
+		g_symbols = 0;
+		yyparse();
+		symbolFromProgramStart(root);
+		emitToFile(argv[2]);
+		printf("OK\n");
+		return 0;
+	}
 	else 
 	{
 		fprintf(stderr, 
 			"Valid arguments are scan|tokens|parse|pretty|symbol|typecheck|codegen\n");
+		fprintf(stderr,
+			"In the case of codegen, a file name is required as a 2nd argument\n");
 		return 1;
 	}
 

@@ -1,5 +1,8 @@
-all: lex.yy.o y.tab.o main.o tree.o pretty.o symbol.o type.o
-	gcc -o minic lex.yy.o y.tab.o main.o tree.o pretty.o symbol.o type.o -lfl
+all: lex.yy.o y.tab.o main.o tree.o pretty.o symbol.o type.o emit.o
+	gcc -o minic lex.yy.o y.tab.o main.o tree.o pretty.o symbol.o type.o emit.o -lfl
+
+emit.o:
+	gcc -c emit.c emit.h
 
 type.o:
 	gcc -c type.c type.h
