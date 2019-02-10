@@ -77,7 +77,7 @@ Type checkBinaryOp(Type left, Type right, ExpressionKind kind,
 		case k_expressionKindEqual:
 		case k_expressionKindNEqual:
 		
-			if (left == right) return left;
+			if (left == right) return t_boolean;
 			else printBinaryError(left, right, kind, lineno);
 			
 			break;
