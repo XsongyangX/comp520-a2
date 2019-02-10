@@ -96,7 +96,7 @@ Type checkBinaryOp(Type left, Type right, ExpressionKind kind,
 void printBinaryError(Type left, Type right, ExpressionKind kind, int lineno) {
 	
 	fprintf(stderr, 
-		"Error: (line %d) incompatible types for binary %s: %s and %s\n",
+		"Error: (line %d) incompatible types for binary operation %s: %s and %s\n",
 		lineno,
 		opToString(kind),
 		typeToString(left),
@@ -105,4 +105,48 @@ void printBinaryError(Type left, Type right, ExpressionKind kind, int lineno) {
 
 char *opToString(ExpressionKind kind) {
 	
+	switch (kind) {
+		case k_expressionKindAdd:
+			return "+";
+			break;
+		case k_expressionKindMinus:
+			return "-";
+			break;
+		case k_expressionKindTimes:
+			return "*";
+			break;
+		case k_expressionKindDivide:
+			return "/";
+			break;
+		case k_expressionKindNot:
+			return "!";
+			break;
+		case k_expressionKindUMinus:
+			return "-";
+			break;
+		case k_expressionKindGEQ:
+			return ">=";
+			break;
+		case k_expressionKindLEQ:
+			return "<=";
+			break;
+		case k_expressionKindGreater:
+			return ">";
+			break;
+		case k_expressionKindLesser:
+			return "<";
+			break;
+		case k_expressionKindEqual:
+			return "==";
+			break;
+		case k_expressionKindNEqual:
+			return "!=";
+			break;
+		case k_expressionKindAnd:
+			return "&&";
+			break;
+		case k_expressionKindOr:
+			return "||";
+			break;
+	}
 }
