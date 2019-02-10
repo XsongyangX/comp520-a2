@@ -140,7 +140,7 @@ void emitStatement(Statement *s){
 			else
 				fprintf(targetFile, "%s %s", 
 					typeToString(s->content.var.t_type),
-					s->content.var.identifier,);
+					s->content.var.identifier);
 			break;
 			
 		case k_statementKindAssignment:
@@ -164,7 +164,7 @@ void emitStatement(Statement *s){
 			else
 				fprintf(targetFile, "%s %s", 
 					typeToString(s->content.var.t_type),
-					s->content.var.identifier,);
+					s->content.var.identifier);
 			
 			emitExpression(s->content.initialization.assignment);
 			
