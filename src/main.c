@@ -62,6 +62,7 @@ int main(int argc, char** argv)
 		g_tokens = 0;
 		g_symbols = 0;
 		yyparse();
+		symbolFromProgramStart(root);
 		printf("OK\n");
 		return 0;
 	}
