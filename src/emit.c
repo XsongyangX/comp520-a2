@@ -18,8 +18,9 @@ void emitProgramStart(Program *root){
 	// main function body
 	fprintf(targetFile,
 		"void main(){\n");
+	fprintTabs(1);
 	emitProgram(root, 1);
-	fprintf(targetFile, "}\n");
+	fprintf(targetFile, "\n}");
 }
 
 void fprintTabs(int count){
