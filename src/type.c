@@ -185,5 +185,3 @@ char *opToString(ExpressionKind kind) {
 			break;
 	}
 }
-
-Type typeOfExpression(Expression *)
