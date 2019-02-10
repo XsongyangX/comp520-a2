@@ -11,6 +11,9 @@ void emitToFile(char *fileName) {
 }
 
 void emitProgramStart(Program *root){
+	// includes
+	fprintf(targetFile, 
+		"#include <stdio.h>\n#include <string.h>\n");
 	emitProgram(root, 0);
 }
 
@@ -113,6 +116,59 @@ void emitControlFlow(ControlFlow *cf, int tabs){
 
 void emitStatement(Statement *s){
 	
+	switch (s->kind) {
+		
+		case k_statementKindDeclaration:
+			
+			// type identifier
+			type = typeToString(s->content.var.t_type);
+			if (type != t_boolean)
+				fprintf(targetFile, "%s %s", 
+					type,
+					s->content.var.identifier);
+			else 
+				fprintf(targetFile, "int %s",
+					s->content.var.identifier);
+					
+			break;
+			
+		case k_statementKindAssignment:
+		
+			fprintf(targetFile, "%s = ",
+				s->content.assign.identifier);
+			
+			emitExpression(s->content.assign.assignment);
+		
+			break;
+			
+		case k_statementKindInitialization:
+		
+			// type identifier
+			type = typeToString(s->content.var.t_type);
+			if (type != t_boolean)
+				fprintf(targetFile, "%s %s = ", 
+					type,
+					s->content.var.identifier);
+			else 
+				fprintf(targetFile, "int %s = ",
+					s->content.var.identifier);
+			
+			emitExpression(s->content.initialization.assignment);
+			
+			break;
+			
+		case k_statementKindPrint:
+		
+			fprintf(targetFile, "printf(\"%%s\",");
+			emitExpression(s->content.printValue);
+			fprintf(targetFile, ")");
+		
+			break;
+			
+		case k_statementKindRead:
+		
+			break;
+	}
 }
 
 void emitExpression(Expression *e) {
