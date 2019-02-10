@@ -139,7 +139,7 @@ void emitStatement(Statement *s){
 					s->content.var.identifier);
 			else
 				fprintf(targetFile, "%s %s", 
-					type,
+					s->content.var.t_type,
 					typeToString(s->content.var.t_type));
 			break;
 			
@@ -163,7 +163,7 @@ void emitStatement(Statement *s){
 					s->content.var.identifier);
 			else
 				fprintf(targetFile, "%s %s = ", 
-					type,
+					s->content.var.t_type,
 					typeToString(s->content.var.t_type));
 			
 			emitExpression(s->content.initialization.assignment);
