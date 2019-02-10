@@ -236,7 +236,7 @@ void emitExpression(Expression *e) {
 		case k_expressionKindAdd:
 			
 			// string concatenation
-			if (e->content.binary.left == t_string){
+			if (e->content.binary.left->t_type == t_string){
 				fprintf(targetFile, "(strcat(");
 				emitExpression(e->content.binary.left);
 				fprintf(targetFile, ",");
