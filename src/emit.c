@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <string.h>
 
 #include "emit.h"
 #include "type.h"
@@ -34,7 +35,7 @@ void emitProgram(Program *p, int tabs){
 			emitStatement(p->content.statement.statement);
 			fprintf(targetFile, ";\n");
 			fprintTabs(tabs);
-			emitProgram(p->content.statement.next);
+			emitProgram(p->content.statement.next, tabs);
 			
 			break;
 	}
