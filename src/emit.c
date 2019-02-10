@@ -134,7 +134,7 @@ void emitStatement(Statement *s){
 			if (t_boolean == s->content.var.t_type)
 				fprintf(targetFile, "int %s",
 					s->content.var.identifier);
-			else if (t_string == s->content.var.t_type);
+			else if (t_string == s->content.var.t_type)
 				fprintf(targetFile, "char *%s",
 					s->content.var.identifier);
 			else
@@ -158,7 +158,7 @@ void emitStatement(Statement *s){
 			if (t_boolean == s->content.var.t_type)
 				fprintf(targetFile, "int %s = ",
 					s->content.var.identifier);
-			else if (t_string == s->content.var.t_type);
+			else if (t_string == s->content.var.t_type)
 				fprintf(targetFile, "char *%s = ",
 					s->content.var.identifier);
 			else
