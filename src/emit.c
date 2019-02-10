@@ -4,21 +4,26 @@
 #include "type.h"
 
 void emitToFile(char *fileName) {
-	targetFile = fopen(fileName, "w");
+	targetFile = fopen(strcat(fileName, ".c"), "w");
 }
 
 void emitProgramStart(Program *root){
-	emitProgram(root);
+	emitProgram(root, 0);
 }
 
-void emitProgram(Program *p){
+void fprintTabs(int count){
+	for (int i = 0; i < count; i++)
+		fprintf(targetFile, "\t");
+}
+
+void emitProgram(Program *p, int tabs){
 	
 	switch (p->kind) {
 		
 		case k_programKindControlFlow:
 			
-			emitControlFlow(p->content.controlFlow.controlFlow);
-			emitProgram(p->content.controlFlow.next);
+			emitControlFlow(p->content.controlFlow.controlFlow, tabs);
+			emitProgram(p->content.controlFlow.next, tabs);
 		
 			break;
 			
@@ -26,10 +31,13 @@ void emitProgram(Program *p){
 			
 			emitStatement(p->content.statement.statement);
 			fprintf(targetFile, ";\n");
+			fprintTabs(tabs);
 			emitProgram(p->content.statement.next);
 			
 			break;
-			
 	}
+}
+
+void emitControlFlow(ControlFlow *cf, int tabs){
 	
 }
