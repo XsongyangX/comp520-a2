@@ -45,7 +45,13 @@ void emitProgram(Program *p, int tabs){
 			
 			emitStatement(p->content.statement.statement);
 			fprintf(targetFile, ";\n");
-			fprintTabs(tabs);
+			
+			if (p->content.statement.next != NULL){
+				fprintTabs(tabs);
+			}
+			else {
+				fprintTabs(tabs-1);
+			}
 			emitProgram(p->content.statement.next, tabs);
 			
 			break;
@@ -159,7 +165,7 @@ void emitStatement(Statement *s){
 				fprintf(targetFile, "char *%s = ",
 					s->content.var.identifier);
 			else
-				fprintf(targetFile, "%s %s", 
+				fprintf(targetFile, "%s %s = ", 
 					typeToString(s->content.var.t_type),
 					s->content.var.identifier);
 			
