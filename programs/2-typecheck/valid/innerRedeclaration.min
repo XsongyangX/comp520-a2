@@ -1,0 +1,5 @@
+// check scope
+var s: string;
+if (true) {
+	var s: int = 3;
+}
