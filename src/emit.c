@@ -239,7 +239,41 @@ void emitExpression(Expression *e) {
 		case k_expressionKindNot:
 		case k_expressionKindUMinus:
 		
-			emitExpression(e->content.unary
+			fprintf(targetFile, "%s", opToString(e->kind));
+			emitExpression(e->content.unary);
+			
+			break;
+			
+		case k_expressionKindIdentifier:
+			
+			fprintf(targetFile, "%s", e->content.identifier);
+			break;
+			
+		case k_expressionKindBooleanLiteral:
+			
+			if (e->content.boolean){
+				fprintf(targetFile, "1");
+			}
+			else{
+				fprintf(targetFile, "0");
+			}
+			break;
+			
+		case k_expressionKindIntLiteral:
+		
+			fprintf(targetFile, "%d", e->content.intVal);
+			break;
+			
+		case k_expressionKindFloatLiteral:
+		
+			fprintf(targetFile, "%f", e->content.floatVal);
+			break;
+			
+		case k_expressionKindStringLiteral:
+		
+			fprintf(targetFile, "%s", e->content.string);
+			break;
+			
 	}
 	
 }
