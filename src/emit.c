@@ -143,11 +143,11 @@ void emitStatement(Statement *s){
 					appendX(s->content.var.identifier));
 			else if (t_string == s->content.var.t_type)
 				fprintf(targetFile, "char *%s",
-					appendX(s->content.var.identifier);
+					appendX(s->content.var.identifier));
 			else
 				fprintf(targetFile, "%s %s", 
 					typeToString(s->content.var.t_type),
-					appendX(s->content.var.identifier);
+					appendX(s->content.var.identifier));
 			break;
 			
 		case k_statementKindAssignment:
