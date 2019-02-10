@@ -184,7 +184,7 @@ void prettyStatement(Statement *s) {
 			
 		case k_statementKindRead:
 		
-			printf("read( %s )", s->content.identifier);
+			printf("read( %s )", s->content.readVar.identifier);
 			// to verify whether to tab 
 			break;
 			
