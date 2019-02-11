@@ -9,9 +9,11 @@ var message: string = "Enter the number of iterations:\n";
 print(message);
 read(n);
 
-while(n>0){
+var iter: int = n;
+
+while(iter>0){
 	e = e * (1.0 + 1.0/n);
-	n = n - 1;
+	iter = iter - 1;
 }
 
 print(e);
