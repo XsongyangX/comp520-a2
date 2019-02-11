@@ -28,6 +28,8 @@ Comments found in both files provide more details as to the requirements. Since 
 
 There are additional scripts (Bash and Python) in this repository.
 
+If there are not around 700 invalid files in the typechecking folder, run `generate.py` with argument `generate`.
+
 * `prettyCheck.sh`: Runs the pretty printer and pretty comparator
 * `prettyCompare.py`: Compares the files printed by the pretty printer, called by `prettyCheck.sh`
 * `programs`
