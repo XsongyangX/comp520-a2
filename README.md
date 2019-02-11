@@ -26,7 +26,7 @@ We provide 3 scripts for convenience and two directories for organization:
 
 Comments found in both files provide more details as to the requirements. Since a large portion of grading is performed automatically, please ensure to follow the input/output specifications **exactly**. You must be able to run the provided scripts on the SOCS Trottier machines.
 ----------
-There are additional scripts (Bash and Python) in this repository.
+There are additional scripts (Bash and Python) in this repository, not required to build the compiler.
 
 If there are not around 700 invalid files in the typechecking folder, run `generate.py` with argument `generate`.
 
