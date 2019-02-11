@@ -19,6 +19,7 @@ while (iter <= n){
 	next = even + 1;
 	if (iter == 1) {
 		pi = (even * even)/(next * prev);
+		iter = iter + 1;
 	}
 	else {
 		pi = (pi * even * even)/(next * prev);
