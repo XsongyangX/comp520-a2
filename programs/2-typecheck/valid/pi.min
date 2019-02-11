@@ -2,7 +2,7 @@
 // Computes the circle constant pi using Wallis' product, until a certain amount of iterations has been reached. The iteration count is set by the user.
 // pi/2 = Product_{n = 1 to infinity} (2n/(2n-1) * 2n/(2n+1))
 
-var pi: float = 0.0;
+var pi: float = 1;
 var even: int;
 var prev: int;
 var next: int;
@@ -17,8 +17,13 @@ while (iter <= n){
 	even = 2*n;
 	prev = even - 1;
 	next = even + 1;
-	pi = (pi * even * even)/(next * prev);
-	iter = iter + 1;
+	if (iter == 1) {
+		pi = (even * even)/(next * prev);
+	}
+	else {
+		pi = (pi * even * even)/(next * prev);
+		iter = iter + 1;
+	}
 }
 
 print(pi* 2);
