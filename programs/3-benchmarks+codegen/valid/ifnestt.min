@@ -1,4 +1,7 @@
 // Test if nesting
+//~hi
+//~
+//~love
 if (true==false){
 	print("contradiction!");
 }
